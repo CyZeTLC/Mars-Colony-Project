@@ -5,6 +5,7 @@ import { getSectionTitle } from './utils/sectionTitle';
 
 import Overview from './pages/Overview';
 import Vehicles from './pages/Vehicles';
+import Employees from './pages/Employees';
 // (Importiere Firebase Auth hier, wenn benötigt)
 
 function App() {
@@ -60,6 +61,10 @@ function App() {
 
             {activeSection === 'vehicles' && (
               <Vehicles />
+            )}
+
+            {activeSection === 'employees' && (
+              <Employees />
             )}
 
             {/* Weitere Sektoren (Cities, Employees, etc.) hinzufügen... */}
