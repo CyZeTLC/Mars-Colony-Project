@@ -34,7 +34,7 @@ Stelle sicher, dass du **Node.js (LTS)** und **npm** installiert hast.
 # Repository klonen
 git clone https://github.com/CyZeTLC/Mars-Colony-Project
 
-# Alle notwendigen Pakete installieren (React, Vite, Tailwind v4, etc.)
+# Alle notwendigen Pakete installieren (React, Vite, Tailwind v3, etc.)
 npm install
 ```
 
