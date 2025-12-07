@@ -1,73 +1,49 @@
-# React + TypeScript + Vite
+## 🚀 Mars Colony Logistics Control
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Übersicht
 
-Currently, two official plugins are available:
+Dieses Projekt dient als zentrale **Web-Anwendung zur Verwaltung der Logistik und der kritischen Ressourcen** der Mars-Kolonie. Es bietet eine moderne, typensichere Benutzeroberfläche, entwickelt mit **React und TypeScript**, die als **Frontend** für die Oracle-Datenbank (Backend) fungiert.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+Die Anwendung ermöglicht die Überwachung von Ressourcen (Sauerstoff, Ressourcen, etc.), die Verwaltung von Kolonie-Standorten (Habitaten), die Koordination der Fahrzeugflotte und das Management des Kolonie-Personals.
 
-## React Compiler
+### 🧑‍💻 Autoren
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+* **Projektinitiator & Entwickler:** **[@CyZeTLC](https://github.com/CyZeTLC)**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚙️ Technologie-Stack
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+| Rolle | Technologie | Beschreibung |
+| :--- | :--- | :--- |
+| **Frontend Framework** | **React** (mit Hooks) | Komponentenbasiertes UI-Design. |
+| **Sprache** | **TypeScript** | Stellt Typensicherheit und bessere Wartbarkeit sicher. |
+| **Build Tool** | **Vite** | Schneller Development-Server und effizientes Bundling. |
+| **Styling** | **Tailwind CSS v4** | Utility-First CSS-Framework für das futuristische Mars-Design. |
+| **Backend/Daten** | **Oracle Database** | Der geplante Datenbank-Layer für die persistente Speicherung der Kolonie-Daten. |
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## 🛠️ Einrichtung und Installation (Schritt-für-Schritt)
+
+### 1. Klonen und Abhängigkeiten installieren
+
+Stelle sicher, dass du **Node.js (LTS)** und **npm** installiert hast.
+
+```bash
+# Repository klonen
+git clone https://github.com/CyZeTLC/Mars-Colony-Project
+
+# Alle notwendigen Pakete installieren (React, Vite, Tailwind v4, etc.)
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### 2. Applikation starten
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Starte den Vite-Entwicklungsserver:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```bash
+npm run dev
 ```
+
+Die Anwendung ist nun über die angezeigte lokale URL (z.B. http://localhost:5173/) erreichbar.
