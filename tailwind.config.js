@@ -17,7 +17,7 @@ export default {
         'mars-glow': '0 0 15px rgba(255, 136, 85, 0.4)',
         'mars-glow-lg': '0 0 25px rgba(255, 136, 85, 0.6)',
       }
-    },
+    }
   },
   plugins: [],
 }
