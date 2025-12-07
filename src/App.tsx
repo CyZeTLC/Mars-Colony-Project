@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import Sidebar, { type Section } from './components/Sidebar';
 import { calculateMarsSolDate } from './utils/marsTime';
+import { getSectionTitle } from './utils/sectionTitle';
 
 import Overview from './pages/Overview';
 import Vehicles from './pages/Vehicles';
@@ -42,7 +43,7 @@ function App() {
         {/* Header */}
         <header className="mb-8 pb-4 border-b border-mars-red-deep/50 flex justify-between items-center sticky top-0 bg-bg-dark/95 backdrop-blur z-10">
             <h2 className="text-3xl md:text-4xl font-extrabold capitalize">
-                {activeSection === 'overview' ? 'Übersicht & Logistik' : activeSection}
+                {getSectionTitle(activeSection)}
             </h2>
             <div className="text-sm text-gray-400 text-right">
                 Mitarbeiter: <span className="text-mars-accent">Tom Coombs</span> <br/>

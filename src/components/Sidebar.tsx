@@ -1,6 +1,6 @@
 import React from 'react';
 
-export type Section = 'overview' | 'cities' | 'inhabitants' | 'employees' | 'vehicles';
+export type Section = 'overview' | 'cities' | 'inhabitants' | 'employees' | 'vehicles' | 'sql';
 
 interface SidebarProps {
     activeSection: Section;
@@ -15,6 +15,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
         { id: 'inhabitants', label: 'Bewohner-Management', icon: '🧑‍🤝‍🧑' },
         { id: 'employees', label: 'Mitarbeiter-Datenbank', icon: '👷' },
         { id: 'vehicles', label: 'Fahrzeugflotte', icon: '🚜' },
+        { id: 'sql', label: 'SQL-Queries', icon: '🗒️' },
     ];
 
     return (
