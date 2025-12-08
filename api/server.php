@@ -22,6 +22,11 @@ header('Referrer-Policy: no-referrer');
 header('Feature-Policy: camera "none"; microphone "none"; geolocation "none"; payment "none";');
 header('permissions-policy: camera=(), microphone=(), geolocation=()');
 
+/* Debug Headers */
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 /* Session */
 session_start();
 $_SESSION['last_page_load'] = $dateTime;
