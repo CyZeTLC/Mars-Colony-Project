@@ -1,9 +1,5 @@
 <?php
 require "./server.php";
-header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
-header("Access-Control-Allow-Headers: Content-Type, Authorization");
-
 generate_csrf();                //debug
 ini_set('display_errors', 0);
 $json = json_decode("{}", true);
