@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { apiFetchFile } from "../utils/restApi";
 
 async function loadAllSqlQueries() {
-  try {
-    const sqlQueries = await apiFetchFile('get_sql_files');
-    return sqlQueries;
-  } catch (e) {
-    alert("Queries konnten nicht geladen werden!");
-  }
+    try {
+        const sqlQueries = await apiFetchFile('get_sql_files');
+        return sqlQueries;
+    } catch (e) {
+        alert("Queries konnten nicht geladen werden!");
+    }
 }
 
 const SqlOverview: React.FC = () => {
@@ -52,16 +54,25 @@ const SqlOverview: React.FC = () => {
             </section>
         );
     }
-    
+
     return (
         <section>
             <h3 className="text-2xl font-semibold text-mars-accent mb-4">Alle Queries</h3>
             <div className="bg-card-bg p-6 rounded-lg border border-gray-700">
                 <p className="mb-4 font-bold">Liste der Queries:</p>
-                <pre>
+                <SyntaxHighlighter
+                    language="sql"
+                    style={dark}
+                    showLineNumbers={true}
+                    customStyle={{
+                        backgroundColor: 'transparent',
+                        padding: '0',
+                        margin: '0',
+                    }}
+                >
                     {queries}
-                </pre>
-                
+                </SyntaxHighlighter>
+
             </div>
         </section>
     );

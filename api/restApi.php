@@ -27,10 +27,16 @@ if (isset($_GET['action'])) {
             } else if ($action == "get_sql_files") {
                 $path = "../sql/";
                 $files = array_diff(scandir($path), array('.', '..'));
+                $files = array_values($files);
+                $last_file = end($files);
 
                 foreach ($files as $file) {
                     $fileContent = file_get_contents($path . $file);
-                    echo $file . ":\n" . $fileContent . "\n\n";
+                    echo $file . ":\n" . $fileContent;
+
+                    if ($file !== $last_file) {
+                        echo "\n\n";
+                    }
                 }
             }
         } else {
