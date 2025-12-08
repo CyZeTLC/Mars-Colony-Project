@@ -1,12 +1,20 @@
 <?php
 require "./server.php";
+header("Access-Control-Allow-Origin: *");
+header("Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
+generate_csrf();                //debug
 ini_set('display_errors', 0);
 $json = json_decode("{}", true);
 
-if (isset($_POST['action'])) {
-    $action = $_POST['action'];
-    $given_csrf = $_POST['csrf'];
+if (isset($_GET['action'])) {
+    $action = $_GET['action'];
+    $given_csrf = $_GET['csrf'];
     $current_csrf = $_SESSION['csrf']['token'];
+
+    //debug
+    $given_csrf = $current_csrf;
 
     if ($current_csrf == $given_csrf) {
         if ($_SESSION['csrf']['time'] + (1000 * 60 * 60 * 24) > time()) {
@@ -16,6 +24,14 @@ if (isset($_POST['action'])) {
             } else if ($action == "get_citizens_count") {
                 $data = runSqlFile("../sql/getCitizensCount.sql");
                 $json['citizens_count'] = $data;
+            } else if ($action == "get_sql_files") {
+                $path = "../sql/";
+                $files = array_diff(scandir($path), array('.', '..'));
+
+                foreach ($files as $file) {
+                    $fileContent = file_get_contents($path . $file);
+                    echo $file . ":\n" . $fileContent . "\n\n";
+                }
             }
         } else {
             $json['error'] = 403;

@@ -22,3 +22,20 @@ export async function apiFetch<T>(endpoint: string): Promise<T> {
     throw error; 
   }
 }
+
+export async function apiFetchFile(endpoint: string) {
+  const url = 'https://hsbi.cyzetlc.de/api/restApi.php?action=' + endpoint 
+
+  try {
+    const response = await fetch(url);
+
+    if (!response.ok) {
+      throw new Error(`HTTP Error! Status: ${response.status} for ${url}`);
+    }
+    return response.text();
+    
+  } catch (error) {
+    console.error(`Fetch-Fehler bei ${url}:`, error);
+    throw error; 
+  }
+}
