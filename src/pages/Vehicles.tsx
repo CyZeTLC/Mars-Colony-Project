@@ -76,7 +76,7 @@ const Vehicles: React.FC = () => {
                     {vehicles.map((vehicle) => (
                         <div 
                             key={vehicle.id} 
-                            className="group bg-gradient-to-br from-slate-800/60 to-red-900/30 backdrop-blur-sm border border-orange-500/30 hover:border-orange-400/60 rounded-xl p-6 transition-all duration-300 hover:shadow-lg hover:shadow-orange-500/20 hover:-translate-y-1"
+                            className="group bg-gradient-to-br from-slate-900/90 via-slate-800/80 to-gray-800/70 backdrop-blur-md ring-1 ring-slate-700/40 border border-transparent hover:border-orange-400/60 rounded-xl p-6 transition-all duration-300 hover:shadow-2xl hover:shadow-orange-500/20 hover:-translate-y-1"
                         >
                             <div className="flex items-start justify-between mb-4">
                                 <h4 className="text-xl font-bold text-orange-300 group-hover:text-orange-200 transition-colors">
