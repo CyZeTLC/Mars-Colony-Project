@@ -9,7 +9,7 @@ if (isset($_GET['action'])) {
     $given_csrf = $_GET['csrf'];
     $current_csrf = $_SESSION['csrf']['token'];
 
-    //debug
+    /* debug */
     $given_csrf = $current_csrf;
 
     if ($current_csrf == $given_csrf) {
