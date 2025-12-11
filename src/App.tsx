@@ -41,7 +41,7 @@ function App() {
       />
 
       {/* Hauptinhalt */}
-      <main className="flex-1 overflow-y-auto p-6 md:p-10 bg-bg-dark relative">
+      <main className="flex-1 overflow-y-auto p-6 md:p-10 relative">
         {/* Header */}
         <header className="mb-8 pb-4 border-b border-mars-red-deep/50 flex justify-between items-center sticky top-0 bg-bg-dark/95 backdrop-blur z-10">
           <h2 className="text-3xl md:text-4xl font-extrabold capitalize">
