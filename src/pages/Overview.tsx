@@ -27,7 +27,7 @@ const columns: GridColDef<CriticalResourceRow>[] = [
         headerName: 'Priorität',
         width: 150,
         renderCell: (params: GridRenderCellParams<CriticalResourceRow, 'priority'>) => {
-            const isCritical = params.value === 'KRITISCH';
+            const isCritical = params.value === 'KRITISCH';     // Need rework on statement (vscode warning)
             return (
                 <Chip
                     label={params.value}
