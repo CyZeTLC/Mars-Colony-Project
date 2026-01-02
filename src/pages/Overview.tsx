@@ -1,5 +1,4 @@
 import StatusCard from '../components/StatusCard';
-import React from 'react';
 import { DataGrid, type GridColDef, type GridRenderCellParams } from '@mui/x-data-grid';
 import { Chip, Typography } from '@mui/material';
 import WarningIcon from '@mui/icons-material/Warning';
