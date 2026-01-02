@@ -141,7 +141,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
                                 {!collapsed && (
                                     <span className="flex-1 text-left text-sm">
                                         <div className="font-medium">{item.label}</div>
-                                        {/* Optional subtitle */}
+                                        {/* subtitle */}
                                         <div className="text-xs text-gray-400">{active ? 'Aktiv' : 'Anzeigen'}</div>
                                     </span>
                                 )}
@@ -170,7 +170,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
                         title="Account Menü"
                         className="p-2 rounded-md text-gray-300 hover:bg-white/5 transition hidden"
                     >
-                        {/* placeholder if you want a dropdown later */}
+                        {/* placeholder for dropdown */}
                     </button>
                 </div>
 
