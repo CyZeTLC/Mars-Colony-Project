@@ -42,10 +42,10 @@ class TableRenderer {
     private generateTableHtml(data: TableRow[]): string {
         const headers = Object.keys(data[0]);
 
-        let html = '<table><thead><tr>';
+        let html = '<table class="w-full table-auto border-collapse border border-gray-400"><thead><tr>';
 
         headers.forEach(header => {
-            html += `<th>${this.escapeHtml(header)}</th>`;
+            html += `<th class="border border-gray-300 p-2 bg-gray-500">${this.escapeHtml(header)}</th>`;
         });
         html += '</tr></thead><tbody>';
 
@@ -53,7 +53,7 @@ class TableRenderer {
             html += '<tr>';
             headers.forEach(header => {
                 const value = row[header] !== null ? row[header] : '';
-                html += `<td>${this.escapeHtml(String(value))}</td>`;
+                html += `<td class="border border-gray-300 p-2">${this.escapeHtml(String(value))}</td>`;
             });
             html += '</tr>';
         });
