@@ -1,53 +1,65 @@
 <?php
 require "./server.php";
 generate_csrf();                //debug
+
+header('Content-Type: application/json; charset=utf-8');
 ini_set('display_errors', 0);
+
 $json = json_decode("{}", true);
 
-if (isset($_GET['action'])) {
-    $action = $_GET['action'];
-    $given_csrf = $_GET['csrf'];
-    $current_csrf = $_SESSION['csrf']['token'];
+function sendResponse(array $data, int $httpCode = 200) {
+    http_response_code($httpCode);
+    echo json_encode($data);
+    exit;
+}
 
-    /* debug */
-    $given_csrf = $current_csrf;
+if (!isset($_GET['action']) || !isset($_GET['csrf'])) {
+    sendResponse(["error" => 400, "message" => "Invalid request!"], 400);
+}
 
-    if ($current_csrf == $given_csrf) {
-        if ($_SESSION['csrf']['time'] + (1000 * 60 * 60 * 24) > time()) {
-            if ($action == "get_active_vehicles_count") {
-                $data = runSqlFile("../sql/getActiveVehiclesCount.sql");
-                $json['active_vehicles'] = $data;
-            } else if ($action == "get_citizens_count") {
-                $data = runSqlFile("../sql/getCitizensCount.sql");
-                $json['citizens_count'] = $data;
-            } else if ($action == "get_sql_files") {
-                $path = "../sql/";
-                $files = array_diff(scandir($path), array('.', '..'));
-                $files = array_values($files);
-                $last_file = end($files);
+$action = $_GET['action'];
+$given_csrf = $_GET['csrf'];
+$current_csrf = $_SESSION['csrf']['token'] ?? '';
 
-                foreach ($files as $file) {
-                    $fileContent = file_get_contents($path . $file);
-                    echo $file . ":\n" . $fileContent;
+$given_csrf = $current_csrf; // debug
 
-                    if ($file !== $last_file) {
-                        echo "\n\n";
-                    }
-                }
-            }
-        } else {
-            $json['error'] = 403;
-            $json['message'] = "CSRF-Token expired!";
+if ($current_csrf !== $given_csrf) {
+    sendResponse(["error" => 403, "message" => "Invalid CSRF-Token!"], 403);
+}
+
+$oneDayInSeconds = 24 * 60 * 60;
+if (($_SESSION['csrf']['time'] + $oneDayInSeconds) < time()) {
+    sendResponse(["error" => 403, "message" => "CSRF-Token expired!"], 403);
+}
+
+$response = [];
+
+switch ($action) {
+    case "generate_csrf":
+        generate_csrf();
+        $response['csrf'] = $_SESSION['csrf']['token'];
+        break;
+
+    case "get_active_vehicles_count":
+        $response['active_vehicles'] = runSqlFile("../sql/getActiveVehiclesCount.sql");
+        break;
+
+    case "get_citizens_count":
+        $response['citizens_count'] = runSqlFile("../sql/getCitizensCount.sql");
+        break;
+
+    case "get_sql_files":
+        $path = "../sql/";
+        $files = array_diff(scandir($path), array('.', '..'));
+        $fileData = "";
+        foreach ($files as $file) {
+            $fileData .= $file . ":\n" . file_get_contents($path . $file) . "\n\n";
         }
-    } else {
-        $json['error'] = 403;
-        $json['message'] = "Invaild CSRF-Token!";
-    }
-} else {
-    $json['error'] = 501;
-    $json['message'] = "Invaild request!";
+        $response['sql_content'] = trim($fileData);
+        break;
+
+    default:
+        sendResponse(["error" => 501, "message" => "Action not implemented!"], 501);
 }
 
-if (count($json) > 0) {
-    echo json_encode($json);
-}
+sendResponse($response);
