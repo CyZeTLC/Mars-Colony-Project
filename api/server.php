@@ -5,6 +5,7 @@ use PDO;
 use DateTime;
 
 /* DateTime */
+
 $dateTime = new DateTime();
 
 /* Errors */
@@ -32,10 +33,28 @@ session_start();
 $_SESSION['last_page_load'] = $dateTime;
 $_SESSION['version'] = "0.2";
 
-/* MySQL Connection */
-$dsn = 'mysql:host=' . $mysqlCredentials['host'] . ';dbname=' . $mysqlCredentials['schema'];
-$pdo = new PDO($dsn, $mysqlCredentials['user'], $mysqlCredentials['passwd']);
-$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); /* Enable exceptions on errors */
+if ($useMySQL) {
+    /* MySQL Connection */
+    $dsn = 'mysql:host=' . $mysqlCredentials['host'] . ';dbname=' . $mysqlCredentials['schema'];
+
+    try {
+        $pdo = new PDO($dsn, $mysqlCredentials['user'], $mysqlCredentials['passwd']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); /* Enable exceptions on errors */
+    } catch (PDOException $e) {
+        echo "Verbindung fehlgeschlagen: " . $e->getMessage();
+    }
+} else {
+    /* Oracle Connection */
+    $dsn = 'oci:dbname=//' . $oracleCredentials['host'] . ':' . $oracleCredentials['port'] . '/' . $oracleCredentials['service_name'] . ';charset=AL32UTF8';
+
+    try {
+        $pdo = new PDO($dsn, $oracleCredentials['user'], $oracleCredentials['passwd']);
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); /* Enable exceptions on errors */
+
+    } catch (PDOException $e) {
+        echo "Verbindung fehlgeschlagen: " . $e->getMessage();
+    }
+}
 
 /**
  * Generates a CSRF token and stores it in the session.
@@ -97,14 +116,15 @@ function runSqlFile(string $sqlFilePath, array $params = []): array
  * @param array $params Optionale Parameter für das Prepared Statement.
  * @return void Gibt den JSON-String direkt aus und beendet das Skript.
  */
-function outputQueryResultsAsJson(string $sql, array $params = []): void {
+function outputQueryResultsAsJson(string $sql, array $params = []): void
+{
     header('Content-Type: application/json');
 
     try {
         global $pdo; // Verwende die globale PDO-Variable
         $stmt = $pdo->prepare($sql);
         $stmt->execute($params);
-        
+
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         $json_output = json_encode([
@@ -114,7 +134,6 @@ function outputQueryResultsAsJson(string $sql, array $params = []): void {
         ], JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE);
 
         echo $json_output;
-
     } catch (PDOException $e) {
         http_response_code(500);
         echo json_encode([
@@ -122,6 +141,6 @@ function outputQueryResultsAsJson(string $sql, array $params = []): void {
             'error' => 'Datenbankfehler: ' . $e->getMessage()
         ]);
     }
-    
+
     exit;
 }
