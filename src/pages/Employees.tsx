@@ -6,7 +6,8 @@ const Employees = () => {
 
     useEffect(() => {
         if (tableContainerRef.current) {
-            const myTable = new TableRenderer('table-app-id', 'https://cyzetlc.de/rest/data.php');
+            //const myTable = new TableRenderer('table-app-id', 'https://cyzetlc.de/rest/data.php');
+            const myTable = new TableRenderer('table-app-id', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=dev&action=get_sql_result&file=getKoords.sql');
             myTable.init();
         }
     }, []);

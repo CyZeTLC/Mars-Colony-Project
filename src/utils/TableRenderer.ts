@@ -2,6 +2,10 @@ interface TableRow {
     [key: string]: string | number | boolean | null;
 }
 
+interface ApiResponse {
+    result: TableRow[];
+}
+
 class TableRenderer {
     private container: HTMLElement | null;
 
@@ -36,7 +40,8 @@ class TableRenderer {
         if (!response.ok) {
             throw new Error(`Server-Fehler: ${response.statusText}`);
         }
-        return await response.json();
+        const data: ApiResponse = await response.json();
+        return data.result || [];
     }
 
     private generateTableHtml(data: TableRow[]): string {
