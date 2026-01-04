@@ -9,39 +9,39 @@ interface ApiResponse {
 class TableRenderer {
     private container: HTMLElement | null;
 
-    constructor(private containerId: string, private apiUrl: string) {
+    constructor(
+        private containerId: string,
+        private apiUrlOrData: string | TableRow[]
+    ) {
         this.container = document.getElementById(containerId);
     }
 
     public async init(): Promise<void> {
-        if (!this.container) {
-            console.error(`Container mit ID "${this.containerId}" nicht gefunden.`);
-            return;
-        }
+        if (!this.container) return;
 
         try {
-            this.container.innerHTML = '<p>Lade Daten...</p>';
-            const data = await this.fetchData();
+            this.container.innerHTML = '<p>Lade...</p>';
 
-            if (data.length === 0) {
+            const data = typeof this.apiUrlOrData === 'string'
+                ? await this.fetchData(this.apiUrlOrData)
+                : this.apiUrlOrData;
+
+            if (!data || data.length === 0) {
                 this.container.innerHTML = '<p>Keine Daten vorhanden.</p>';
                 return;
             }
 
-            const tableHtml = this.generateTableHtml(data);
-            this.container.innerHTML = tableHtml;
+            this.container.innerHTML = this.generateTableHtml(data);
         } catch (error) {
             this.container.innerHTML = `<p style="color: red;">Fehler: ${error}</p>`;
         }
     }
 
-    private async fetchData(): Promise<TableRow[]> {
-        const response = await fetch(this.apiUrl);
-        if (!response.ok) {
-            throw new Error(`Server-Fehler: ${response.statusText}`);
-        }
-        const data: ApiResponse = await response.json();
-        return data.result || [];
+    private async fetchData(url: string): Promise<TableRow[]> {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error("Fehler beim Laden");
+        const json = await response.json();
+        return json.result || json;
     }
 
     private generateTableHtml(data: TableRow[]): string {
