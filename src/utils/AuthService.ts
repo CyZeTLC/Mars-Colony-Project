@@ -20,6 +20,7 @@ export class AuthService {
 
             if (result.success) {
                 localStorage.setItem('auth_token', result.token);
+                localStorage.setItem('username', userField.value);
                 window.location.reload(); 
             } else {
                 if (errorMsg) {

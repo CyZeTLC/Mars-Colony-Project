@@ -162,7 +162,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
                     <div className="w-10 h-10 rounded-full bg-white/6 flex items-center justify-center text-white/90">T</div>
                     {!collapsed && (
                         <div className="flex-1">
-                            <div className="text-sm font-medium text-white">Admin</div>
+                            <div className="text-sm font-medium text-white">{localStorage.getItem('username')}</div>
                             <div className="text-xs text-gray-400">Alle Rechte</div>
                         </div>
                     )}
