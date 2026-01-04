@@ -18,6 +18,8 @@ const SqlOverview: React.FC = () => {
     const [queries, setQueries] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [bewohnerQuery, setBewohnerQuery] = useState<string>("");
+    const [koordsQuery, setKoordsQuery] = useState<string>("");
 
     useEffect(() => {
         const initializeDashboard = async () => {
@@ -35,9 +37,11 @@ const SqlOverview: React.FC = () => {
                 setTimeout(() => {
                     if (tables.getAllEmployees) {
                         new TableRenderer('container-citizens', tables.getAllEmployees.result).init();
+                        setBewohnerQuery(tables.getAllEmployees.sql);
                     }
                     if (tables.getKoords) {
                         new TableRenderer('container-coords', tables.getKoords.result).init();
+                        setKoordsQuery(tables.getKoords.sql);
                     }
                 }, 0);
 
@@ -61,10 +65,36 @@ const SqlOverview: React.FC = () => {
                 <div className="grid grid-cols-1 gap-6">
                     <div className="bg-card-bg p-4 rounded-lg border border-gray-700">
                         <h4 className="text-xl mb-2">Bürger Anzahl</h4>
+                        <SyntaxHighlighter
+                            language="sql"
+                            style={dark}
+                            showLineNumbers={true}
+                            customStyle={{
+                                backgroundColor: 'transparent',
+                                padding: '0.5rem',
+                                margin: '0',
+                                marginBottom: '1rem',
+                            }}
+                        >
+                            {bewohnerQuery}
+                        </SyntaxHighlighter>
                         <div id="container-citizens"></div>
                     </div>
                     <div className="bg-card-bg p-4 rounded-lg border border-gray-700">
                         <h4 className="text-xl mb-2">Koordinaten</h4>
+                        <SyntaxHighlighter
+                            language="sql"
+                            style={dark}
+                            showLineNumbers={true}
+                            customStyle={{
+                                backgroundColor: 'transparent',
+                                padding: '0.5rem',
+                                margin: '0',
+                                marginBottom: '1rem',
+                            }}
+                        >
+                            {koordsQuery}
+                        </SyntaxHighlighter>
                         <div id="container-coords"></div>
                     </div>
                 </div>

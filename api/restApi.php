@@ -70,7 +70,8 @@ switch ($action) {
             $queryResult = runSqlFile($path . $file);
             $tableName = pathinfo($file, PATHINFO_FILENAME);
             $allTables[$tableName] = [
-                "result" => $queryResult
+                "result" => $queryResult,
+                "sql" => file_get_contents($path . $file)
             ];
         }
 
