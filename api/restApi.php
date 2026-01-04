@@ -40,6 +40,18 @@ switch ($action) {
         $response['csrf'] = $_SESSION['csrf']['token'];
         break;
 
+    case "get_sql_result":
+        if (!isset($_GET['file'])) {
+            sendResponse(["error" => 400, "message" => "SQL file not specified!"], 400);
+        }
+        $file = basename($_GET['file']);
+        $allowedFiles = array_diff(scandir("../sql/"), array('.', '..'));
+        if (!in_array($file, $allowedFiles)) {
+            sendResponse(["error" => 400, "message" => "SQL file not found!"], 400);
+        }
+        $response['result'] = runSqlFile("../sql/" . $file);
+        break;
+
     case "get_active_vehicles_count":
         $response['active_vehicles'] = runSqlFile("../sql/getActiveVehiclesCount.sql");
         break;
