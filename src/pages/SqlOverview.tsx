@@ -33,9 +33,9 @@ const SqlOverview: React.FC = () => {
                 const tables = data.tables;
 
                 setTimeout(() => {
-                    /*if (tables.getCitizensCount) {
-                        new TableRenderer('container-citizens', tables.getCitizensCount.result).init();
-                    }*/
+                    if (tables.getAllEmployees) {
+                        new TableRenderer('container-citizens', tables.getAllEmployees.result).init();
+                    }
                     if (tables.getKoords) {
                         new TableRenderer('container-coords', tables.getKoords.result).init();
                     }
