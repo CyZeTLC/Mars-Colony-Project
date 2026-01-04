@@ -21,6 +21,7 @@ export class AuthService {
             if (result.success) {
                 localStorage.setItem('auth_token', result.token);
                 localStorage.setItem('username', userField.value);
+                localStorage.setItem('csrf_token', result.csrf);
                 window.location.reload(); 
             } else {
                 if (errorMsg) {

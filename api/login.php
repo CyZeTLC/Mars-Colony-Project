@@ -18,7 +18,8 @@ if ($dev) {
 
     if ($user && password_verify($password, $user['PASSWORT'])) {
         $token = bin2hex(random_bytes(16));
-        echo json_encode(["success" => true, "token" => $token]);
+        generate_csrf();
+        echo json_encode(["success" => true, "token" => $token, "csrf" => $_SESSION['csrf']['token']]);
     } else {
         //http_response_code(401);
         echo json_encode(["success" => false, "message" => "Login fehlgeschlagen"]);

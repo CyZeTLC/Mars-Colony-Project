@@ -27,7 +27,8 @@ const SqlOverview: React.FC = () => {
                     setQueries((fetchedQueries as any).sql_content || fetchedQueries);
                 }
 
-                const response = await fetch('https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=dev&action=get_all_tables');
+                const csrf = localStorage.getItem('csrf_token') || 'dev';
+                const response = await fetch(`https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=${csrf}&action=get_all_tables`);
                 const data = await response.json();
                 const tables = data.tables;
 
