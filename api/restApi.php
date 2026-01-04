@@ -61,6 +61,13 @@ switch ($action) {
         $response['citizens_count'] = runSqlFile("../sql/getCitizensCount.sql");
         break;
 
+    case "get_dashboard_stats":
+        $response['dashboard_stats'] = [
+            "citizens_count" => runSqlFile("../sql/getCitizensCount.sql"),
+            "cities_count" => runSqlFile("../sql/getCitiesCount.sql")
+        ];
+        break;
+
     case "get_all_tables":
         $path = "../sql/";
         $files = array_diff(scandir($path), array('.', '..'));

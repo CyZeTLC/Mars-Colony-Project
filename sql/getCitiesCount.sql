@@ -1,0 +1,1 @@
+SELECT COUNT(*) AS cities_count FROM STADT;
