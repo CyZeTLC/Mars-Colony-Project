@@ -95,9 +95,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
                     {!collapsed ? (
                         <div className="rounded-md p-2 bg-mars-accent/10 text-mars-accent">
                             {/* Logo */}
-                            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                            {/* <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor">
                                 <path d="M12 2l3 6 6 .5-4.5 3.5L19 21l-7-4-7 4 1.5-8L2 8.5 8 8 12 2z" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg>
+                            </svg> */} 
+                            <img src="./logo.png" alt="ALS-Control Logo" className="w-6 h-6" />
                         </div>
                     ) : (
                         // Platzhalter, damit das Layout zentriert bleibt (Logo ausgeblendet)
