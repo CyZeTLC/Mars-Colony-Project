@@ -7,7 +7,8 @@ ini_set('display_errors', 0);
 
 $json = json_decode("{}", true);
 
-function sendResponse(array $data, int $httpCode = 200) {
+function sendResponse(array $data, int $httpCode = 200)
+{
     http_response_code($httpCode);
     echo json_encode($data);
     exit;
@@ -58,6 +59,22 @@ switch ($action) {
 
     case "get_citizens_count":
         $response['citizens_count'] = runSqlFile("../sql/getCitizensCount.sql");
+        break;
+
+    case "get_all_tables":
+        $path = "../sql/";
+        $files = array_diff(scandir($path), array('.', '..'));
+        $allTables = [];
+
+        foreach ($files as $file) {
+            $queryResult = runSqlFile($path . $file);
+            $tableName = pathinfo($file, PATHINFO_FILENAME);
+            $allTables[$tableName] = [
+                "result" => $queryResult
+            ];
+        }
+
+        $response['tables'] = $allTables;
         break;
 
     case "get_sql_files":
