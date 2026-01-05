@@ -45,25 +45,33 @@ class TableRenderer {
     }
 
     private generateTableHtml(data: TableRow[]): string {
+        if (!data || data.length === 0) {
+            return '<div class="p-8 text-center text-gray-400 bg-[#071422]/60 backdrop-blur-md rounded-xl border border-white/5 italic font-light tracking-wide">Keine Datensätze in der Datenbank gefunden.</div>';
+        }
+
         const headers = Object.keys(data[0]);
 
-        let html = '<table class="w-full table-auto border-collapse border border-gray-400"><thead><tr>';
+        let html = '<div class="overflow-hidden rounded-xl border border-white/5 bg-gradient-to-b from-[#071422]/60 to-[#03101a]/60 backdrop-blur-md shadow-2xl">';
+        html += '<table class="w-full text-left text-sm border-separate border-spacing-0">';
 
+        html += '<thead class="bg-white/5 text-mars-accent uppercase text-[10px] font-bold tracking-[0.15em]">';
+        html += '<tr>';
         headers.forEach(header => {
-            html += `<th class="border border-gray-300 p-2 bg-gray-500">${this.escapeHtml(header)}</th>`;
+            html += `<th class="px-6 py-4 border-b border-white/5">${this.escapeHtml(header)}</th>`;
         });
-        html += '</tr></thead><tbody>';
+        html += '</tr></thead>';
 
-        data.forEach(row => {
-            html += '<tr>';
+        html += '<tbody class="divide-y divide-white/5">';
+        data.forEach((row) => {
+            html += '<tr class="group hover:bg-white/[0.03] transition-colors duration-200">';
             headers.forEach(header => {
-                const value = row[header] !== null ? row[header] : '';
-                html += `<td class="border border-gray-300 p-2">${this.escapeHtml(String(value))}</td>`;
+                const value = row[header] !== null ? row[header] : '-';
+                html += `<td class="px-6 py-4 text-gray-300 font-light tracking-wide group-hover:text-white transition-colors">${this.escapeHtml(String(value))}</td>`;
             });
             html += '</tr>';
         });
 
-        html += '</tbody></table>';
+        html += '</tbody></table></div>';
         return html;
     }
 
