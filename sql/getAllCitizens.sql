@@ -2,9 +2,7 @@ SELECT
     b.bewohner_id,
     b.vorname,
     b.nachname,
-    a.stra_e,
-    a.hausnummer,
-    s.stadt_name,
+    CONCAT(CONCAT(CONCAT(CONCAT(a.stra_e, ' '), a.hausnummer), ', '), s.stadt_name) AS adresse,
     CASE 
         WHEN m.bewohner_id IS NOT NULL THEN 'Ja' 
         ELSE 'Nein' 

@@ -10,6 +10,7 @@ import Employees from './pages/Employees';
 import SqlOverview from './pages/SqlOverview';
 import Ressources from './pages/Ressources';
 import LoginPage from './pages/Login';
+import Citizens from './pages/Citizens.tsx';
 
 function App() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
@@ -75,6 +76,10 @@ function App() {
 
             {activeSection === 'ressources' && (
               <Ressources />
+            )}
+
+            {activeSection === 'inhabitants' && (
+              <Citizens />
             )}
 
             {activeSection === 'sql' && (
