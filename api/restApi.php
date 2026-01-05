@@ -64,7 +64,9 @@ switch ($action) {
     case "get_dashboard_stats":
         $response = [
             "citizens_count" => runSqlFile("../sql/getCitizensCount.sql"),
-            "cities_count" => runSqlFile("../sql/getCitiesCount.sql")
+            "cities_count" => runSqlFile("../sql/getCitiesCount.sql"),
+            "vehicles" => runSqlFile("../sql/getActiveVehicles.sql"),
+            "energy_power" => runSqlFile("../sql/getCurrentEnergieLeistung.sql")
         ];
         break;
 
