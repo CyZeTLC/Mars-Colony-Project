@@ -5,7 +5,14 @@
  * @returns {Promise<T>} Ein Promise, das mit den typisierten JSON-Daten aufgelöst wird.
  */
 export async function apiFetch<T>(endpoint: string): Promise<T> {
-  const url = 'https://hsbi.cyzetlc.de/api/' + endpoint + "/";
+  const csrf = localStorage.getItem('csrfToken') || 'dev';
+  var url = 'https://hsbi.cyzetlc.de/api/' + endpoint + "/";
+
+  if (endpoint === 'vehicles') {
+      url = 'https://hsbi.cyzetlc.de/api/' + endpoint + "/";
+  } else {
+    url = 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=' + endpoint;
+  }
 
   try {
     const response = await fetch(url);
