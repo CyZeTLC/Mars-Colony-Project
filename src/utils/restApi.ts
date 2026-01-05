@@ -5,7 +5,7 @@
  * @returns {Promise<T>} Ein Promise, das mit den typisierten JSON-Daten aufgelöst wird.
  */
 export async function apiFetch<T>(endpoint: string): Promise<T> {
-  const url = 'https://hsbi.cyzetlc.de/api/' + endpoint + "/"; 
+  const url = 'https://hsbi.cyzetlc.de/api/' + endpoint + "/";
 
   try {
     const response = await fetch(url);
@@ -16,15 +16,16 @@ export async function apiFetch<T>(endpoint: string): Promise<T> {
 
     const data: T = await response.json();
     return data;
-    
+
   } catch (error) {
     console.error(`Fetch-Fehler bei ${url}:`, error);
-    throw error; 
+    throw error;
   }
 }
 
 export async function apiFetchFile(endpoint: string) {
-  const url = 'https://hsbi.cyzetlc.de/api/restApi.php?action=' + endpoint 
+  const csrf = localStorage.getItem('csrfToken') || 'dev';
+  const url = 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=' + endpoint;
 
   try {
     const response = await fetch(url);
@@ -33,9 +34,9 @@ export async function apiFetchFile(endpoint: string) {
       throw new Error(`HTTP Error! Status: ${response.status} for ${url}`);
     }
     return response.text();
-    
+
   } catch (error) {
     console.error(`Fetch-Fehler bei ${url}:`, error);
-    throw error; 
+    throw error;
   }
 }

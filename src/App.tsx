@@ -8,6 +8,7 @@ import Overview from './pages/Overview';
 import Vehicles from './pages/Vehicles';
 import Employees from './pages/Employees';
 import SqlOverview from './pages/SqlOverview';
+import Ressources from './pages/Ressources';
 import LoginPage from './pages/Login';
 
 function App() {
@@ -70,6 +71,10 @@ function App() {
 
             {activeSection === 'employees' && (
               <Employees />
+            )}
+
+            {activeSection === 'ressources' && (
+              <Ressources />
             )}
 
             {activeSection === 'sql' && (
