@@ -1,0 +1,1 @@
+SELECT SUM(AKTUELLE_LEISTUNG) as current_energy_power FROM `ENERGIEQUELLE`;
