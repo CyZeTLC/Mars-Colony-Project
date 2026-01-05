@@ -8,7 +8,7 @@ SELECT
         ELSE 'Nein' 
     END AS ist_mitarbeiter
 FROM BEWOHNER b
-INNER JOIN MITARBEITER m 
+LEFT JOIN MITARBEITER m 
     ON b.bewohner_id = m.bewohner_id
 INNER JOIN ADRESSE a 
     ON b.adresse_id = a.adresse_id
