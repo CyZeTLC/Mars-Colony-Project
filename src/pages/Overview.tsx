@@ -1,7 +1,6 @@
 import StatusCard from '../components/StatusCard';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../utils/restApi';
-import { Dashboard } from '@mui/icons-material';
 
 interface DashboardStats {
     citizens_count: Array<{ citizens_count: number; minors_count: number }>;
