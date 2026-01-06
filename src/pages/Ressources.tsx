@@ -4,6 +4,7 @@ import TableRenderer from '../utils/TableRenderer.js';
 const Ressources = () => {
     const tableContainerRef = useRef<HTMLDivElement>(null);
     const lagerTableContainerRef = useRef<HTMLDivElement>(null);
+    const ressourcenTableContainerRef = useRef<HTMLDivElement>(null);
     const csrf = localStorage.getItem('csrfToken') || 'dev';
 
     useEffect(() => {
@@ -15,6 +16,11 @@ const Ressources = () => {
         if (lagerTableContainerRef.current) {
             const lagerTable = new TableRenderer('table-app-id-lager', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getAllLager.sql');
             lagerTable.init();
+        }
+
+        if (ressourcenTableContainerRef.current) {
+            const ressourcenTable = new TableRenderer('table-app-id-ressourcen', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getRessourcenWithLager.sql');
+            ressourcenTable.init();
         }
     }, []);
 
@@ -48,19 +54,49 @@ const Ressources = () => {
             <div className="relative">
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-2.5 rounded-lg bg-mars-accent/10 border border-mars-accent/20 text-mars-accent shadow-[0_0_15px_rgba(227,88,76,0.1)]">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M21 8V21H3V8" /><path d="M1 3h22v5H1z" /><path d="M10 12h4" />
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M3 3v18h18" />
+                            <path d="M3 7h16" />
+                            <path d="M3 11h16" />
+                            <path d="M3 15h16" />
+                            <rect x="5" y="8" width="4" height="3" />
+                            <rect x="12" y="12" width="3" height="3" />
                         </svg>
                     </div>
                     <div>
-                        <h3 className="text-xl font-bold text-white tracking-tight">Bestandsübersicht</h3>
-                        <p className="text-sm text-gray-400">Zentrales Logistik-Verzeichnis aller Lagerstandorte</p>
+                        <h3 className="text-xl font-bold text-white tracking-tight">Lagerübersicht</h3>
+                        <p className="text-sm text-gray-400">Verzeichnis aller Lagerstandorte</p>
                     </div>
                 </div>
 
                 <div
                     id="table-app-id-lager"
                     ref={lagerTableContainerRef}
+                    className="transition-all duration-500 ease-in-out"
+                >
+                    <div className="flex items-center gap-3 p-8 text-gray-500 animate-pulse bg-[#071422]/30 rounded-xl border border-white/5">
+                        <div className="w-4 h-4 rounded-full bg-gray-600"></div>
+                        Lade Lager...
+                    </div>
+                </div>
+            </div>
+
+            <div className="relative">
+                <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2.5 rounded-lg bg-mars-accent/10 border border-mars-accent/20 text-mars-accent shadow-[0_0_15px_rgba(227,88,76,0.1)]">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                            <path d="M21 8V21H3V8" /><path d="M1 3h22v5H1z" /><path d="M10 12h4" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 className="text-xl font-bold text-white tracking-tight">Bestandsübersicht</h3>
+                        <p className="text-sm text-gray-400">Zentrales Logistik-Verzeichnis aller gelagerten Ressourcen</p>
+                    </div>
+                </div>
+
+                <div
+                    id="table-app-id-ressourcen"
+                    ref={ressourcenTableContainerRef}
                     className="transition-all duration-500 ease-in-out"
                 >
                     <div className="flex items-center gap-3 p-8 text-gray-500 animate-pulse bg-[#071422]/30 rounded-xl border border-white/5">
