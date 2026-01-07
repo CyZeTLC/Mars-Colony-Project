@@ -2,15 +2,11 @@ interface TableRow {
     [key: string]: string | number | boolean | null;
 }
 
-interface ApiResponse {
-    result: TableRow[];
-}
-
 class TableRenderer {
     private container: HTMLElement | null;
 
     constructor(
-        private containerId: string,
+        containerId: string,
         private apiUrlOrData: string | TableRow[]
     ) {
         this.container = document.getElementById(containerId);
