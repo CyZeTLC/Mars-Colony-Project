@@ -11,6 +11,7 @@ import SqlOverview from './pages/SqlOverview';
 import Ressources from './pages/Ressources';
 import LoginPage from './pages/Login';
 import Citizens from './pages/Citizens.tsx';
+import Cities from './pages/Cities.tsx';
 
 function App() {
   const [activeSection, setActiveSection] = useState<Section>('overview');
@@ -84,6 +85,10 @@ function App() {
 
             {activeSection === 'sql' && (
               <SqlOverview />
+            )}
+
+            {activeSection === 'cities' && (
+              <Cities />
             )}
 
             {/* Weitere Sektoren (Cities, Employees, etc.) hinzufügen... */}
