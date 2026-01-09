@@ -1,14 +1,35 @@
-## 🚀 Mars Colony Logistics Control
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/HSBI_Logo_RGB_schwarz.svg/1200px-HSBI_Logo_RGB_schwarz.svg.png" alt="Logo" width="700" height="120">
 
-### Übersicht
+  <h3 align="center">Mars Logisitik Verwaltung - Projekt</h3>
 
-Dieses Projekt dient als zentrale **Web-Anwendung zur Verwaltung der Logistik und der kritischen Ressourcen** der Mars-Kolonie. Es bietet eine moderne, typensichere Benutzeroberfläche, entwickelt mit **React und TypeScript**, die als **Frontend** für die Oracle-Datenbank (Backend) fungiert.
+  <p align="center">
+    ERD & PDM, SQL Queries, TypeScript WepApp, php backend, ..
+    <br />
+    <a href="https://github.com/CyZeTLC/Mars-Colony-Project/issues">Fehler melden</a>
+    ·
+    <a href="https://github.com/CyZeTLC/Mars-Colony-Project/pulls">Feature Request</a>
+  </p>
+</div>
 
-Die Anwendung ermöglicht die Überwachung von Ressourcen (Sauerstoff, Ressourcen, etc.), die Verwaltung von Kolonie-Standorten (Habitaten), die Koordination der Fahrzeugflotte und das Management des Kolonie-Personals.
+<div align="center">
 
-### 🧑‍💻 Autoren
+![GitHub License](https://img.shields.io/github/license/CyZeTLC/Mars-Colony-Project?style=for-the-badge)
+![GitHub stars](https://img.shields.io/github/stars/CyZeTLC/Mars-Colony-Project?style=for-the-badge)
+![Letze Aenderung](https://img.shields.io/github/last-commit/CyZeTLC/Mars-Colony-Project?style=for-the-badge)
 
-* **Projektinitiator & Entwickler:** **[@CyZeTLC](https://github.com/CyZeTLC)**
+</div>
+
+---
+
+## Über das Projekt
+
+Dieses Repository enthält alle technischen Komponenten für das Semesterprojekt **Mars Logisitk Verwaltung** für das Modul Datenbanken-1 im WS 25/26. Es dient als zentraler Speicherort für die serverseitige Logik sowie die Web-Integrationen & SQL Queries.
+
+### Kern-Features:
+* **WebApp:** Echtzeit-Datenabfrage über das Web in Form einer modernen TypeScript App.
+* **ERD/PDM:** Die Darstellung der Datenbankstruktur durch ein den SAP PowerDesigner.
+* **SQL Queries:** Datenbankabfragen für die WebApp.
 
 ---
 
