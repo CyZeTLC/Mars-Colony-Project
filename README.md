@@ -33,7 +33,7 @@ Dieses Repository enthält alle technischen Komponenten für das Semesterprojekt
 
 ---
 
-## ⚙️ Technologie-Stack
+## Technologie-Stack
 
 | Rolle | Technologie | Beschreibung |
 | :--- | :--- | :--- |
@@ -45,7 +45,7 @@ Dieses Repository enthält alle technischen Komponenten für das Semesterprojekt
 
 ---
 
-## 🛠️ Einrichtung und Installation (Schritt-für-Schritt)
+## Einrichtung und Installation (Schritt-für-Schritt)
 
 ### 1. Klonen und Abhängigkeiten installieren
 
