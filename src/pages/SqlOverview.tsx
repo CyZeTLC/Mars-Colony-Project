@@ -14,7 +14,7 @@ const SqlOverview: React.FC = () => {
     const [allQueriesText, setAllQueriesText] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
-    
+
     const renderedTables = useRef<Set<string>>(new Set());
 
     useEffect(() => {
@@ -26,7 +26,7 @@ const SqlOverview: React.FC = () => {
                 const csrf = localStorage.getItem('csrf_token') || 'dev';
                 const response = await fetch(`https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=${csrf}&action=get_all_tables`);
                 const data = await response.json();
-                
+
                 if (data && data.tables) {
                     setTableData(data.tables);
                 }
@@ -44,7 +44,7 @@ const SqlOverview: React.FC = () => {
         Object.keys(tableData).forEach((tableName) => {
             const containerId = `container-${tableName}`;
             const container = document.getElementById(containerId);
-            
+
             if (container && !renderedTables.current.has(tableName)) {
                 new TableRenderer(containerId, tableData[tableName].result).init();
                 renderedTables.current.add(tableName);
@@ -52,7 +52,16 @@ const SqlOverview: React.FC = () => {
         });
     }, [tableData]);
 
-    if (isLoading) return <section><p>🚀 Lade alle Tabellen...</p></section>;
+    if (isLoading) {
+        return (
+            <section className="min-h-screen flex items-center justify-center">
+                <div className="text-center">
+                    <div className="animate-spin text-4xl mb-4">🚀</div>
+                    <p className="text-orange-300 text-lg">Lade Tabellen...</p>
+                </div>
+            </section>
+        );
+    }
     if (error) return <section><p className="text-red-500">Fehler: {error}</p></section>;
 
     return (
@@ -89,9 +98,7 @@ const SqlOverview: React.FC = () => {
                                 </SyntaxHighlighter>
                             </details>
 
-                            {/* Container für den TableRenderer */}
                             <div id={`container-${key}`} className="overflow-x-auto min-h-[50px]">
-                                {/* TableRenderer injiziert hier die HTML-Tabelle */}
                             </div>
                         </div>
                     ))}
