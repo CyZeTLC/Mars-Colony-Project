@@ -55,7 +55,7 @@ function App() {
               {getSectionTitle(activeSection)}
             </h2>
             <div className="text-sm text-gray-400 text-right">
-              Mitarbeiter: <span className="text-mars-accent">Tom Coombs</span> <br />
+              Mitarbeiter: <span className="text-mars-accent">{localStorage.getItem('username')}</span> <br />
               Sol: <b>{marsDate.sol}</b> ({marsDate.time})
             </div>
           </header>
