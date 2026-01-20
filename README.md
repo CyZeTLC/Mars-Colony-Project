@@ -107,7 +107,7 @@ Um Anfragen zu autorisieren, muss jeder Request einen gültigen CSRF-Token entha
 
 ---
 
-### ⚠️ Fehlerbehandlung
+### Fehlerbehandlung
 
 Die API nutzt Standard-HTTP-Statuscodes:
 
