@@ -58,7 +58,7 @@ Die App besteht aus folgenden Hauptseiten:
 - **Employees**: Mitarbeiterverwaltung und Berufe
 - **Ressources**: Ressourceninventar und Lager
 - **Vehicles**: Fahrzeuge und Raumfahrzeuge
-- **SqlOverview**: Direkte SQL-Abfragen
+- **SqlOverview**: Direkte SQL-Abfragen & Results der Queries
 
 ### Login
 
