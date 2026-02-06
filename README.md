@@ -27,7 +27,7 @@
 Dieses Repository enthält alle technischen Komponenten für das Semesterprojekt **Mars Logisitk Verwaltung** für das Modul Datenbanken-1 im WS 25/26. Es dient als zentraler Speicherort für die serverseitige Logik sowie die Web-Integrationen & SQL Queries.
 
 ### Kern-Features:
-* **WebApp:** Echtzeit-Datenabfrage über das Web in Form einer modernen TypeScript App.
+* **WebApp:** Echtzeit-Datenabfrage über das Web in Form einer modernen TypeScript App (mit php backend). 
 * **ERD/PDM:** Die Darstellung der Datenbankstruktur durch ein den SAP PowerDesigner.
 * **SQL Queries:** Datenbankabfragen für die WebApp.
 
