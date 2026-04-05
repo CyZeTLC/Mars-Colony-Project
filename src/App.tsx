@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Sidebar, { type Section } from './components/Sidebar';
+import Sidebar, { type Section } from './components/dashboard/Sidebar.tsx';
 import { calculateMarsSolDate } from './utils/marsTime';
 import { getSectionTitle } from './utils/sectionTitle';
 import { AuthService } from './utils/AuthService.ts';
