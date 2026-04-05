@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: 'class',
   theme: {
     extend: {
       colors: {
@@ -12,6 +13,12 @@ export default {
         'bg-dark': '#120C18',
         'card-bg': '#1B212C',
         'nav-bg': '#1E293B',
+        
+        'text-main': 'var(--text)',
+        'bg-main': 'var(--bg)',
+        'primary': 'var(--primary)',
+        'secondary': 'var(--secondary)',
+        'accent': 'var(--accent)',
       },
       boxShadow: {
         'mars-glow': '0 0 15px rgba(255, 136, 85, 0.4)',
