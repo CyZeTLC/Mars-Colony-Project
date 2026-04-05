@@ -2,8 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
-  /* Whitemode */
   --text: #040316;
   --bg: #fbfbfe;
   --primary: #2f27ce;
@@ -12,18 +15,19 @@
 }
 
 .dark {
-  /* Darkmode */
-  --text: #eae9fc;
-  --bg: #010104;
-  --primary: #3a31d8;
-  --secondary: #020024;
-  --accent: #0600c2;
+  --bg: #050505;
+  --text: #f2f2f7;
+  --primary: #121212;
+  --secondary: #1e1e1e;
+  --accent: #534bff;
 }
 
 body {
   font-family: 'Inter', sans-serif;
   background: var(--bg);
-  background-image: radial-gradient(at 0% 100%, #3a1508 0%, transparent 50%), radial-gradient(at 100% 0%, #1c0f0d 0%, transparent 50%);
+  /* 
+  background-image: radial-gradient(at 0% 100%, #3a1508 0%, transparent 50%), radial-gradient(at 100% 0%, #1c0f0d 0%, transparent 50%); 
+  */
   color: var(--text);
   min-height: 100vh;
   padding: 0;

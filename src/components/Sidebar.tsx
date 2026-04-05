@@ -98,7 +98,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
     return (
         <nav
             aria-label="Hauptnavigation"
-            className={`flex flex-col h-full transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'} bg-gradient-to-b from-[#071422]/60 to-[#03101a]/60 backdrop-blur-md border-r border-white/5 p-3`}
+            className={`flex flex-col h-full transition-all duration-300 ${collapsed ? 'w-20' : 'w-64'} bg-primary backdrop-blur-md border-r border-white/5 p-3`}
         >
             <div className={`relative flex items-center mb-6 ${collapsed ? 'justify-center pr-14 h-14' : 'justify-between'}`}>
                 <div className="flex items-center gap-3">
