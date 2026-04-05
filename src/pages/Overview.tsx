@@ -65,9 +65,15 @@ const Overview = () => {
                 <StatusCard title="Energie-Leistung" value={loading ? "..." : energyPower + " MW"} color="text-mars-red-deep" borderColor="border-mars-red-deep/50" />
                 <StatusCard title="Bevölkerung" value={loading ? "..." : totalCitizens + " (" + minorCitizens + ")"} color="text-white" borderColor="border-gray-600" />
             </div>
-            <div className="mt-8">
-                <h4 className="text-xl font-bold text-mars-accent mb-4">Ressourcenverbrauch (letzte 30 Tage)</h4>
-                <RessourcesChart data={data} isLoading={loadingGraph} />
+            <div className="mt-8 grid grid-cols-2 gap-6">
+                <div className='bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg'>
+                    <h4 className="text-xl font-bold text-mars-accent mb-4">Ressourcenverbrauch (letzte 12 Monate)</h4>
+                    <RessourcesChart data={data} isLoading={loadingGraph} />
+                </div>
+                <div className='bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg'>
+                    <h4 className="text-xl font-bold text-mars-accent mb-4">Weitere Statistiken</h4>
+                    <RessourcesChart data={data} isLoading={loadingGraph} />
+                </div>
             </div>
         </section>
     );
