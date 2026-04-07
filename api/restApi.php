@@ -1,6 +1,5 @@
 <?php
 require "./server.php";
-generate_csrf();                //debug
 
 header('Content-Type: application/json; charset=utf-8');
 ini_set('display_errors', 0);
@@ -14,23 +13,30 @@ function sendResponse(array $data, int $httpCode = 200)
     exit;
 }
 
-if (!isset($_GET['action']) || !isset($_GET['csrf'])) {
+if (!isset($_GET['action'])) {
     sendResponse(["error" => 400, "message" => "Invalid request!"], 400);
 }
 
 $action = $_GET['action'];
-$given_csrf = $_GET['csrf'];
+$given_csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
 $current_csrf = $_SESSION['csrf']['token'] ?? '';
 
-$given_csrf = $current_csrf; // debug
+if ($action !== "generate_csrf") {
+    if (!isset($_SERVER['HTTP_X_CSRF_TOKEN'])) {
+        sendResponse(["error" => 400, "message" => "Missing CSRF"], 400);
+    }
 
-if ($current_csrf !== $given_csrf) {
-    sendResponse(["error" => 403, "message" => "Invalid CSRF-Token!"], 403);
-}
+    $given_csrf = $_SERVER['HTTP_X_CSRF_TOKEN'] ?? '';
+    $current_csrf = $_SESSION['csrf']['token'] ?? '';
 
-$oneDayInSeconds = 24 * 60 * 60;
-if (($_SESSION['csrf']['time'] + $oneDayInSeconds) < time()) {
-    sendResponse(["error" => 403, "message" => "CSRF-Token expired!"], 403);
+    if (!hash_equals($current_csrf, $given_csrf)) {
+        sendResponse(["error" => 403, "message" => "Invalid CSRF-Token!"], 403);
+    }
+
+    $oneDayInSeconds = 24 * 60 * 60;
+    if (($_SESSION['csrf']['time'] + $oneDayInSeconds) < time()) {
+        sendResponse(["error" => 403, "message" => "CSRF-Token expired!"], 403);
+    }
 }
 
 $response = [];
@@ -38,6 +44,7 @@ $response = [];
 switch ($action) {
     case "generate_csrf":
         generate_csrf();
+        session_regenerate_id(true);
         $response['csrf'] = $_SESSION['csrf']['token'];
         break;
 
