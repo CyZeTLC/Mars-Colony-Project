@@ -47,7 +47,7 @@ class TableRenderer {
 
         const headers = Object.keys(data[0]);
 
-        let html = '<div class="overflow-hidden rounded-xl border border-white/5 bg-gradient-to-b from-[#071422]/60 to-[#03101a]/60 backdrop-blur-md shadow-2xl">';
+        let html = '<div class="overflow-hidden rounded-xl border border-white/5 bg-secondary backdrop-blur-md shadow-2xl">';
         html += '<table class="w-full text-left text-sm border-separate border-spacing-0">';
 
         html += '<thead class="bg-white/5 text-mars-accent uppercase text-[10px] font-bold tracking-[0.15em]">';

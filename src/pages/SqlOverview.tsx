@@ -70,7 +70,7 @@ const SqlOverview: React.FC = () => {
                 <h3 className="text-2xl font-semibold text-mars-accent mb-6">Datenbank Ergebnisse</h3>
                 <div className="grid grid-cols-1 gap-10">
                     {Object.entries(tableData).map(([key, table]) => (
-                        <div key={key} className="bg-card-bg p-6 rounded-lg border border-gray-700 shadow-lg">
+                        <div key={key} className="bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg">
                             <div className="flex justify-between items-center mb-4">
                                 <h4 className="text-xl font-bold text-white capitalize">
                                     {key.replace(/([A-Z])/g, ' $1').trim()}

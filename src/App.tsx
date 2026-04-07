@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import Sidebar, { type Section } from './components/Sidebar';
+import Sidebar, { type Section } from './components/dashboard/Sidebar.tsx';
 import { calculateMarsSolDate } from './utils/marsTime';
 import { getSectionTitle } from './utils/sectionTitle';
 import { AuthService } from './utils/AuthService.ts';
@@ -38,7 +38,7 @@ function App() {
 
   if (AuthService.isLoggedIn()) {
     return (
-      <div className="h-screen w-full flex flex-col md:flex-row bg-bg-dark text-white overflow-hidden">
+      <div className="h-screen w-full flex flex-col md:flex-row overflow-hidden">
 
         {/* Sidebar Navigation */}
         <Sidebar
@@ -50,7 +50,7 @@ function App() {
         {/* Hauptinhalt */}
         <main className="flex-1 overflow-y-auto p-6 md:p-10 relative">
           {/* Header */}
-          <header className="mb-8 pb-4 border-b border-mars-red-deep/50 flex justify-between items-center sticky top-0 bg-bg-dark/95 backdrop-blur z-10">
+          <header className="mb-8 pb-4 border-b flex justify-between items-center sticky top-0 backdrop-blur z-10">
             <h2 className="text-3xl md:text-4xl font-extrabold capitalize">
               {getSectionTitle(activeSection)}
             </h2>

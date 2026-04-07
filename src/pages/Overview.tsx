@@ -1,6 +1,7 @@
-import StatusCard from '../components/StatusCard';
+import StatusCard from '../components/dashboard/StatusCard';
 import { useEffect, useState } from 'react';
 import { apiFetch } from '../utils/restApi';
+import { RessourcesChart, type RessourcesData } from '../components/dashboard/RessourcesChart';
 
 interface DashboardStats {
     citizens_count: Array<{ citizens_count: number; minors_count: number }>;
@@ -10,8 +11,10 @@ interface DashboardStats {
 }
 
 const Overview = () => {
+    const [data, setData] = useState<RessourcesData[]>([]);
     const [stats, setStats] = useState<DashboardStats | null>(null);
     const [loading, setLoading] = useState(true);
+    const [loadingGraph, setLoadingGraph] = useState(true);
 
     useEffect(() => {
         async function loadData() {
@@ -25,6 +28,23 @@ const Overview = () => {
                 setLoading(false);
             }
         }
+
+        setTimeout(() => {
+            setData([
+                { name: 'Jan', amount: 400 },
+                { name: 'Feb', amount: 300 },
+                { name: 'Mär', amount: 350 },
+                { name: 'Apr', amount: 420 },
+                { name: 'Mai', amount: 480 },
+                { name: 'Jun', amount: 550 },
+                { name: 'Jul', amount: 600 },
+                { name: 'Aug', amount: 580 },
+                { name: 'Sep', amount: 490 },
+                { name: 'Okt', amount: 410 },
+                { name: 'Nov', amount: 370 },
+                { name: 'Dez', amount: 450 }
+            ]); setLoadingGraph(false);
+        }, 2000);
 
         loadData();
     }, []);
@@ -44,6 +64,16 @@ const Overview = () => {
                 <StatusCard title="Aktive Fahrzeuge" value={loading ? "..." : activeVehicles + "/" + totalVehicles} color="text-mars-accent" borderColor="border-mars-accent/50" />
                 <StatusCard title="Energie-Leistung" value={loading ? "..." : energyPower + " MW"} color="text-mars-red-deep" borderColor="border-mars-red-deep/50" />
                 <StatusCard title="Bevölkerung" value={loading ? "..." : totalCitizens + " (" + minorCitizens + ")"} color="text-white" borderColor="border-gray-600" />
+            </div>
+            <div className="mt-8 grid grid-cols-2 gap-6">
+                <div className='bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg'>
+                    <h4 className="text-xl font-bold text-mars-accent mb-4">Ressourcenverbrauch (letzte 12 Monate)</h4>
+                    <RessourcesChart data={data} isLoading={loadingGraph} />
+                </div>
+                <div className='bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg'>
+                    <h4 className="text-xl font-bold text-mars-accent mb-4">Weitere Statistiken</h4>
+                    <RessourcesChart data={data} isLoading={loadingGraph} />
+                </div>
             </div>
         </section>
     );
