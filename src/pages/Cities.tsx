@@ -6,7 +6,6 @@ const Cities = () => {
 
     useEffect(() => {
         if (tableContainerRef.current) {
-            const csrf = localStorage.getItem('csrfToken') || 'dev';
             const myTable = new TableRenderer('table-app-id', 'getCitiesWithStats.sql');
             myTable.init();
         }

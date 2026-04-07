@@ -6,7 +6,6 @@ const Citizens = () => {
 
     useEffect(() => {
         if (tableContainerRef.current) {
-            const csrf = localStorage.getItem('csrfToken') || 'dev';
             const myTable = new TableRenderer('table-app-id-residents', 'getAllCitizens.sql');
             myTable.init();
         }

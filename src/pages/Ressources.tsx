@@ -5,7 +5,6 @@ const Ressources = () => {
     const tableContainerRef = useRef<HTMLDivElement>(null);
     const lagerTableContainerRef = useRef<HTMLDivElement>(null);
     const ressourcenTableContainerRef = useRef<HTMLDivElement>(null);
-    const csrf = localStorage.getItem('csrfToken') || 'dev';
 
     useEffect(() => {
         if (tableContainerRef.current) {
