@@ -7,7 +7,7 @@ const Citizens = () => {
     useEffect(() => {
         if (tableContainerRef.current) {
             const csrf = localStorage.getItem('csrfToken') || 'dev';
-            const myTable = new TableRenderer('table-app-id-residents', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getAllCitizens.sql');
+            const myTable = new TableRenderer('table-app-id-residents', 'getAllCitizens.sql');
             myTable.init();
         }
     }, []);

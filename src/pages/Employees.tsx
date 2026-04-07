@@ -6,8 +6,7 @@ const Employees = () => {
 
     useEffect(() => {
         if (tableContainerRef.current) {
-            const csrf = localStorage.getItem('csrfToken') || 'dev';
-            const myTable = new TableRenderer('table-app-id', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getAllEmployees.sql');
+            const myTable = new TableRenderer('table-app-id', 'getAllEmployees.sql');
             myTable.init();
         }
     }, []);

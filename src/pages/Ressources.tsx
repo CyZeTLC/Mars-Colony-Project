@@ -9,17 +9,17 @@ const Ressources = () => {
 
     useEffect(() => {
         if (tableContainerRef.current) {
-            const ressourceAtRiskTable = new TableRenderer('table-app-id', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getRessourcesAtRisk.sql');
+            const ressourceAtRiskTable = new TableRenderer('table-app-id', 'getRessourcesAtRisk.sql');
             ressourceAtRiskTable.init();
         }
 
         if (lagerTableContainerRef.current) {
-            const lagerTable = new TableRenderer('table-app-id-lager', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getAllLager.sql');
+            const lagerTable = new TableRenderer('table-app-id-lager', 'getAllLager.sql');
             lagerTable.init();
         }
 
         if (ressourcenTableContainerRef.current) {
-            const ressourcenTable = new TableRenderer('table-app-id-ressourcen', 'https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=' + csrf + '&action=get_sql_result&file=getRessourcenWithLager.sql');
+            const ressourcenTable = new TableRenderer('table-app-id-ressourcen', 'getRessourcenWithLager.sql');
             ressourcenTable.init();
         }
     }, []);

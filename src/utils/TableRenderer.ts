@@ -1,3 +1,5 @@
+import { apiFetch } from "./restApi";
+
 interface TableRow {
     [key: string]: string | number | boolean | null;
 }
@@ -33,11 +35,13 @@ class TableRenderer {
         }
     }
 
+    private async apiFetchFileAsTable(endpoint: string): Promise<{ result: TableRow[] }> {
+        return apiFetch<{ result: TableRow[] }>(`get_sql_result&file=${endpoint}`);
+    }
+
     private async fetchData(url: string): Promise<TableRow[]> {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error("Fehler beim Laden");
-        const json = await response.json();
-        return json.result || json;
+        const result = await this.apiFetchFileAsTable(url) as { result: TableRow[] };
+        return result ? result?.result : [];
     }
 
     private generateTableHtml(data: TableRow[]): string {

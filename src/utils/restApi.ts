@@ -70,30 +70,6 @@ export async function apiFetch<T>(endpoint: string): Promise<T> {
   }
 }
 
-export async function apiFetchFile(endpoint: string) {
-  const csrf = localStorage.getItem('csrfToken');
-
-  if (!csrf) {
-    await fetchCsrfToken();
-  }
-
-  const url = `https://hsbi.cyzetlc.de/dev/api/restApi.php?action=${endpoint}`;
-
-  try {
-    const response = await fetch(url, {
-      credentials: 'include',
-      headers: {
-        'X-CSRF-Token': csrf!
-      }
-    });
-
-    if (!response.ok) {
-      throw new Error(`HTTP Error! Status: ${response.status} for ${url}`);
-    }
-    return response.text();
-
-  } catch (error) {
-    console.error(`Fetch-Fehler bei ${url}:`, error);
-    throw error;
-  }
+export async function apiFetchFile(endpoint: string) : Promise<string> {
+  return apiFetch<string>(`get_sql_result&file=${endpoint}`);
 }
