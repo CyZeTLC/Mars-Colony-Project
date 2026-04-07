@@ -1,7 +1,4 @@
-/* 
-Zeigt welche Stadt von welcher Energiequelle versorgt wird 
-und wie viel Leistung die Quelle momentan + maximal liefert
-*/
+
 
 SELECT
     s.STADT_ID,

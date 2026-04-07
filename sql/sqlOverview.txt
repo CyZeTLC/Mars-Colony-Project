@@ -1,0 +1,5 @@
+_______________________________________________________________
+getEnergySourcesByCity:
+Zeigt welche Stadt von welcher Energiequelle versorgt wird 
+und wie viel Leistung die Quelle momentan + maximal liefert
+_______________________________________________________________
