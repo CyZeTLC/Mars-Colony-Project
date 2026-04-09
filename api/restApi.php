@@ -77,6 +77,14 @@ switch ($action) {
     case "get_citizens_count":
         $response['citizens_count'] = runSqlFile("../sql/getCitizensCount.sql");
         break;
+    
+    case "search_citizens_by_name":
+        if (!isset($_GET['name'])) {
+            sendResponse(["error" => 400, "message" => "Name parameter is missing!"], 400);
+        }
+        $name = $_GET['name'];
+        $response['result'] = runSqlFile("../sql/getAllCitizensByName.sql", [$name]);
+        break;
 
     case "get_dashboard_stats":
         $response = [

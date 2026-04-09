@@ -35,8 +35,28 @@ class TableRenderer {
         }
     }
 
+    public async updateData(newData: TableRow[] | string): Promise<void> {
+        if (!this.container) return;
+
+        if (typeof newData === 'string') {
+            try {
+                const data = await this.apiFetchAsTable(newData) as { result: TableRow[] };
+                console.log("Fetched new data for table update:", data);
+                this.container.innerHTML = this.generateTableHtml(data ? data?.result : []);
+            } catch (error) {
+                this.container.innerHTML = `<p style="color: red;">Fehler: ${error}</p>`;
+            }
+        } else {
+            this.container.innerHTML = this.generateTableHtml(newData);
+        }
+    }
+
     private async apiFetchFileAsTable(endpoint: string): Promise<{ result: TableRow[] }> {
         return apiFetch<{ result: TableRow[] }>(`get_sql_result&file=${endpoint}`);
+    }
+
+    private async apiFetchAsTable(endpoint: string): Promise<{ result: TableRow[] }> {
+        return apiFetch<{ result: TableRow[] }>(endpoint);
     }
 
     private async fetchData(url: string): Promise<TableRow[]> {
@@ -46,7 +66,7 @@ class TableRenderer {
 
     private generateTableHtml(data: TableRow[]): string {
         if (!data || data.length === 0) {
-            return '<div class="p-8 text-center text-gray-400 bg-[#071422]/60 backdrop-blur-md rounded-xl border border-white/5 italic font-light tracking-wide">Keine Datensätze in der Datenbank gefunden.</div>';
+            return '<div class="p-8 text-center text-gray-400 bg-secondary backdrop-blur-md rounded-xl border border-white/5 italic font-light tracking-wide">Keine Datensätze in der Datenbank gefunden.</div>';
         }
 
         const headers = Object.keys(data[0]);

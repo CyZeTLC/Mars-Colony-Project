@@ -1,15 +1,50 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TableRenderer from '../utils/TableRenderer.js';
 
 const Citizens = () => {
     const tableContainerRef = useRef<HTMLDivElement>(null);
+    const loadingContainerRef = useRef<HTMLDivElement>(null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const tableRef = useRef<TableRenderer>(null);
 
     useEffect(() => {
-        if (tableContainerRef.current) {
-            const myTable = new TableRenderer('table-app-id-residents', 'getAllCitizens.sql');
-            myTable.init();
+        if (tableContainerRef.current && !tableRef.current) {
+            const table = new TableRenderer('table-app-id-residents', 'getAllCitizens.sql');
+            table.init();
+            tableRef.current = table;
         }
     }, []);
+
+    useEffect(() => {
+        const delayDebounceFn = setTimeout(async () => {
+            if (!tableRef.current) {
+                return;
+            }
+
+            if (searchTerm.trim() === '') {
+                try {
+                    await tableRef.current.updateData('get_sql_result&file=getAllCitizens.sql');
+                } catch (error) {
+                    console.error("Failed to reset table data", error);
+                } finally {
+                    loadingContainerRef.current?.classList.add('hidden');
+                    tableContainerRef.current?.classList.remove('hidden');
+                }
+                return;
+            }
+
+            try {
+                tableRef.current.updateData(`search_citizens_by_name&name=${searchTerm}`);
+            } catch (error) {
+                console.error("Search failed", error);
+            } finally {
+                loadingContainerRef.current?.classList.add('hidden');
+                tableContainerRef.current?.classList.remove('hidden');
+            }
+        }, 300);
+
+        return () => clearTimeout(delayDebounceFn);
+    }, [searchTerm]);
 
     return (
         <section className="relative">
@@ -42,19 +77,33 @@ const Citizens = () => {
                 </div>
             </div>
 
+            <input
+                type="text"
+                placeholder="Search..."
+                className='mb-6 w-full bg-primary p-4 outline-none rounded-md border-l-2 border-l-mars-accent'
+                value={searchTerm}
+                onChange={(e) => {
+                    setSearchTerm(e.target.value);
+                    tableContainerRef.current?.classList.add('hidden');
+                    loadingContainerRef.current?.classList.remove('hidden');
+                }}
+            />
+
             <div
                 id="table-app-id-residents"
                 ref={tableContainerRef}
                 className="transition-all duration-500 ease-in-out"
             >
-                <div className="flex items-center gap-4 p-10 text-gray-500 bg-[#071422]/30 rounded-xl border border-white/5 shadow-inner">
-                    <div className="flex space-x-1">
-                        <div className="w-2 h-2 rounded-full bg-mars-accent/60 animate-pulse"></div>
-                        <div className="w-2 h-2 rounded-full bg-mars-accent/40 animate-pulse [animation-delay:0.2s]"></div>
-                        <div className="w-2 h-2 rounded-full bg-mars-accent/20 animate-pulse [animation-delay:0.4s]"></div>
-                    </div>
-                    <span className="text-xs font-light tracking-[0.2em] uppercase">Abfrage der biometrischen Daten...</span>
+
+            </div>
+
+            <div ref={loadingContainerRef} className={`flex items-center gap-4 p-10 text-gray-500 bg-secondary rounded-xl border border-white/5 shadow-inner`}>
+                <div className="flex space-x-1">
+                    <div className="w-2 h-2 rounded-full bg-mars-accent/60 animate-pulse"></div>
+                    <div className="w-2 h-2 rounded-full bg-mars-accent/40 animate-pulse [animation-delay:0.2s]"></div>
+                    <div className="w-2 h-2 rounded-full bg-mars-accent/20 animate-pulse [animation-delay:0.4s]"></div>
                 </div>
+                <span className="text-xs font-light tracking-[0.2em] uppercase">Abfrage der biometrischen Daten...</span>
             </div>
         </section>
     );
