@@ -21,7 +21,6 @@ const SqlOverview: React.FC = () => {
         const initializeDashboard = async () => {
             try {
                 const allTables = await apiFetch<{ tables: any }>("get_all_tables");
-                console.log("Alle Tabellen:", allTables);
 
                 if (allTables && allTables.tables) {
                     setTableData(allTables.tables);
