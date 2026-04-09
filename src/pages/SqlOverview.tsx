@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { apiFetchFile } from "../utils/restApi";
+import { apiFetch } from "../utils/restApi";
 import TableRenderer from '../utils/TableRenderer';
 import ErrorBox from '../components/ui/ErrorBox';
 
@@ -12,7 +12,6 @@ interface ApiTable {
 
 const SqlOverview: React.FC = () => {
     const [tableData, setTableData] = useState<Record<string, ApiTable>>({});
-    const [allQueriesText, setAllQueriesText] = useState<string>("");
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
 
@@ -21,18 +20,14 @@ const SqlOverview: React.FC = () => {
     useEffect(() => {
         const initializeDashboard = async () => {
             try {
-                const fetchedQueries = await apiFetchFile('get_sql_files');
-                setAllQueriesText((fetchedQueries as any).sql_content || fetchedQueries);
+                const allTables = await apiFetch<{ tables: any }>("get_all_tables");
+                console.log("Alle Tabellen:", allTables);
 
-                const csrf = localStorage.getItem('csrf_token') || 'dev';
-                const response = await fetch(`https://hsbi.cyzetlc.de/dev/api/restApi.php?csrf=${csrf}&action=get_all_tables`);
-                const data = await response.json();
-
-                if (data && data.tables) {
-                    setTableData(data.tables);
+                if (allTables && allTables.tables) {
+                    setTableData(allTables.tables);
                 }
             } catch (e) {
-                setError("Fehler beim Laden der Daten.");
+                setError("Fehler beim Laden der Daten." + (e instanceof Error ? e.message : ""));
             } finally {
                 setIsLoading(false);
             }
@@ -63,7 +58,7 @@ const SqlOverview: React.FC = () => {
             </section>
         );
     }
-    
+
     if (error) {
         return <ErrorBox error={error} />;
     }
@@ -106,15 +101,6 @@ const SqlOverview: React.FC = () => {
                             </div>
                         </div>
                     ))}
-                </div>
-            </section>
-
-            <section>
-                <h3 className="text-2xl font-semibold text-mars-accent mb-4">Alle geladenen SQL-Dateien</h3>
-                <div className="bg-card-bg p-6 rounded-lg border border-gray-700">
-                    <SyntaxHighlighter language="sql" style={dark} showLineNumbers={true}>
-                        {allQueriesText}
-                    </SyntaxHighlighter>
                 </div>
             </section>
         </div>
