@@ -50,6 +50,7 @@ const Vehicles: React.FC = () => {
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const [selectedVehicle, setSelectedVehicle] = useState<any | null>(null);
     const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
     useEffect(() => {
@@ -98,8 +99,9 @@ const Vehicles: React.FC = () => {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                     {vehicles.map((vehicle) => (
-                        <div
+                        <div><div
                             key={vehicle.id}
+                            onClick={() => setSelectedVehicle(vehicle)}
                             className="group relative bg-secondary border border-slate-700/50 rounded-xl p-6 transition-all duration-300 hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -134,6 +136,77 @@ const Vehicles: React.FC = () => {
                                     </p>
                                 </div>
                             </div>
+                        </div>
+                            {selectedVehicle && (
+                                <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
+                                    <div
+                                        className="absolute inset-0 bg-main backdrop-blur-sm opacity-65"
+                                        onClick={() => setSelectedVehicle(null)}
+                                    />
+
+                                    <div className="relative bg-secondary border border-slate-700/80 w-full max-w-md rounded-2xl overflow-hidden shadow-2xl shadow-orange-950/20">
+
+                                        <div className="relative h-28 w-full bg-slate-800">
+                                            <img
+                                                src={`https://hsbi.cyzetlc.de/dev/assets/curiostity.webp?seed=${selectedVehicle.name}`}
+                                                alt="Vehicle abstract pattern"
+                                                className="w-full h-full object-cover opacity-80"
+                                            />
+                                            <div className="absolute inset-0 bg-gradient-to-t from-secondary to-transparent" />
+
+                                            <button
+                                                onClick={() => setSelectedVehicle(null)}
+                                                className="absolute top-4 right-4 p-2 bg-slate-900/50 hover:bg-slate-900 rounded-full text-slate-400 hover:text-white transition-colors"
+                                            >
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><path d="M18 6L6 18M6 6l12 12" /></svg>
+                                            </button>
+                                        </div>
+
+                                        <div className="px-7 pb-7">
+                                            <div className="flex justify-between items-start mb-6">
+                                                <div>
+                                                    <span className="text-[10px] uppercase tracking-[0.2em] text-orange-500 font-mono">
+                                                        {selectedVehicle.type}
+                                                    </span>
+                                                    <h2 className="text-2xl font-bold text-orange-300">
+                                                        {selectedVehicle.name}
+                                                    </h2>
+                                                </div>
+                                                <span className={`px-3 py-1 rounded-full text-[10px] font-bold border ${selectedVehicle.available
+                                                    ? 'bg-green-500/10 text-green-400 border-green-500/30'
+                                                    : 'bg-red-500/10 text-red-400 border-red-500/30'
+                                                    }`}>
+                                                    {selectedVehicle.available ? '✓ BEREIT' : '⚡ ' + selectedVehicle.status.toUpperCase()}
+                                                </span>
+                                            </div>
+
+                                            <div className="space-y-1.5">
+                                                <div className="h-[1px] w-full bg-slate-700/50 mb-3" />
+
+                                                <p className="text-sm flex justify-between">
+                                                    <span className="text-slate-400">Status:</span>
+                                                    <span className="text-orange-200/80 font-medium">{selectedVehicle.status}</span>
+                                                </p>
+                                                <p className="text-sm flex justify-between">
+                                                    <span className="text-slate-400">Typ:</span>
+                                                    <span className="text-orange-200/80 font-medium">{selectedVehicle.type}</span>
+                                                </p>
+                                                <p className="text-sm flex justify-between">
+                                                    <span className="text-slate-400">Einheit ID:</span>
+                                                    <span className="text-orange-200/80 font-medium">#{selectedVehicle.id}</span>
+                                                </p>
+                                            </div>
+
+                                            <button
+                                                onClick={() => setSelectedVehicle(null)}
+                                                className="uppercase mt-8 w-full py-3 bg-slate-800 hover:bg-orange-600/20 text-orange-300 text-sm font-bold rounded-xl transition-all border border-slate-700 hover:border-orange-500/50 active:scale-[0.98]"
+                                            >
+                                                zurück zur übersicht
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     ))}
                 </div>
