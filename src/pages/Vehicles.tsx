@@ -50,6 +50,7 @@ const Vehicles: React.FC = () => {
     const [vehicles, setVehicles] = useState<Vehicle[]>([]);
     const [isLoading, setIsLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
+    const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
 
     useEffect(() => {
         const fetchVehicles = async () => {
@@ -59,7 +60,7 @@ const Vehicles: React.FC = () => {
             } catch (e) {
                 setError("Die Flottenkapazitäten konnten nicht abgefragt werden.");
             } finally {
-                setIsLoading(false);
+                sleep(750).then(() => setIsLoading(false));
             }
         };
         fetchVehicles();
