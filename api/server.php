@@ -112,9 +112,12 @@ function runSqlFile(string $sqlFilePath, array $params = []): array
     global $pdo; // Verwende die globale PDO-Variable
     $stmt = $pdo->prepare($sql);
 
-    $stmt->execute($params);
-
-    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    try {
+        $stmt->execute($params);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    } catch (PDOException $e) {
+        return [];
+    }
 }
 
 
