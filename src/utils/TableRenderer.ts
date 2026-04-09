@@ -25,7 +25,7 @@ class TableRenderer {
                 : this.apiUrlOrData;
 
             if (!data || data.length === 0) {
-                this.container.innerHTML = '<p>Keine Daten vorhanden.</p>';
+                this.container.innerHTML = this.getNoEntryDiv();
                 return;
             }
 
@@ -41,7 +41,6 @@ class TableRenderer {
         if (typeof newData === 'string') {
             try {
                 const data = await this.apiFetchAsTable(newData) as { result: TableRow[] };
-                console.log("Fetched new data for table update:", data);
                 this.container.innerHTML = this.generateTableHtml(data ? data?.result : []);
             } catch (error) {
                 this.container.innerHTML = `<p style="color: red;">Fehler: ${error}</p>`;
@@ -66,7 +65,7 @@ class TableRenderer {
 
     private generateTableHtml(data: TableRow[]): string {
         if (!data || data.length === 0) {
-            return '<div class="p-8 text-center text-gray-400 bg-secondary backdrop-blur-md rounded-xl border border-white/5 italic font-light tracking-wide">Keine Datensätze in der Datenbank gefunden.</div>';
+            return this.getNoEntryDiv();
         }
 
         const headers = Object.keys(data[0]);
@@ -93,6 +92,10 @@ class TableRenderer {
 
         html += '</tbody></table></div>';
         return html;
+    }
+
+    private getNoEntryDiv(): string {
+        return '<div class="p-8 text-center text-gray-400 bg-secondary backdrop-blur-md rounded-xl border border-white/5 italic font-light tracking-wide">Keine Datensätze in der Datenbank gefunden.</div>';
     }
 
     private escapeHtml(str: string): string {

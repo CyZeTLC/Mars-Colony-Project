@@ -3,6 +3,7 @@ import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import { apiFetchFile } from "../utils/restApi";
 import TableRenderer from '../utils/TableRenderer';
+import ErrorBox from '../components/ui/ErrorBox';
 
 interface ApiTable {
     result: any[];
@@ -62,7 +63,10 @@ const SqlOverview: React.FC = () => {
             </section>
         );
     }
-    if (error) return <section><p className="text-red-500">Fehler: {error}</p></section>;
+    
+    if (error) {
+        return <ErrorBox error={error} />;
+    }
 
     return (
         <div className="space-y-8">

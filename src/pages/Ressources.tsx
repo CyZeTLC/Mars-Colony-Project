@@ -24,7 +24,7 @@ const Ressources = () => {
     }, []);
 
     return (
-        <section className="space-y-10 py-6">
+        <section className="space-y-10">
             <div className="relative overflow-hidden">
                 <div className="flex items-center gap-3 mb-6">
                     <div className="p-2.5 rounded-lg bg-red-500/10 border border-red-500/20 text-red-400 shadow-[0_0_15px_rgba(239,68,68,0.1)]">
