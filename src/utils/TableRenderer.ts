@@ -41,7 +41,6 @@ class TableRenderer {
         if (typeof newData === 'string') {
             try {
                 const data = await this.apiFetchAsTable(newData) as { result: TableRow[] };
-                console.log("Fetched new data for table update:", data);
                 this.container.innerHTML = this.generateTableHtml(data ? data?.result : []);
             } catch (error) {
                 this.container.innerHTML = `<p style="color: red;">Fehler: ${error}</p>`;
