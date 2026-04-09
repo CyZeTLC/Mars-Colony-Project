@@ -6,6 +6,7 @@ interface ApiVehicle {
     TYP: string;
     NAME: string;
     STATUS: string;
+    IMG: string;
 }
 
 interface ApiResponse {
@@ -18,6 +19,7 @@ interface Vehicle {
     status: string;
     type: string;
     available: boolean;
+    img: string;
 }
 
 async function loadAllVehicles(): Promise<Vehicle[]> {
@@ -37,7 +39,8 @@ async function loadAllVehicles(): Promise<Vehicle[]> {
                 name: item.NAME || "Unbenanntes Fahrzeug",
                 status: currentStatus,
                 type: item.TYP || "Allgemein",
-                available: currentStatus.toLowerCase() === 'bereit'
+                available: currentStatus.toLowerCase() === 'bereit',
+                img: item.IMG || 'https://media.cnn.com/api/v1/images/stellar/prod/230614113409-curiosity-marker-band-valley.jpg?q=w_3000,c_fill'
             };
         });
     } catch (e) {
@@ -148,7 +151,7 @@ const Vehicles: React.FC = () => {
 
                                         <div className="relative h-28 w-full bg-slate-800">
                                             <img
-                                                src={`https://hsbi.cyzetlc.de/dev/assets/curiostity.webp?seed=${selectedVehicle.name}`}
+                                                src={selectedVehicle.img}
                                                 alt="Vehicle abstract pattern"
                                                 className="w-full h-full object-cover opacity-80"
                                             />
