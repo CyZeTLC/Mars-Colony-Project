@@ -1,11 +1,11 @@
 export class AuthService {
-    constructor(private loginUrl: string) {}
+    constructor(private loginUrl: string) { }
 
     public async login(): Promise<void> {
         const userField = document.getElementById('username') as HTMLInputElement;
         const passField = document.getElementById('password') as HTMLInputElement;
         const errorMsg = document.getElementById('error-msg');
-        
+
         try {
             const response = await fetch(this.loginUrl, {
                 method: 'POST',
@@ -22,7 +22,7 @@ export class AuthService {
                 localStorage.setItem('auth_token', result.token);
                 localStorage.setItem('username', userField.value);
                 localStorage.setItem('csrf_token', result.csrf);
-                window.location.reload(); 
+                window.location.reload();
             } else {
                 if (errorMsg) {
                     errorMsg.textContent = "Login fehlgeschlagen!";
