@@ -105,7 +105,7 @@ const Vehicles: React.FC = () => {
                         <div><div
                             key={vehicle.id}
                             onClick={() => setSelectedVehicle(vehicle)}
-                            className="group relative bg-secondary border border-slate-700/50 rounded-xl p-6 transition-all duration-300 hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 overflow-hidden"
+                            className="group cursor-pointer relative bg-secondary border border-slate-700/50 rounded-xl p-6 transition-all duration-300 hover:border-orange-400/60 hover:shadow-2xl hover:shadow-orange-500/10 hover:-translate-y-1 overflow-hidden"
                         >
                             <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
 
