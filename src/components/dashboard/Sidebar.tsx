@@ -4,11 +4,6 @@ import { NavLink } from 'react-router-dom';
 
 export type Section = 'overview' | 'cities' | 'inhabitants' | 'employees' | 'vehicles' | 'sql' | 'ressources';
 
-interface SidebarProps {
-    activeSection: Section;
-    setSection: (section: Section) => void;
-}
-
 const handleLogout = () => {
     AuthService.logout();
 };
@@ -87,7 +82,7 @@ const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }
     }
 };
 
-const Sidebar: React.FC<SidebarProps> = () => {
+const Sidebar = () => {
     const [collapsed, setCollapsed] = useState(false);
 
     const navItems: { id: Section; label: string; path: string }[] = [

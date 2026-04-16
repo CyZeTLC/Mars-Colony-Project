@@ -19,10 +19,7 @@ const Layout = () => {
 
     return (
         <div className="h-screen w-full flex flex-col md:flex-row overflow-hidden">
-            <Sidebar 
-                activeSection='overview'
-                setSection={() => {}}
-            />
+            <Sidebar />
 
             <main className="flex-1 overflow-y-auto p-6 md:p-10 relative">
                 <header className="mb-8 pb-4 border-b flex justify-between items-center sticky top-0 backdrop-blur z-10">
