@@ -1,12 +1,17 @@
 import React, { useState } from 'react';
+import { AuthService } from '../../utils/AuthService';
+import { NavLink } from 'react-router-dom';
 
 export type Section = 'overview' | 'cities' | 'inhabitants' | 'employees' | 'vehicles' | 'sql' | 'ressources';
 
 interface SidebarProps {
     activeSection: Section;
     setSection: (section: Section) => void;
-    onLogout: () => void;
 }
+
+const handleLogout = () => {
+    AuthService.logout();
+};
 
 const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }> = ({ name, className }) => {
     const common = { width: 20, height: 20, className: className ?? 'inline-block' };
@@ -82,17 +87,17 @@ const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }
     }
 };
 
-const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }) => {
+const Sidebar: React.FC<SidebarProps> = () => {
     const [collapsed, setCollapsed] = useState(false);
 
-    const navItems: { id: Section; label: string }[] = [
-        { id: 'overview', label: 'Übersicht & Logistik' },
-        { id: 'cities', label: 'Kolonie-Standorte' },
-        { id: 'inhabitants', label: 'Bewohner-Management' },
-        { id: 'employees', label: 'Mitarbeiter-Datenbank' },
-        { id: 'vehicles', label: 'Fahrzeugflotte' },
-        { id: 'ressources', label: 'Ressourcen & Lager' },
-        { id: 'sql', label: 'SQL-Queries' },
+    const navItems: { id: Section; label: string; path: string }[] = [
+        { id: 'overview', label: 'Übersicht & Logistik', path: '/' },
+        { id: 'cities', label: 'Kolonie-Standorte', path: '/cities' },
+        { id: 'inhabitants', label: 'Bewohner-Management', path: '/citizens' },
+        { id: 'employees', label: 'Mitarbeiter-Datenbank', path: '/employees' },
+        { id: 'vehicles', label: 'Fahrzeugflotte', path: '/vehicles' },
+        { id: 'ressources', label: 'Ressourcen & Lager', path: '/ressources' },
+        { id: 'sql', label: 'SQL-Queries', path: '/sql' },
     ];
 
     return (
@@ -104,14 +109,10 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
                 <div className="flex items-center gap-3">
                     {!collapsed ? (
                         <div className="rounded-md p-2 bg-mars-accent/10 text-mars-accent">
-                            {/* Logo */}
-                            {/* <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                                <path d="M12 2l3 6 6 .5-4.5 3.5L19 21l-7-4-7 4 1.5-8L2 8.5 8 8 12 2z" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round"/>
-                            </svg> */}
                             <img src="./logo.png" alt="ALS-Control Logo" className="w-6 h-6" />
                         </div>
                     ) : (
-                        // Platzhalter, damit das Layout zentriert bleibt (Logo ausgeblendet)
+                        // Platzhalter, damit das Layout zentriert bleibt
                         <div className="w-6" aria-hidden />
                     )}
                     {!collapsed && <div className="text-lg font-semibold text-mars-accent">ALS-Control</div>}
@@ -129,35 +130,44 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
 
             <ul className="flex-1 space-y-1">
                 {navItems.map((item) => {
-                    const active = activeSection === item.id;
                     return (
                         <li key={item.id} className="relative">
-                            <button
-                                onClick={() => setSection(item.id)}
+                            <NavLink
+                                to={item.path}
                                 title={collapsed ? item.label : undefined}
-                                className={`w-full flex items-center gap-3 py-2 px-2 rounded-lg group transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-mars-accent/40 ${active
-                                    ? 'bg-gradient-to-r from-mars-accent/10 to-mars-red-deep/10 text-white shadow-[0_6px_20px_rgba(227,88,76,0.08)]'
-                                    : 'text-gray-300 hover:bg-white/5'
-                                    }`}
+                                className={({ isActive }) =>
+                                    `w-full flex items-center gap-3 py-2 px-2 rounded-lg group transition-colors duration-200 focus:outline-none focus:ring-2 focus:ring-mars-accent/40 ${isActive
+                                        ? "bg-gradient-to-r from-mars-accent/10 to-mars-red-deep/10 text-white shadow-[0_6px_20px_rgba(227,88,76,0.08)]"
+                                        : "text-gray-300 hover:bg-white/5"
+                                    }`
+                                }
                             >
-                                <span
-                                    className={`flex items-center justify-center w-10 h-10 rounded-md ${active ? 'bg-gradient-to-br from-mars-accent to-mars-red-deep text-white' : 'bg-white/3 text-gray-200 group-hover:bg-white/5'
-                                        }`}
-                                >
-                                    <Icon name={item.id} className="text-inherit" />
-                                </span>
+                                {({ isActive }) => (
+                                    <>
+                                        <span
+                                            className={`flex items-center justify-center w-10 h-10 rounded-md ${isActive
+                                                    ? "bg-gradient-to-br from-mars-accent to-mars-red-deep text-white"
+                                                    : "bg-white/3 text-gray-200 group-hover:bg-white/5"
+                                                }`}
+                                        >
+                                            <Icon name={item.id} className="text-inherit" />
+                                        </span>
 
-                                {!collapsed && (
-                                    <span className="flex-1 text-left text-sm">
-                                        <div className="font-medium">{item.label}</div>
-                                        <div className="text-xs text-gray-400">{active ? 'Aktiv' : 'Anzeigen'}</div>
-                                    </span>
-                                )}
+                                        {!collapsed && (
+                                            <span className="flex-1 text-left text-sm">
+                                                <div className="font-medium">{item.label}</div>
+                                                <div className="text-xs text-gray-400">
+                                                    {isActive ? "Aktiv" : "Anzeigen"}
+                                                </div>
+                                            </span>
+                                        )}
 
-                                {active && !collapsed && (
-                                    <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 rounded-r-full bg-gradient-to-b from-mars-accent to-mars-red-deep shadow-lg"></span>
+                                        {isActive && !collapsed && (
+                                            <span className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-10 rounded-r-full bg-gradient-to-b from-mars-accent to-mars-red-deep shadow-lg"></span>
+                                        )}
+                                    </>
                                 )}
-                            </button>
+                            </NavLink>
                         </li>
                     );
                 })}
@@ -181,7 +191,7 @@ const Sidebar: React.FC<SidebarProps> = ({ activeSection, setSection, onLogout }
                 </div>
 
                 <button
-                    onClick={onLogout}
+                    onClick={handleLogout}
                     className="w-full flex items-center gap-3 justify-center sm:justify-start py-2 px-2 rounded-lg text-sm font-medium bg-red-900/30 text-red-300 hover:bg-red-900/50 transition"
                 >
                     <span className="flex items-center justify-center w-8 h-8 rounded-md bg-red-800/40">
