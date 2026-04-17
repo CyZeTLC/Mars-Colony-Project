@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Sidebar from './dashboard/Sidebar';
-import { calculateMarsSolDate } from '../utils/marsTime';
+import { calculateMarsSolDate } from '@/utils/marsTime';
 import { Outlet, useLocation } from 'react-router-dom';
 
 const Layout = () => {

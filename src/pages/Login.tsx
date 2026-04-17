@@ -1,4 +1,4 @@
-import { AuthService } from "../utils/AuthService";
+import { AuthService } from "@/utils/AuthService";
 
 export default function LoginPage({ onLogin }: { onLogin: () => void }) {
     const auth = new AuthService('https://hsbi.cyzetlc.de/dev/api/login.php');

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { apiFetch } from "../utils/restApi";
-import ErrorBox from '../components/ui/ErrorBox';
+import { apiFetch } from "@/utils/restApi";
+import ErrorBox from '@/components/ui/ErrorBox';
 
 interface ApiVehicle {
     TYP: string;
