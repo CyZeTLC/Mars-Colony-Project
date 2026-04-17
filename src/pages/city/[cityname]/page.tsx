@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom';
-import { RessourcesChart } from '../../../components/dashboard/RessourcesChart';
+import { RessourcesChart } from '@/components/dashboard/RessourcesChart';
 
 const City = () => {
     const { name } = useParams();
