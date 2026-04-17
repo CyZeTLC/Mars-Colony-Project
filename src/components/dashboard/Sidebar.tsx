@@ -104,7 +104,7 @@ const Sidebar = () => {
                 <div className="flex items-center gap-3">
                     {!collapsed ? (
                         <div className="rounded-md p-2 bg-mars-accent/10 text-mars-accent">
-                            <img src="./logo.png" alt="ALS-Control Logo" className="w-6 h-6" />
+                            <img src="/logo.png" alt="ALS-Control Logo" className="w-6 h-6" />
                         </div>
                     ) : (
                         // Platzhalter, damit das Layout zentriert bleibt
