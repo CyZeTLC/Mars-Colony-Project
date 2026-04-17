@@ -11,6 +11,7 @@ import LoginPage from './pages/Login';
 import Citizens from './pages/Citizens.tsx';
 import Cities from './pages/Cities.tsx';
 import Layout from './components/Layout.tsx';
+import City from "./pages/city/[cityname]/page.tsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.isLoggedIn());
@@ -26,6 +27,7 @@ function App() {
           <Route path="ressources" element={<Ressources />} />
           <Route path="citizens" element={<Citizens />} />
           <Route path="cities" element={<Cities />} />
+          <Route path="city/:name" element={<City />} />
         </Route>
       </Routes>
     </BrowserRouter>
