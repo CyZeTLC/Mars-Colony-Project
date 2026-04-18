@@ -1,4 +1,16 @@
-const LoginPage = () => {
+import { AuthService } from "@/utils/AuthService";
+
+export default function LoginPage({ onLogin }: { onLogin: () => void }) {
+    const auth = new AuthService('https://hsbi.cyzetlc.de/dev/api/login.php');
+
+    const handleLogin = async () => {
+        await auth.login();
+
+        if (AuthService.isLoggedIn()) {
+            onLogin();
+        }
+    };
+
     return (
         <section className="min-h-screen flex items-center justify-center bg-main" >
             <img src="https://media.cnn.com/api/v1/images/stellar/prod/230614113409-curiosity-marker-band-valley.jpg?q=w_3000,c_fill" alt="Mars Landscape" className="min-h-screen w-full absolute inset-0 object-cover blur" />
@@ -18,10 +30,8 @@ const LoginPage = () => {
                     <input type="password" id="password" className="w-full bg-primary p-2 outline-none rounded-md border-l-2 border-l-mars-accent text-white focus:outline-none focus:ring-2 focus:ring-mars-accent" />
                 </div>
                 <div id="error-msg" className="text-red-400 text-sm mb-4 hidden"></div>
-                <button id="login-btn" className="w-full bg-mars-accent hover:bg-mars-accent-dark text-white font-semibold py-2 px-4 rounded transition-colors">Anmelden</button>
+                <button id="login-btn" onClick={handleLogin} className="w-full bg-mars-accent hover:bg-mars-accent-dark text-white font-semibold py-2 px-4 rounded transition-colors">Anmelden</button>
             </div>
         </section>
     );
 }
-
-export default LoginPage;

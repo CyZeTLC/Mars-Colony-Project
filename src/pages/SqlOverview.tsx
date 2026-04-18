@@ -1,9 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { dark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import { apiFetch } from "../utils/restApi";
-import TableRenderer from '../utils/TableRenderer';
-import ErrorBox from '../components/ui/ErrorBox';
+import { apiFetch } from "@/utils/restApi";
+import TableRenderer from '@/utils/TableRenderer';
+import ErrorBox from '@/components/ui/ErrorBox';
 
 interface ApiTable {
     result: any[];

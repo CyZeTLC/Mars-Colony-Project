@@ -1,8 +1,8 @@
-import StatusCard from '../components/dashboard/StatusCard';
+import StatusCard from '@/components/dashboard/StatusCard';
 import { useEffect, useState } from 'react';
-import { apiFetch } from '../utils/restApi';
-import { RessourcesChart, type RessourcesData } from '../components/dashboard/RessourcesChart';
-import Weather from '../components/dashboard/Weather';
+import { apiFetch } from '@/utils/restApi';
+import { RessourcesChart, type RessourcesData } from '@/components/dashboard/RessourcesChart';
+import Weather from '@/components/dashboard/Weather';
 
 interface DashboardStats {
     citizens_count: Array<{ citizens_count: number; minors_count: number }>;

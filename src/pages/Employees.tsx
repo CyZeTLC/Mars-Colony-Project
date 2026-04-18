@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import TableRenderer from '../utils/TableRenderer.js';
+import TableRenderer from '@/utils/TableRenderer.js';
 
 const Employees = () => {
     const tableContainerRef = useRef<HTMLDivElement>(null);

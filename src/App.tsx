@@ -1,7 +1,5 @@
-import { useState, useEffect } from 'react';
-import Sidebar, { type Section } from './components/dashboard/Sidebar.tsx';
-import { calculateMarsSolDate } from './utils/marsTime';
-import { getSectionTitle } from './utils/sectionTitle';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState } from "react";
 import { AuthService } from './utils/AuthService.ts';
 
 import Overview from './pages/Overview';
@@ -12,96 +10,30 @@ import Ressources from './pages/Ressources';
 import LoginPage from './pages/Login';
 import Citizens from './pages/Citizens.tsx';
 import Cities from './pages/Cities.tsx';
+import Layout from './components/Layout.tsx';
+import City from "./pages/city/[cityname]/page.tsx";
 
 function App() {
-  const [activeSection, setActiveSection] = useState<Section>('overview');
-  const [marsDate, setMarsDate] = useState({ sol: 0, time: '00:00' });
+  const [isLoggedIn, setIsLoggedIn] = useState(AuthService.isLoggedIn());
 
-  // Sol-Datum beim Start berechnen
-  useEffect(() => {
-    const updateTime = () => {
-      const { sol, time } = calculateMarsSolDate(new Date());
-      setMarsDate({ sol, time });
-    };
-    updateTime();
-    // Intervall setzen, um Zeit live zu aktualisieren
-    const timer = setInterval(updateTime, 60000);
-    return () => clearInterval(timer);
-  }, []);
-
-  const handleLogout = () => {
-    AuthService.logout();
-  };
-
-  const auth = new AuthService('https://hsbi.cyzetlc.de/dev/api/login.php');
-  document.getElementById('login-btn')?.addEventListener('click', () => auth.login());
-
-  if (AuthService.isLoggedIn()) {
-    return (
-      <div className="h-screen w-full flex flex-col md:flex-row overflow-hidden">
-
-        {/* Sidebar Navigation */}
-        <Sidebar
-          activeSection={activeSection}
-          setSection={setActiveSection}
-          onLogout={handleLogout}
-        />
-
-        {/* Hauptinhalt */}
-        <main className="flex-1 overflow-y-auto p-6 md:p-10 relative">
-          {/* Header */}
-          <header className="mb-8 pb-4 border-b flex justify-between items-center sticky top-0 backdrop-blur z-10">
-            <h2 className="text-3xl md:text-4xl font-extrabold capitalize">
-              {getSectionTitle(activeSection)}
-            </h2>
-            <div className="text-sm text-gray-400 text-right">
-              Mitarbeiter: <span className="text-mars-accent">{localStorage.getItem('username')}</span> <br />
-              Sol: <b>{marsDate.sol}</b> ({marsDate.time})
-            </div>
-          </header>
-
-          {/* Dynamischer Inhalt basierend auf State */}
-          <div className="space-y-10 animate-fade-in">
-
-            {activeSection === 'overview' && (
-              <Overview />
-            )}
-
-            {activeSection === 'vehicles' && (
-              <Vehicles />
-            )}
-
-            {activeSection === 'employees' && (
-              <Employees />
-            )}
-
-            {activeSection === 'ressources' && (
-              <Ressources />
-            )}
-
-            {activeSection === 'inhabitants' && (
-              <Citizens />
-            )}
-
-            {activeSection === 'sql' && (
-              <SqlOverview />
-            )}
-
-            {activeSection === 'cities' && (
-              <Cities />
-            )}
-
-            {/* Weitere Sektoren (Cities, Employees, etc.) hinzufügen... */}
-
-          </div>
-        </main>
-      </div>
-    );
-  } else {
-    return (
-      <LoginPage />
-    );
-  }
+  return isLoggedIn ? (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Layout />}>
+          <Route index element={<Overview />} />
+          <Route path="vehicles" element={<Vehicles />} />
+          <Route path="employees" element={<Employees />} />
+          <Route path="sql" element={<SqlOverview />} />
+          <Route path="ressources" element={<Ressources />} />
+          <Route path="citizens" element={<Citizens />} />
+          <Route path="cities" element={<Cities />} />
+          <Route path="city/:name" element={<City />} />
+        </Route>
+      </Routes>
+    </BrowserRouter>
+  ) : (
+    <LoginPage onLogin={() => setIsLoggedIn(true)} />
+  );
 }
 
 export default App;

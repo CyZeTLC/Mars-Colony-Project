@@ -1,0 +1,10 @@
+_______________________________________________________________
+getEnergySourcesByCity:
+Zeigt welche Stadt von welcher Energiequelle versorgt wird 
+und wie viel Leistung die Quelle momentan + maximal liefert
+_______________________________________________________________
+getDepartmentsWithLeaders.sql
+Zeigt alle Abteilungen mit Leitung und Login / Welche Abteilungen gibt es und wer leitet sie?
+_______________________________________________________________
+getDepartmentResourceDependencies.sql
+Zeigt welche Abteilung mit welchen Ressourcen verknüpft/zugeordnet ist 
