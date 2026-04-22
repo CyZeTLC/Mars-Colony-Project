@@ -1,0 +1,8 @@
+DELIMITER $$
+
+CREATE PROCEDURE getCurrentEnergieLeistung()
+BEGIN
+SELECT SUM(AKTUELLE_LEISTUNG) as current_energy_power FROM `ENERGIEQUELLE`;
+END $$
+
+DELIMITER ;

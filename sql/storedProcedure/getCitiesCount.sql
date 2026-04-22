@@ -1,0 +1,8 @@
+DELIMITER $$
+
+CREATE PROCEDURE getCitiesCount()
+BEGIN
+SELECT COUNT(*) AS cities_count FROM STADT;
+END $$
+
+DELIMITER ;
