@@ -1,0 +1,3 @@
+AP3: Sprecher:in wählen
+
+Die Arbeitsgruppe hat sich bei der Rollenverteilung für ein agiles, rotierendes System entschieden. Um sicherzustellen, dass sich alle Teammitglieder aktiv einbringen und wertvolle Erfahrungen sammeln können, wird die Rolle der Sprecherin bzw. des Sprechers im Laufe des Projekts abwechselnd von jedem Gruppenmitglied übernommen. Somit ist jeder einmal für die Präsentation von Zwischenergebnissen zuständig.
