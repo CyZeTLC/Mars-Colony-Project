@@ -77,17 +77,20 @@ const Citizens = () => {
                 </div>
             </div>
 
-            <input
-                type="text"
-                placeholder="Search..."
-                className='mb-6 w-full bg-primary p-4 outline-none rounded-md border-l-2 border-l-mars-accent'
-                value={searchTerm}
-                onChange={(e) => {
-                    setSearchTerm(e.target.value);
-                    tableContainerRef.current?.classList.add('hidden');
-                    loadingContainerRef.current?.classList.remove('hidden');
-                }}
-            />
+            <div className="flex justify-between gap-6 mb-4">
+                <input
+                    type="text"
+                    placeholder="Search..."
+                    className='w-1/3 bg-primary p-4 outline-none rounded-md border-l-2 border-l-mars-accent'
+                    value={searchTerm}
+                    onChange={(e) => {
+                        setSearchTerm(e.target.value);
+                        tableContainerRef.current?.classList.add('hidden');
+                        loadingContainerRef.current?.classList.remove('hidden');
+                    }}
+                />
+                <button id="login-btn" className="bg-mars-accent hover:bg-mars-accent-dark text-white font-semibold py-4 px-6 rounded transition-colors">+</button>
+            </div>
 
             <div
                 id="table-app-id-residents"

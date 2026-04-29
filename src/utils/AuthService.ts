@@ -37,6 +37,9 @@ export class AuthService {
 
     public static logout(): void {
         localStorage.removeItem('auth_token');
+        localStorage.removeItem('username');
+        localStorage.removeItem('csrf_token');
+        localStorage.removeItem('auth_time');
         window.location.reload();
     }
 
