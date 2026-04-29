@@ -10,11 +10,12 @@ Im Projekt „Mars Logistik Verwaltung“ entwickeln wir ein datenbankgestützte
 [Nr.1]
 
 **Gruppenmitglieder:**  
-- Baisangur Aslambekov, Matr.-Nr. 5020 08 47
+- Baisangur Aslambekov, Matr.-Nr. 502 008 47
 - Tom Coombs, Matr.-Nr. 502 128 15
 - Leonardo Parrino, Matr.-Nr. 501 970 39
 - Nikita Töws, Matr.-Nr. 502 144 71
 - Sergiu Curmei, Matr.-Nr. 502 135 44
+- Eduard Flaming, Matr.-Nr. 502 169 12
 
 **Sprecher / Sprecherin:**  
 Ansprechperson: Tom Coombs (tom.coombs@hsbi.de)  
