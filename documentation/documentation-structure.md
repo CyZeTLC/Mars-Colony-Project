@@ -1,80 +1,110 @@
 # Dokumentationsstruktur
 
+Stand: 14.05.2026
+
+Die Dokumentation befindet sich im Ordner `documentation/`.  
+Der aktuelle Projektfokus liegt nach dem Feedback von Prof. Dr. Becking auf zwei Businessprozessen:
+
+1. **Kritische Ressourcen überwachen und Nachschub auslösen**
+2. **Überschüssige Ressourcen an externe Unternehmen verkaufen**
+
+Ältere oder breiter angelegte Inhalte bleiben teilweise erhalten, stehen aber nicht mehr im Hauptfokus.
+
+---
+
+## Aktuelle Ordnerstruktur
+
 ```text
 documentation/
 ├── README.md
-├── 10_case-study/
-│   ├── README.md
-│   ├── hintergrund.md
-│   ├── problemstellung.md
-│   └── zielsetzung.md
-├── 20_use-cases/
-│   ├── README.md
-│   ├── use-cases.md
-│   ├── akteure.md
-│   └── use-case-diagramm.png
-├── 25_identitaet-und-branding/
-│   ├── README.md
-│   ├── namensgebung.md
-│   ├── logo-design.md
-│   └── assets/
-├── 30_anforderungsanalyse-und-bpmn/
-│   ├── README.md
-│   ├── anforderungsanalyse.md
-│   ├── prozessuebersicht.md
-│   ├── prozess-01.bpmn
-│   ├── prozess-02.bpmn
-│   └── assets/
-├── 40_lastenheft-und-pflichtenheft/
-│   ├── README.md
-│   ├── lastenheft.md
-│   ├── pflichtenheft.md
-│   ├── priorisierung.md
-│   └── ressourcenplanung.md
-├── 50_datenbank/
-│   ├── README.md
-│   ├── erd.md
-│   ├── pdm.md
-│   ├── datenbankstruktur.md
-│   ├── stored-procedures.md
-│   ├── views.md
-│   ├── beispieldaten.md
-│   └── assets/
-│       ├── erd.pdf
-│       └── pdm.pdf
-├── 60_architektur-und-technologie/
-│   ├── README.md
-│   ├── architekturuebersicht.md
-│   ├── api.md
-│   ├── frontend.md
-│   ├── backend.md
-│   └── technologiebegruendung.md
-├── 70_software-dokumentation/
-│   ├── README.md
-│   ├── moduluebersicht.md
-│   ├── benutzerablauf.md
-│   ├── installationshinweise.md
-│   ├── query-overview.md
-│   └── sicherheitskonzept.md
-├── 80_test-und-qualitaet/
-│   ├── README.md
-│   ├── testkonzept.md
-│   ├── testfaelle.md
-│   ├── testergebnisse.md
-│   └── bekannte-probleme.md
-├── 90_projektmanagement/
-│   ├── README.md
-│   ├── aufgabenverteilung.md
-│   ├── meilensteine.md
-│   ├── projektplan.md
-│   ├── einzelleistungen.md
-│   └── feedback.md
-├── 95_praesentationen/
-│   ├── README.md
-│   ├── proposal/
-│   ├── zwischenstand/
-│   └── abschluss/
-└── 99_projektbericht/
-    ├── README.md
-    ├── projektbericht.md
-    └── projektablauf.md
+├── documentation-structure.md
+├── businessprozesse-v1.md
+├── businessprozesse-v2.md
+├── datenbankabfragen.md
+├── LastenheftUndPflichtenheft.md
+├── APs/
+│   ├── Gruppenanmeldung.md
+│   ├── AP1-Gruppe-finden.md
+│   ├── AP2-Kommunikation-sichern.md
+│   ├── AP3-Sprecherin-waehlen.md
+│   ├── AP4-Auswahl-Case-Study.md
+│   ├── AP5-Revision-Case-Study-v2.md
+│   ├── AP6-Verantwortungen-festlegen.md
+│   ├── AP7-Revision-Datenbankentwurf.md
+│   ├── AP8-Auswahl-DBMS-Infrastruktur-Prototyp.md
+│   ├── AP9-Revision-Implementierung.md
+│   ├── AP10-Revision-Use-Cases.md
+│   ├── AP11-BPMN-Modellierung-BP1-Kritische RessourcenÜberwachenUndNachschubAuslösen.md
+│   ├── AP11-BPMN-Modellierung-BP2-Ueberschuessige-Ressourcen-an-externe-Unternehmen-verkaufen.md
+│   ├── AP12-Spezifikation.md
+│   ├── AP13-Proposal-Vorbereitung.md
+│   ├── AP13-Proposal-Ausgearbeitet.md
+│   └── AP14-Methodenwahl.md
+├── Gesprächsprotokoll/
+│   ├── 01-Gesprächsprotokoll.md
+│   └── 02-Gesprächsprotokoll.md
+├── docu-assets/
+│   └── 1-mars-logistik-verwaltung-als-kritische-ressourcen-ueberwachen.png
+└── archive/
+    ├── AP5-Revision-Case-Study.md
+    ├── Mars_Colony_Riskante_LagerbestaendeEduard.bpmn
+    └── diagramEduard.svg
+```
+
+---
+
+## Zentrale Dokumente
+
+| Datei | Zweck |
+|---|---|
+| `businessprozesse-v2.md` | Aktuelle Businessprozess-Auswahl nach der Revision. |
+| `APs/AP5-Revision-Case-Study-v2.md` | Überarbeitete Case Study mit reduziertem Fokus. |
+| `APs/AP10-Revision-Use-Cases.md` | Use Cases passend zu den zwei ausgewählten Businessprozessen. |
+| `APs/AP11-BPMN-Modellierung-BP1-Kritische RessourcenÜberwachenUndNachschubAuslösen.md` | BPMN-Dokumentation für Prozess 1. |
+| `APs/AP11-BPMN-Modellierung-BP2-Ueberschuessige-Ressourcen-an-externe-Unternehmen-verkaufen.md` | BPMN-Dokumentation für Prozess 2. |
+| `LastenheftUndPflichtenheft.md` | Ausführliche Spezifikation für den reduzierten Projektumfang. |
+| `APs/AP12-Spezifikation.md` | Arbeitspaket-Zusammenfassung zur Spezifikation. |
+| `APs/AP13-Proposal-Ausgearbeitet.md` | Ausgearbeitetes Projektproposal mit Projektplan, Aufwand und Kriterienbezug. |
+| `datenbankabfragen.md` | Dokumentation der vorhandenen SQL-Abfragen. |
+
+---
+
+## Arbeitspakete
+
+| AP | Datei | Inhalt |
+|---:|---|---|
+| AP1 | `AP1-Gruppe-finden.md` | Gruppenbildung |
+| AP2 | `AP2-Kommunikation-sichern.md` | Kommunikationswege und Organisation |
+| AP3 | `AP3-Sprecherin-waehlen.md` | Sprecherrolle |
+| AP4 | `AP4-Auswahl-Case-Study.md` | ursprüngliche breite Case-Study-Auswahl |
+| AP5 | `AP5-Revision-Case-Study-v2.md` | aktuelle Case-Study-Revision |
+| AP6 | `AP6-Verantwortungen-festlegen.md` | Verantwortlichkeiten |
+| AP7 | `AP7-Revision-Datenbankentwurf.md` | Datenbankentwurf und neue Verkaufstabellen |
+| AP8 | `AP8-Auswahl-DBMS-Infrastruktur-Prototyp.md` | DBMS, Infrastruktur und Prototyp |
+| AP9 | `AP9-Revision-Implementierung.md` | Implementierungsstand nach Revision |
+| AP10 | `AP10-Revision-Use-Cases.md` | aktuelle Use Cases |
+| AP11 | zwei BPMN-Dateien | BPMN-Modellierung der zwei Hauptprozesse |
+| AP12 | `AP12-Spezifikation.md` | Lastenheft und Pflichtenheft |
+| AP13 | `AP13-Proposal-Vorbereitung.md`, `AP13-Proposal-Ausgearbeitet.md` | Proposal-Vorbereitung und ausgearbeitete Fassung |
+| AP14 | `AP14-Methodenwahl.md` | Methodenwahl |
+
+---
+
+## Archiv
+
+Der Ordner `archive/` enthält ältere oder nicht mehr zentrale Dateien. Diese Dateien bleiben zur Nachvollziehbarkeit erhalten, gehören aber nicht zum aktuellen Hauptstand der Dokumentation.
+
+| Datei | Bedeutung |
+|---|---|
+| `AP5-Revision-Case-Study.md` | ältere Case-Study-Revision |
+| `Mars_Colony_Riskante_LagerbestaendeEduard.bpmn` | älteres BPMN-Modell |
+| `diagramEduard.svg` | ältere Diagrammdatei |
+
+---
+
+## Hinweis
+
+Die Dokumentation soll nicht alle denkbaren Bereiche der Marskolonie gleich stark behandeln. Für Proposal, BPMN, Use Cases, Spezifikation und Datenbankrevision ist der aktuelle Hauptstand der Zwei-Prozess-Fokus:
+
+- kritische Ressourcen erkennen und Nachschubbedarf vorbereiten,
+- überschüssige Ressourcen erkennen, bewerten und eine externe Abgabe vorbereiten.
