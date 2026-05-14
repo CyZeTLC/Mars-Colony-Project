@@ -19,8 +19,8 @@ Diese Datei ist eine vorläufige Zuarbeit für Tom Coombs / CyZeTLC. Sie fasst z
 | Datenbankmanagementsystem | In der Spezifikation wird MariaDB als Datenbank genannt. Zusätzlich existieren SQL-Build-Dateien für MySQL und Oracle. | Der PHP-Servercode enthält eine PDO-Anbindung, die je nach Konfiguration MySQL oder Oracle verwenden kann. | Finale DBMS-Auswahl und Version durch Tom Coombs / CyZeTLC bestätigen. |
 | Server / Hosting | In der Spezifikation wird ein VPS als Serverbetrieb genannt. In der WebApp sind produktionsnahe API-URLs zu einer externen Domain sichtbar. | Der genaue Servertyp und Anbieter sind im Repository nicht vollständig dokumentiert. | Hosting-Anbieter, VPS-Konfiguration und Betriebsumgebung ergänzen. |
 | API-Anbindung | Eine PHP-API im Ordner `api/` ist vorhanden. Sie liefert JSON-Antworten und nutzt CSRF-Schutz. | Die API lädt SQL-Dateien und führt sie über eine serverseitige Datenbankverbindung aus. | Finale Beschreibung der API-Struktur und produktiven Pfade bestätigen. |
-| WebApp-Anbindung | Die WebApp ist als React/TypeScript/Vite-Anwendung aufgebaut. Sie ruft Daten über serverseitige API-Funktionen ab. | Seiten wie Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht sind im Routing erkennbar. | Bestätigen, welche Seiten für AP8 als Infrastrukturbezug genannt werden sollen. |
-| SQL-Dateien | Im Ordner `sql/` sind zahlreiche SQL-Abfragen vorhanden. Zusätzlich existieren Build-Skripte und ein Ordner für Stored Procedures. | Die SQL-Dateien unterstützen fachliche Auswertungen zu Ressourcen, Fahrzeugen, Energie, Lager, Personal und Städten. | Prüfen, welche Abfragen in der finalen Abgabe tatsächlich verwendet werden. |
+| WebApp-Anbindung | Die WebApp ist als React/TypeScript/Vite-Anwendung aufgebaut. Sie ruft Daten über serverseitige API-Funktionen ab. | Seiten wie Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht sind im Routing erkennbar. Im aktuellen Fokus sind vor allem Ressourcen- und Lagerdaten relevant. | Bestätigen, welche Seiten für AP8 als Infrastrukturbezug genannt werden sollen. |
+| SQL-Dateien | Im Ordner `sql/` sind zahlreiche SQL-Abfragen vorhanden. Zusätzlich existieren Build-Skripte und ein Ordner für Stored Procedures. | Die SQL-Dateien unterstützen viele fachliche Auswertungen. Für die aktuelle Revision stehen Ressourcen-, Lager- und Bestandsabfragen im Vordergrund. | Prüfen, welche Abfragen in der finalen Abgabe tatsächlich verwendet werden. |
 | Stored Procedures | Ein Ordner `sql/storedProcedure/` ist vorhanden und enthält viele gleichnamige SQL-Dateien zu den Abfragen. | Der genaue produktive Einsatz als Stored Procedures sollte noch bestätigt werden. | Stored-Procedures-Stand und Einbindung ergänzen. |
 | Zugangsdaten / Konfiguration | Eine Konfigurationsdatei für die Datenbankanbindung ist vorhanden. | Aus Sicherheitsgründen werden keine Zugangsdaten, Passwörter, Tokens oder privaten Konfigurationswerte dokumentiert. | Tom ergänzt nur allgemeine, freigabefähige Angaben. |
 | Deployment / Betrieb | Die Dokumentation beschreibt lokale Entwicklung mit Vite und PHP sowie eine vorhandene Serverumgebung. | Der konkrete Deployment-Prozess ist nicht vollständig aus den gelesenen Dateien ableitbar. | Deployment-, Backup- und Betriebskonzept ergänzen. |
@@ -46,7 +46,7 @@ Noch offen: genaue Serverkonfiguration, DBMS-Version, Hosting-Anbieter, produkti
 | Betrieb auf VPS möglich | Wahrscheinlich geeignet | Die Spezifikation nennt den Betrieb der Datenbank auf einem VPS. | Anbieter, Betriebssystem, Ressourcen und Absicherung ergänzen. |
 | vorhandene Projektgrundlage | Geeignet | WebApp, PHP-API, SQL-Dateien, Build-Skripte und Dokumentation sind vorhanden. | Unterschiede zwischen Oracle-, MySQL- und MariaDB-Hinweisen klären. |
 | Teamkenntnisse | Vermutlich geeignet | Die vorhandene Struktur nutzt klassische SQL-Dateien und PHP/PDO, was für ein Datenbankprojekt nachvollziehbar ist. | Kenntnisse und Verantwortlichkeiten im Team ergänzen. |
-| Projektumfang | Geeignet | Ein relationales DBMS reicht für die dokumentierten Geschäftsprozesse aus. | Prüfen, ob spätere Verkaufsfunktionen neue Tabellen benötigen. |
+| Projektumfang | Geeignet | Ein relationales DBMS reicht für die zwei aktuell ausgewählten Geschäftsprozesse aus. | Prüfen, ob spätere Verkaufsfunktionen neue Tabellen benötigen. |
 | Wartbarkeit | Geeignet, wenn sauber dokumentiert | Die Trennung zwischen WebApp, API und SQL-Dateien unterstützt Wartbarkeit. | Stored-Procedures-Stand und Dokumentation vereinheitlichen. |
 | Erweiterbarkeit | Geeignet | Weitere Prozesse wie Verkauf, Routenoptimierung oder Prognosen können später ergänzt werden. | Notwendige Schema-Erweiterungen für spätere Phasen prüfen. |
 
@@ -56,18 +56,16 @@ Die DBMS-Infrastruktur unterstützt die WebApp, indem sie fachliche Daten für d
 
 Im Repository ist eine serverseitige PHP-API sichtbar. Die WebApp kommuniziert über diese Schnittstelle mit der Datenbanklogik. Die Daten werden im JSON-Format an die WebApp zurückgegeben und dort in Dashboard-Kacheln, Tabellen oder Übersichten dargestellt.
 
-Erkennbar sind unter anderem WebApp-Bereiche für Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht. Diese Bereiche können fachliche Geschäftsprozesse unterstützen, zum Beispiel Ressourcenüberwachung, Flottenübersicht, Energiekennzahlen, Personalübersicht und technische Nachvollziehbarkeit von SQL-Abfragen.
+Erkennbar sind unter anderem WebApp-Bereiche für Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht. Für die aktuelle Revision stehen davon vor allem Ressourcenübersicht, Lagerbezug und technische Nachvollziehbarkeit der verwendeten SQL-Abfragen im Vordergrund. Die übrigen Bereiche bleiben als vorhandene Projektbestandteile erhalten, werden aber nicht als Hauptprozesse betrachtet.
 
 ## 6. Bezug zu Businessprozessen
 
 | Businessprozess | Benötigte Datenbankunterstützung | Bedeutung der DBMS-Infrastruktur |
 |---|---|---|
 | Kritische Ressourcen überwachen und Nachschub auslösen | Ressourcenbestände, Mindestwerte, Lagerzuordnung und Bestandsübersichten | Das DBMS stellt die Grundlage bereit, um kritische Ressourcen zu erkennen und Nachschubbedarf abzuleiten. |
-| Transportmissionen planen und auswerten | Missionsdaten, Fahrzeuge, Status, Strecken und ggf. Personalzuordnung | Die Infrastruktur ermöglicht Auswertungen zu Missionen und Fahrzeugverfügbarkeit. |
-| Energieengpass erkennen und Lastverteilung einleiten | Energiequellen, aktuelle Leistung, Kapazitäten und Stadtzuordnung | Das DBMS unterstützt die Erkennung möglicher Energieprobleme und Versorgungslücken. |
-| Ablaufende oder riskante Lagerbestände priorisiert verbrauchen | Ablaufdaten, Lagerorte, Risikokennzahlen und Ressourcenmengen | Die Infrastruktur ermöglicht Warnlisten und Priorisierung riskanter Bestände. |
-| Personal- und Arbeitseinsätze ressourcenbasiert planen | Mitarbeitende, Rollen, Berufe, Arbeitszeiten und Abteilungen | Das DBMS stellt Personaldaten als Grundlage für Planungsentscheidungen bereit. |
-| Überschüssige Ressourcen an externe Partner verkaufen | Ressourcenbestände, Mindestwerte, Lagerdaten und mögliche Überschussberechnung | Die Infrastruktur kann als Grundlage für spätere Verkaufsentscheidungen dienen; ein vollständiges Verkaufsmodul ist noch zu ergänzen. |
+| Überschüssige Ressourcen an externe Unternehmen verkaufen | Ressourcenbestände, Mindestwerte, Lagerdaten und mögliche Überschussberechnung | Die Infrastruktur kann als Grundlage für Verkaufsentscheidungen dienen; ein vollständiges Verkaufsmodul ist eine spätere Erweiterung. |
+
+Weitere vorhandene Daten zu Missionen, Fahrzeugen, Energie, Personal, Städten und Bewohnern bleiben technisch relevant, werden in der aktuellen Revision aber nicht als Hauptprozesse ausgearbeitet.
 
 ## 7. Offene Punkte für Tom Coombs / CyZeTLC
 

@@ -10,7 +10,7 @@ Daher konzentriert sich die Ares Logistik Verwaltung zunächst auf die folgenden
 | Nr. | Businessprozess | Begründung |
 |---:|---|---|
 | 1 | Kritische Ressourcen überwachen und Nachschub auslösen | Dieser Prozess hat den höchsten fachlichen und wirtschaftlichen Nutzen, weil Sauerstoff, Wasser, Nahrung und Ersatzteile knapp, teuer und für den Betrieb der Marskolonie überlebenswichtig sind. Durch eine datenbankgestützte Überwachung können kritische Bestände früh erkannt und Nachschubmaßnahmen rechtzeitig ausgelöst werden. |
-| 6 | Ressourcen an externe Unternehmen verkaufen | Dieser Prozess erzeugt direkten wirtschaftlichen Nutzen, weil überschüssige oder lokal produzierte Ressourcen kontrolliert verkauft werden können. Dadurch lassen sich Lagerkosten reduzieren und zusätzliche Einnahmen für die Marskolonie erzielen. |
+| 6 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Dieser Prozess erzeugt direkten wirtschaftlichen Nutzen, weil überschüssige oder lokal produzierte Ressourcen kontrolliert verkauft werden können. Dadurch lassen sich Lagerkosten reduzieren und zusätzliche Einnahmen für die Marskolonie erzielen. |
 
 Die Prozesse 2 bis 5 bleiben weiterhin dokumentiert und werden für alle Eventualitäten sowie zu Dokumentations- und Archivierungszwecken im Semesterprojekt festgehalten. Sie sind fachlich grundsätzlich interessant, werden aber aktuell nicht als Hauptprozesse umgesetzt, da sie teilweise größere Änderungen an der bestehenden Datenbankstruktur erfordern würden.
 

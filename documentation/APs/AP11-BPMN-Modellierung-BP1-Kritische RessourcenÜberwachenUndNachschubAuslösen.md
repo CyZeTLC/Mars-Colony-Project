@@ -8,7 +8,7 @@ Dieses Arbeitspaket beschreibt den Businessprozess „Kritische Ressourcen über
 
 Der Prozess gehört zu den Hauptprozessen der Mars Logistik Verwaltung [ALS], weil Sauerstoff, Wasser, Nahrung und Ersatzteile für den Betrieb der Marskolonie kritisch sind.
 
-Die finale Ausarbeitung erfolgt nach Feedback von Prof. Dr. Becking.
+Die Ausarbeitung orientiert sich am Feedback von Prof. Dr. Becking und konzentriert sich auf den reduzierten Projektfokus.
 
 ---
 
@@ -24,9 +24,9 @@ Wenn ein Mindestbestand unterschritten wurde, wird eine kritische Ressource geme
 
 Danach wird geprüft, ob die benötigte Ressource intern verfügbar ist.
 
-Wenn die Ressource intern verfügbar ist, wird eine interne Umlagerung oder Produktion geplant und anschließend ein Transport ausgeführt.
+Wenn die Ressource intern verfügbar ist, wird eine interne Umlagerung oder Produktion geplant und anschließend die Versorgung abgesichert.
 
-Wenn die Ressource nicht intern verfügbar ist, wird externer Nachschub angefordert. Danach wird der Nachschub empfangen, eine Lieferung oder Mission geplant und der Bestand aktualisiert.
+Wenn die Ressource nicht intern verfügbar ist, wird externer Nachschub angefordert. Danach wird der Nachschub empfangen und der Bestand aktualisiert.
 
 Der Prozess endet, sobald die Versorgung gesichert ist.
 
@@ -39,7 +39,7 @@ Der Prozess endet, sobald die Versorgung gesichert ist.
 | System / Sensorik | Bestände überwachen und Sensorwerte auswerten |
 | Leitstand / Kolonieleitung | Kritische Ressourcen bewerten und Bedarf berechnen |
 | Lager / Produktion | Interne Umlagerung oder Produktion planen |
-| Logistik / Transport | Transporte, Lieferungen und Missionen durchführen |
+| Logistik / Ausführung | Interne Umlagerung oder externe Lieferung organisatorisch abwickeln |
 
 ---
 
@@ -79,7 +79,7 @@ Mögliche Anzeigen:
 | aktuelle Bestände | Überblick |
 | kritische Ressourcen | Warnung |
 | Nachschubbedarf | Entscheidungsgrundlage |
-| Liefer- oder Missionsstatus | Kontrolle |
+| Nachschubstatus | Kontrolle |
 | aktualisierte Bestände | Prüfung der Versorgung |
 
 ---
@@ -96,7 +96,7 @@ Der Prozess ist fachlich sinnvoll, wirtschaftlich relevant und gut für eine dat
 
 | Punkt | Status |
 |---|---|
-| Feedback von Prof. Dr. Becking einarbeiten | offen |
+| Feedback von Prof. Dr. Becking einarbeiten | in Bearbeitung |
 | SQL-Abfragen konkret zuordnen | offen |
 | Stored Procedures planen | offen |
 | BPMN-Modell final prüfen | offen |
