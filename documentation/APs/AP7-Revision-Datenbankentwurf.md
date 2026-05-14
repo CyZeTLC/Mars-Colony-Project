@@ -1,81 +1,91 @@
-# AP7 – Revision Datenbankentwurf – Vorlage
+# AP7 – Revision Datenbankentwurf
 
-Status: Vorlage / Zwischenstand  
-Finale Ausarbeitung erfolgt nach dem zweiten Feedback von Prof. Dr. Becking.
+Status: abgeschlossen / überarbeitet
 
 ## 1. Ziel des Arbeitspakets
 
-Diese Datei dient als Vorlage für die Revision des Datenbankentwurfs. Nach dem Feedback von Prof. Dr. Becking soll besonders geprüft werden, ob der Datenbankentwurf die zwei ausgewählten Hauptprozesse ausreichend unterstützt.
+In AP7 wird der Datenbankentwurf nach dem Feedback von Prof. Dr. Becking überprüft und an den reduzierten Projektfokus angepasst.
 
-Ziel ist es, nach dem Feedback nachvollziehbar zu dokumentieren, welche Punkte am Datenbankentwurf geprüft, angepasst oder bewusst unverändert gelassen wurden.
+Im Mittelpunkt steht die Frage, ob der vorhandene Datenbankentwurf die zwei ausgewählten Businessprozesse ausreichend unterstützt:
 
-## 2. Phase der Bearbeitung
+1. **Kritische Ressourcen überwachen und Nachschub auslösen**
+2. **Überschüssige Ressourcen an externe Unternehmen verkaufen**
 
-| Feld | Eintrag |
-|---|---|
-| Aktuelle Phase | ______________________________ |
-| Datum des Feedbacks | ______________________________ |
-| Feedback erhalten von | Prof. Dr. Becking |
-| Zuständige Person im Team | ______________________________ |
-| Stand der Revision | [ ] offen [ ] in Bearbeitung [ ] abgeschlossen |
+## 2. Anlass der Revision
+
+Die ursprüngliche Projektidee war deutlich breiter angelegt und enthielt viele Bereiche der Marskolonie, zum Beispiel Transport, Energie, Personal, Städte, Bewohner und Fahrzeuge.
+
+Nach dem zweiten Gespräch mit Prof. Dr. Becking wurde entschieden, den Projektumfang zu reduzieren. Dadurch muss der Datenbankentwurf nicht alle möglichen Geschäftsbereiche gleich stark unterstützen, sondern vor allem Ressourcen, Lagerbestände, kritische Mindestwerte und Ressourcenüberschüsse abbilden.
 
 ## 3. Ausgangspunkt vor der Revision
 
-| Bereich | Vorläufiger Stand | Anmerkung / später ausfüllen |
-|---|---|---|
-| Datenbankmodell | PowerDesigner-Dateien und SQL-Build-Skripte sind im Repository vorhanden. | ______________________________ |
-| Tabellenstruktur | Tabellen für Ressourcen, Lager, Städte, Bewohner, Mitarbeitende, Fahrzeuge, Transport und Energie sind erkennbar. Für die aktuelle Revision sind vor allem Ressourcen- und Lagerdaten relevant. | ______________________________ |
-| Beziehungen | Primär- und Fremdschlüssel sind in den Build-Skripten erkennbar. | ______________________________ |
-| Testdaten | Aufbau- und Insert-Strukturen sind vorhanden. | ______________________________ |
-| Businessprozess-Bezug | Datenmodell soll die ausgewählten Businessprozesse unterstützen. | ______________________________ |
-
-## 4. Feedbackpunkte
-
-| Nr. | Feedbackpunkt | Betroffener Bereich | Entscheidung | Notiz |
-|---:|---|---|---|---|
-| 1 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-| 2 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-| 3 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-| 4 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-
-## 5. Geplante Anpassungen am Datenbankentwurf
-
-| Bereich | Geplante Änderung | Begründung | Status |
-|---|---|---|---|
-| Tabellen | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| Beziehungen | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| Ressourcen / Lager | Prüfen, ob Bestände, Mindestwerte und Lagerbezug für kritische Ressourcen ausreichend abbildbar sind. | Grundlage für Prozess 1 und Prozess 6. | [ ] offen [ ] erledigt |
-| Nachschubbedarf | Prüfen, ob Nachschubbedarf aus Bestand, Mindestbestand und Lagerdaten fachlich ableitbar ist. | Keine vollständige automatische Bestellung notwendig. | [ ] offen [ ] erledigt |
-| Überschüssige Ressourcen | Prüfen, ob Ressourcenüberschüsse aus vorhandenen Daten ableitbar sind. | Grundlage für Verkaufspotenzial. | [ ] offen [ ] erledigt |
-| Verkaufsprozess | Prüfen, ob für die aktuelle Revision eine fachliche Vorbereitung reicht oder ob spätere Verkaufstabellen nötig werden. | Vollständiges Verkaufsmodul ist spätere Erweiterung. | [ ] offen [ ] erledigt |
-| Städte / Standorte | Vorerst keine Hauptanpassung geplant. | Bleibt Datenbasis, aber nicht Hauptprozess. | [ ] offen [ ] erledigt |
-| Fahrzeuge / Transport | Vorerst keine Hauptanpassung geplant. | Nach Feedback nicht Teil der zwei Hauptprozesse. | [ ] offen [ ] erledigt |
-| Energieversorgung / Personal | Vorerst keine Hauptanpassung geplant. | Mögliche spätere Erweiterung. | [ ] offen [ ] erledigt |
-
-## 6. Offene Prüfpunkte
-
-- [ ] Finales DBMS bestätigen: ______________________________
-- [ ] Verbindliches Datenbankmodell festlegen: ______________________________
-- [ ] Prüfen, ob ERD, CDM, PDM und SQL-Skripte zusammenpassen: ______________________________
-- [ ] Prüfen, ob die Tabellen die zwei ausgewählten Businessprozesse ausreichend unterstützen: ______________________________
-- [ ] Prüfen, ob zusätzliche Tabellen oder Beziehungen notwendig sind: ______________________________
-- [ ] Prüfen, ob Testdaten für die spätere Demonstration ausreichen: ______________________________
-
-## 7. Ergebnis nach der Revision
-
-Dieser Abschnitt wird erst nach dem Feedback ausgefüllt.
-
-| Ergebnisfrage | Antwort |
+| Bereich | Stand vor der Revision |
 |---|---|
-| Wurde der Datenbankentwurf angepasst? | ______________________________ |
-| Welche wichtigsten Änderungen wurden vorgenommen? | ______________________________ |
-| Welche Punkte bleiben offen? | ______________________________ |
-| Ist der Datenbankentwurf für die weitere Umsetzung geeignet? | ______________________________ |
+| Datenbankmodell | PowerDesigner-Dateien und SQL-Build-Skripte sind im Repository vorhanden. |
+| Tabellenstruktur | Tabellen für Ressourcen, Lager, Städte, Bewohner, Mitarbeitende, Fahrzeuge, Transport und Energie sind vorhanden. |
+| Ressourcen und Lager | `RESSOURCE`, `LAGER` und `IST_GELAGERT_IN` bilden Ressourcenbestände und Lagerbezug ab. |
+| Mindestbestand | In `RESSOURCE` ist mit `MIN_SCHWELLENWERT` eine Grundlage für kritische Bestände vorhanden. |
+| Testdaten | In `sql/build/mysql.sql` sind Beispieldaten für Ressourcen, Lager und weitere Projektbereiche enthalten. |
+| DBMS-Linie | Für die aktuelle Dokumentation steht MariaDB/MySQL im Vordergrund. Oracle bleibt als vorhandene Alt- bzw. Alternativdatei im Repository erhalten. |
 
-## 8. Kurzfazit
+## 4. Bewertung nach Feedback
 
-Kurzfazit nach Feedback:
+| Prüffrage | Ergebnis |
+|---|---|
+| Unterstützt das Modell Prozess 1? | Ja. Ressourcenbestände, Mindestwerte und Lagerbezug sind bereits abbildbar. |
+| Unterstützt das Modell Prozess 6? | Teilweise. Die vorhandenen Ressourcen- und Lagerdaten reichen zur Erkennung von Überschüssen, für die fachliche Verkaufsvorbereitung wurden zusätzliche Tabellen ergänzt. |
+| Sind große Änderungen am bestehenden Modell notwendig? | Nein. Der bestehende Entwurf bleibt erhalten und wird nur additiv erweitert. |
+| Müssen Transport, Energie und Personal weiter ausgebaut werden? | Nein. Diese Bereiche bleiben vorhanden, gehören aber nicht zum aktuellen Hauptfokus. |
 
-____________________________________________________________
+## 5. Anpassungen am Datenbankentwurf
 
-____________________________________________________________
+Für den Prozess „Überschüssige Ressourcen an externe Unternehmen verkaufen“ wurden neue Tabellen ergänzt.
+
+| Neue Tabelle | Zweck |
+|---|---|
+| `EXTERNES_UNTERNEHMEN` | Speichert externe Firmen, die Ressourcen kaufen oder übernehmen können. |
+| `RESSOURCEN_UEBERSCHUSS_BEWERTUNG` | Dokumentiert, welche Ressourcen als Überschuss bewertet wurden. |
+| `RESSOURCEN_VERKAUF` | Bildet einen vorbereiteten Verkauf oder eine externe Abgabe ab. |
+| `RESSOURCEN_VERKAUF_POSITION` | Speichert die einzelnen Ressourcenpositionen eines vorbereiteten Verkaufs. |
+
+Die Erweiterung wurde bewusst additiv umgesetzt. Bestehende Tabellen wurden nicht gelöscht und nicht grundlegend umgebaut.
+
+## 6. Beziehungen zu bestehenden Tabellen
+
+| Neue Beziehung | Bedeutung |
+|---|---|
+| Bewertung zu `IST_GELAGERT_IN` | Überschüsse beziehen sich auf eine konkrete Ressource in einem konkreten Lager. |
+| Bewertung zu `MITARBEITER` | Eine Bewertung kann einer verantwortlichen Person zugeordnet werden. |
+| Verkauf zu `EXTERNES_UNTERNEHMEN` | Jeder vorbereitete Verkauf hat ein externes Unternehmen als Empfänger. |
+| Verkauf zu `MITARBEITER` | Ein Verkauf kann einer erstellenden Person zugeordnet werden. |
+| Verkaufsposition zu Bewertung | Eine Verkaufsposition kann aus einer vorherigen Überschussbewertung entstehen. |
+| Verkaufsposition zu `IST_GELAGERT_IN` | Die verkaufte Ressource bleibt fachlich mit Lager und Ressource verbunden. |
+
+## 7. Testdaten
+
+In `sql/build/mysql.sql` wurden Beispieldaten ergänzt, damit der Verkaufsprozess demonstrierbar ist.
+
+| Bereich | Beispieldaten |
+|---|---|
+| Externe Unternehmen | Deutsche Mars Bau GmbH, Deutsche Mars Versorgung AG |
+| Überschussbewertungen | Eisenerz aus Lager 2, Aluminiumplatten aus Lager 2 |
+| Vorbereiteter Verkauf | Verkauf an Deutsche Mars Bau GmbH |
+| Verkaufspositionen | 3000 KG Eisenerz, 120 Stück Aluminiumplatten |
+
+## 8. Bewusste Abgrenzung
+
+Ein vollständiges Verkaufsmodul mit Rechnung, Zahlung, Vertrag und Buchhaltung ist nicht Teil des aktuellen Kernumfangs.
+
+Für die aktuelle Revision reicht es, Ressourcenüberschüsse zu erkennen, wirtschaftlich zu bewerten und eine externe Abgabe fachlich vorzubereiten.
+
+## 9. Ergebnis der Revision
+
+Der Datenbankentwurf ist für den reduzierten Projektfokus geeignet.
+
+Prozess 1 wird durch vorhandene Ressourcen-, Lager- und Mindestbestandsdaten unterstützt. Prozess 6 wird durch neue Verkaufstabellen und passende Beispieldaten ergänzt.
+
+Die Datenbankstruktur bleibt damit realistisch, überschaubar und nah an der vorhandenen technischen Grundlage.
+
+## 10. Kurzfazit
+
+AP7 zeigt, dass der Datenbankentwurf nicht vollständig neu erstellt werden muss. Die vorhandene Struktur unterstützt den Ressourcenfokus bereits gut. Für den Verkauf überschüssiger Ressourcen wurden gezielt zusätzliche Tabellen ergänzt, ohne bestehende Projektbereiche unnötig umzubauen.

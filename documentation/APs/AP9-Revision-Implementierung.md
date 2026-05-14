@@ -1,82 +1,72 @@
-# AP9 – Revision Implementierung – Vorlage
+# AP9 – Revision Implementierung
 
-Status: Vorlage / Zwischenstand  
-Finale Ausarbeitung erfolgt nach Feedback von Prof. Dr. Becking.
+Status: abgeschlossen / überarbeitet
 
 ## 1. Ziel des Arbeitspakets
 
-Diese Datei dient als Vorlage für die spätere Revision der Implementierung. Die eigentliche inhaltliche Überarbeitung erfolgt erst nach dem Feedback von Prof. Dr. Becking.
+In AP9 wird geprüft, ob die vorhandene Implementierung zum reduzierten Projektfokus passt.
 
-Ziel ist es, nach dem Feedback nachvollziehbar zu dokumentieren, welche technischen Bestandteile geprüft, angepasst oder bewusst unverändert gelassen wurden.
+Nach dem Feedback von Prof. Dr. Becking stehen nur noch zwei Businessprozesse im Mittelpunkt:
 
-## 2. Phase der Bearbeitung
+1. **Kritische Ressourcen überwachen und Nachschub auslösen**
+2. **Überschüssige Ressourcen an externe Unternehmen verkaufen**
 
-| Feld | Eintrag |
+Die Implementierung soll diese Prozesse nachvollziehbar unterstützen, ohne den Projektumfang unnötig zu vergrößern.
+
+## 2. Ausgangspunkt vor der Revision
+
+| Bereich | Stand vor der Revision |
 |---|---|
-| Aktuelle Phase | ______________________________ |
-| Datum des Feedbacks | ______________________________ |
-| Feedback erhalten von | Prof. Dr. Becking |
-| Zuständige Person im Team | ______________________________ |
-| Stand der Revision | [ ] offen [ ] in Bearbeitung [ ] abgeschlossen |
+| WebApp | React/TypeScript-WebApp mit Dashboard und Tabellenansichten ist vorhanden. |
+| API | Eine PHP-API ist vorhanden und stellt Daten im JSON-Format bereit. |
+| Datenbank | MariaDB/MySQL wird als aktuelle Datenbanklinie verwendet. |
+| SQL-Dateien | SQL-Build-Dateien und fachliche Abfragen sind im Repository vorhanden. |
+| Stored Procedures | Ein Ordner für Stored-Procedure-Dateien ist vorhanden und kann weiter ausgebaut werden. |
+| Testdaten | In `sql/build/mysql.sql` sind Beispieldaten für die Demonstration enthalten. |
 
-## 3. Ausgangspunkt vor der Revision
+## 3. Bewertung nach Feedback
 
-| Bereich | Vorläufiger Stand | Anmerkung / später ausfüllen |
+| Prüffrage | Ergebnis |
+|---|---|
+| Passt die Implementierung zu Prozess 1? | Ja. Ressourcenbestände, Mindestwerte und Lagerdaten sind bereits in der Datenbank vorhanden und können über SQL-Abfragen ausgewertet werden. |
+| Passt die Implementierung zu Prozess 6? | Ja, nach Erweiterung. Für den Verkaufsprozess wurden zusätzliche Tabellen und Beispieldaten ergänzt. |
+| Muss die gesamte WebApp neu gebaut werden? | Nein. Die vorhandene WebApp bleibt die zentrale Oberfläche. |
+| Müssen Transport, Energie und Personal technisch weiter ausgebaut werden? | Nein. Diese Bereiche bleiben vorhanden, sind aber nicht Teil des aktuellen Kernumfangs. |
+
+## 4. Umgesetzte Anpassungen
+
+| Bereich | Anpassung | Nutzen |
 |---|---|---|
-| SQL-Dateien | Mehrere SQL-Abfragen sind im Repository vorhanden. | ______________________________ |
-| Stored Procedures | Ein Ordner für Stored-Procedure-Dateien ist vorhanden. | ______________________________ |
-| API-Anbindung | Eine PHP-API ist im Repository erkennbar. | ______________________________ |
-| WebApp-Anbindung | Eine React/TypeScript-WebApp ist vorhanden. | ______________________________ |
-| Datenbankzugriff | Datenbankzugriffe laufen serverseitig über die API. | ______________________________ |
-| Testdaten | Build- und Insert-Strukturen sind vorhanden. | ______________________________ |
-| Technische Infrastruktur | Hinweise auf WebApp, API, Datenbank und Serverbetrieb sind vorhanden. | ______________________________ |
+| SQL-Build-Skripte | Verkaufstabellen in `marskolonie_mysql.sql` und `mysql.sql` ergänzt. | Prozess 6 kann datenbankseitig abgebildet werden. |
+| Beispieldaten | Seed-Daten für externe Unternehmen, Überschussbewertungen und Verkaufspositionen ergänzt. | Der Verkaufsprozess ist in einer Präsentation leichter erklärbar. |
+| Ressourcenbezug | Verkaufspositionen beziehen sich auf konkrete Ressourcen und Lager. | Die Verbindung zwischen Lagerbestand und Verkauf bleibt nachvollziehbar. |
+| Dokumentation | AP5, AP10, AP11, AP12 und AP13 wurden auf den Zwei-Prozess-Fokus ausgerichtet. | Implementierung und Dokumentation erzählen dieselbe fachliche Linie. |
 
-## 4. Feedbackpunkte
+## 5. Technische Unterstützung der Use Cases
 
-| Nr. | Feedbackpunkt | Betroffener Bereich | Entscheidung | Notiz |
-|---:|---|---|---|---|
-| 1 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-| 2 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-| 3 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-| 4 | ______________________________ | ______________________________ | [ ] übernehmen [ ] prüfen [ ] nicht übernehmen | ______________________________ |
-
-## 5. Geplante Anpassungen an der Implementierung
-
-| Bereich | Geplante Änderung | Begründung | Status |
-|---|---|---|---|
-| SQL-Abfragen | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| Stored Procedures | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| API-Anbindung | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| WebApp-Anbindung | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| Datenbankzugriff | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| Testdaten | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-| Dokumentation | ______________________________ | ______________________________ | [ ] offen [ ] erledigt |
-
-## 6. Offene Prüfpunkte
-
-- [ ] Finalen Implementierungsumfang bestätigen: ______________________________
-- [ ] Prüfen, welche SQL-Dateien zum Kernumfang gehören: ______________________________
-- [ ] Prüfen, welche Stored Procedures tatsächlich verwendet werden: ______________________________
-- [ ] Prüfen, ob API und WebApp die priorisierten Use Cases ausreichend unterstützen: ______________________________
-- [ ] Prüfen, ob Testdaten für Demonstration und Abnahme ausreichen: ______________________________
-- [ ] Prüfen, ob technische Dokumentation und Businessprozesse konsistent zusammenpassen: ______________________________
-- [ ] Sicherheitsaspekte allgemein ergänzen, ohne Passwörter, Tokens oder Zugangsdaten zu dokumentieren: ______________________________
-
-## 7. Ergebnis nach der Revision
-
-Dieser Abschnitt wird erst nach dem Feedback ausgefüllt.
-
-| Ergebnisfrage | Antwort |
+| Use Case | Technische Unterstützung |
 |---|---|
-| Wurde die Implementierung angepasst? | ______________________________ |
-| Welche wichtigsten Änderungen wurden vorgenommen? | ______________________________ |
-| Welche Punkte bleiben offen? | ______________________________ |
-| Ist die Implementierung für die weitere Projektarbeit geeignet? | ______________________________ |
+| Ressourcenbestand anzeigen | Vorhandene Ressourcen- und Lagerdaten in `RESSOURCE`, `LAGER` und `IST_GELAGERT_IN`. |
+| Kritische Ressourcen anzeigen | Vergleich von `MENGE` und `MIN_SCHWELLENWERT` in `RESSOURCE`. |
+| Nachschubbedarf erkennen | Ableitung aus kritischen Beständen und Lagerbezug. |
+| Überschüssige Ressourcen anzeigen | Ableitung aus Menge, Mindestreserve und Lagerdaten. |
+| Verkaufspotenzial bewerten | Tabelle `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`. |
+| Externe Abgabe vorbereiten | Tabellen `RESSOURCEN_VERKAUF` und `RESSOURCEN_VERKAUF_POSITION`. |
+
+## 6. Bewusste Abgrenzung
+
+Nicht umgesetzt wird ein vollständiges Verkaufs- und Zahlungssystem mit Rechnung, Vertrag und Zahlungsstatus.
+
+Nicht weiter ausgebaut werden außerdem Transportplanung, Energieverteilung, Personalplanung und vollständige Bewohnerverwaltung. Diese Bereiche bleiben als spätere Erweiterungen möglich, gehören aber nicht zum aktuellen Fokus.
+
+## 7. Ergebnis der Revision
+
+Die Implementierung passt zum reduzierten Projektumfang.
+
+Prozess 1 wird durch vorhandene Ressourcen-, Lager- und Mindestbestandsdaten unterstützt. Prozess 6 wurde durch neue Verkaufstabellen und Seed-Daten ergänzt.
+
+Damit kann die Anwendung in der Präsentation als datenbankgestützte Unterstützung der zwei ausgewählten Businessprozesse erklärt werden.
 
 ## 8. Kurzfazit
 
-Kurzfazit nach Feedback:
-
-____________________________________________________________
-
-____________________________________________________________
+AP9 zeigt, dass die vorhandene technische Grundlage nicht ersetzt werden muss. Die Implementierung wurde fachlich auf Ressourcenüberwachung und Ressourcenverkauf zugespitzt. Dadurch bleibt das Projekt realistisch, demonstrierbar und passend zur überarbeiteten Case Study.
