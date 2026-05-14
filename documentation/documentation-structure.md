@@ -21,7 +21,7 @@ documentation/
 ├── businessprozesse-v1.md
 ├── businessprozesse-v2.md
 ├── datenbankabfragen.md
-├── LastenheftUndPflichtenheft.md
+├── lastenheft-und-pflichtenheft.md
 ├── APs/
 │   ├── Gruppenanmeldung.md
 │   ├── AP1-Gruppe-finden.md
@@ -62,7 +62,7 @@ documentation/
 | `APs/AP10-Revision-Use-Cases.md` | Use Cases passend zu den zwei ausgewählten Businessprozessen. |
 | `APs/AP11-BPMN-Modellierung-BP1-Kritische RessourcenÜberwachenUndNachschubAuslösen.md` | BPMN-Dokumentation für Prozess 1. |
 | `APs/AP11-BPMN-Modellierung-BP2-Ueberschuessige-Ressourcen-an-externe-Unternehmen-verkaufen.md` | BPMN-Dokumentation für Prozess 2. |
-| `LastenheftUndPflichtenheft.md` | Ausführliche Spezifikation für den reduzierten Projektumfang. |
+| `lastenheft-und-pflichtenheft.md` | Ausführliche Spezifikation für den reduzierten Projektumfang. |
 | `APs/AP12-Spezifikation.md` | Arbeitspaket-Zusammenfassung zur Spezifikation. |
 | `APs/AP13-Proposal-Ausgearbeitet.md` | Ausgearbeitetes Projektproposal mit Projektplan, Aufwand und Kriterienbezug. |
 | `datenbankabfragen.md` | Dokumentation der vorhandenen SQL-Abfragen. |
