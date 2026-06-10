@@ -31,5 +31,19 @@ COUNT = zählt Zeilen
 SUM = addiert Zahlen
 
 _______________________________________________________________
-getResidentCountByCity.sql
+BP1 SQL und Stored Procedures
+getRessourcesBelowMin.sql
+Erkennt kritische Ressourcen unter Mindestbestand und berechnet Fehlmenge,
+Fehlmengen-Prozent und Handlungsprioritaet.
 
+getRessourcesAtRisk.sql
+Erkennt abgelaufene oder innerhalb von 30 Tagen ablaufende Ressourcen
+und gibt Risikostatus sowie empfohlene Massnahme aus.
+
+getNachschubanforderungen.sql
+Bereitet Nachschubanforderungen fachlich vor. Die Procedure berechnet
+Anforderungsmenge, Sicherheitsreserve fuer 7 Sols, interne Verfuegbarkeit,
+Anforderungsgrund und empfohlene Massnahme.
+
+_______________________________________________________________
+getResidentCountByCity.sql

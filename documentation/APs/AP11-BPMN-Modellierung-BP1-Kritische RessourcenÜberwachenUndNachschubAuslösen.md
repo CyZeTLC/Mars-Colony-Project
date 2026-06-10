@@ -66,6 +66,14 @@ Relevante Datenbankaufgaben:
 | interne Verfügbarkeit prüfen | Lager oder Produktion auswerten |
 | Bestand aktualisieren | neue Werte speichern |
 
+Konkret umgesetzte Stored Procedures für BP1:
+
+| Stored Procedure | Prozessschritt | Ergebnis |
+|---|---|---|
+| `getRessourcesBelowMin` | Mindestbestand vergleichen | zeigt kritische Ressourcen inklusive Fehlmenge und Handlungspriorität |
+| `getRessourcesAtRisk` | Ablaufdatum prüfen | zeigt abgelaufene oder bald ablaufende Ressourcen mit empfohlener Maßnahme |
+| `getNachschubanforderungen` | Bedarf berechnen und interne Verfügbarkeit prüfen | erstellt eine fachliche Nachschubliste mit Anforderungsmenge, Grund und Maßnahme |
+
 ---
 
 ## Bezug zur Webanwendung
@@ -96,9 +104,9 @@ Der Prozess ist fachlich sinnvoll, wirtschaftlich relevant und gut für eine dat
 
 | Punkt | Status |
 |---|---|
-| Feedback von Prof. Dr. Becking einarbeiten | in Bearbeitung |
-| SQL-Abfragen konkret zuordnen | offen |
-| Stored Procedures planen | offen |
+| Feedback von Prof. Dr. Becking einarbeiten | erledigt |
+| SQL-Abfragen konkret zuordnen | erledigt |
+| Stored Procedures planen | erledigt |
 | BPMN-Modell final prüfen | offen |
 | BPMN-Grafik in Projektdokumentation einfügen | vorbereitet |
 

@@ -33,12 +33,14 @@ Für die Präsentation und weitere Dokumentation sollen deshalb nur die Abfragen
 
 | Businessprozess | Relevante Abfragen / Tabellen | Zweck |
 |---|---|---|
-| Kritische Ressourcen überwachen und Nachschub auslösen | `getRessourcesBelowMin.sql`, `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql`, `getRessourcesAtRisk.sql` | Bestände anzeigen, kritische Ressourcen erkennen, Lagerbezug prüfen und Nachschubbedarf ableiten. |
+| Kritische Ressourcen überwachen und Nachschub auslösen | `getRessourcesBelowMin.sql`, `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql`, `getRessourcesAtRisk.sql`, `sql/storedProcedure/getNachschubanforderungen.sql` | Bestände anzeigen, kritische Ressourcen erkennen, ablaufende Bestände bewerten, Lagerbezug prüfen und Nachschubbedarf als fachliche Anforderung ableiten. |
 | Überschüssige Ressourcen an externe Unternehmen verkaufen | `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql`, `EXTERNES_UNTERNEHMEN`, `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`, `RESSOURCEN_VERKAUF`, `RESSOURCEN_VERKAUF_POSITION` | Überschüsse fachlich bewerten und eine externe Abgabe vorbereiten. |
 
 ---
 
 ## 3. Abfragen für Prozess 1
+
+Für Prozess 1 liegen die wichtigsten Abfragen zusätzlich als Stored Procedures im Ordner `sql/storedProcedure/` vor. Die gleichnamigen Dateien im Ordner `sql/` bleiben als API-kompatible SELECT-Spiegel für die bestehende Web-App erhalten. Damit passt die Datenbanklogik zum Feedback aus dem Projektproposal: Die Anwendung soll fachliche Datenbankfunktionen kontrolliert über Procedures nutzen, statt Prozesslogik frei in der Oberfläche zu verteilen.
 
 ### 3.1 `getRessourcesBelowMin.sql`
 
@@ -58,7 +60,9 @@ Die Kolonieleitung kann sehen, welche Ressourcen kritisch sind und bei welchen B
 | Ressource | Welche Ressource ist betroffen? |
 | Menge | Wie viel ist aktuell vorhanden? |
 | Mindestbestand | Ab wann wird die Ressource kritisch? |
+| Fehlmenge | Wie groß ist die Lücke bis zum Mindestbestand? |
 | Lagerbezug | Wo befindet sich die Ressource? |
+| Handlungspriorität | Wie dringend muss die Ressource geprüft werden? |
 
 **Bezug zum Businessprozess**  
 Diese Abfrage ist der zentrale technische Einstieg für Prozess 1. Wenn eine Ressource unter dem Mindestbestand liegt, wird der fachliche Ablauf zur Prüfung und Nachschubvorbereitung ausgelöst.
@@ -126,7 +130,7 @@ Für Prozess 1 unterstützt die Abfrage die Übersicht über verfügbare Lagerre
 ### 3.4 `getRessourcesAtRisk.sql`
 
 **Zweck**  
-Diese Abfrage erkennt Ressourcen, deren Ablaufdatum bald erreicht wird.
+Diese Abfrage erkennt Ressourcen, deren Ablaufdatum bald erreicht oder bereits überschritten wurde.
 
 **Unterstützter Use Case**  
 Kritische Ressourcen anzeigen
@@ -140,10 +144,43 @@ Eine Ressource kann nicht nur wegen zu geringer Menge kritisch sein, sondern auc
 |---|---|
 | Ressource | welche Ressource betroffen ist |
 | Ablaufdatum | wann die Ressource kritisch wird |
+| Tage bis Ablauf | wie dringend der Bestand behandelt werden muss |
 | Lager-ID | wo die Ressource liegt |
+| Risikostatus | ob der Bestand abgelaufen ist oder bald abläuft |
+| empfohlene Maßnahme | fachliche Reaktion, zum Beispiel Verbrauch planen oder Ersatz prüfen |
 
 **Bezug zum Businessprozess**  
 Die Abfrage unterstützt Prozess 1, weil sie zusätzliche Risiken im Bestand sichtbar macht. Sie ist nicht der Hauptauslöser für Nachschub, aber eine sinnvolle Ergänzung für die Ressourcenüberwachung.
+
+---
+
+### 3.5 `getNachschubanforderungen.sql`
+
+**Zweck**
+Diese Stored Procedure erstellt eine fachliche Nachschubliste für Prozess 1. Sie berechnet, für welche Ressourcen eine Nachschubanforderung vorbereitet werden soll.
+
+**Unterstützter Use Case**
+Nachschubbedarf erkennen
+
+**Fachliche Bedeutung**
+Die Procedure verbindet Mindestbestand, aktuelle Menge, Verbrauch pro Sol, Ablaufstatus und Lagerbezug. Dadurch entsteht keine blinde Bestellung, sondern eine begründete Entscheidungsgrundlage für interne Umlagerung oder externen Nachschub.
+
+**Benötigte Daten**
+
+| Datenfeld | Bedeutung |
+|---|---|
+| Nachschubanforderung-ID | nachvollziehbare Kennung für die vorbereitete Anforderung |
+| Ressource und Lager | welche Ressource an welchem Ort betroffen ist |
+| aktuelle Menge | aktueller Bestand |
+| Mindestbestand | fachliche Reservegrenze |
+| Verbrauch pro Sol | Grundlage für einen 7-Sol-Sicherheitspuffer |
+| Anforderungsmenge | berechnete Menge, die vorbereitet werden soll |
+| intern verfügbare Menge | mögliche interne Deckung durch andere Bestände desselben Ressourcentyps |
+| Anforderungsgrund | warum Nachschub vorbereitet wird |
+| empfohlene Maßnahme | interne Umlagerung prüfen oder externen Nachschub anfordern |
+
+**Bezug zum Businessprozess**
+Diese Procedure bildet den fachlichen Schritt „Bedarf berechnen und interne Verfügbarkeit prüfen“ aus dem BPMN-Prozess ab. Sie erzeugt keine vollautomatische Bestellung, sondern bereitet eine prüfbare Nachschubentscheidung vor. Das entspricht der Abgrenzung aus AP10 und AP13.
 
 ---
 
