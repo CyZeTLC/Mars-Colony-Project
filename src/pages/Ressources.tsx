@@ -8,7 +8,7 @@ const Ressources = () => {
 
     useEffect(() => {
         if (tableContainerRef.current) {
-            const ressourceAtRiskTable = new TableRenderer('table-app-id', 'getRessourcesAtRisk.sql');
+            const ressourceAtRiskTable = new TableRenderer('table-app-id', 'bp1/getRessourcesAtRisk.sql');
             ressourceAtRiskTable.init();
         }
 
@@ -18,7 +18,7 @@ const Ressources = () => {
         }
 
         if (ressourcenTableContainerRef.current) {
-            const ressourcenTable = new TableRenderer('table-app-id-ressourcen', 'getRessourcenWithLager.sql');
+            const ressourcenTable = new TableRenderer('table-app-id-ressourcen', 'shared/getRessourcenWithLager.sql');
             ressourcenTable.init();
         }
     }, []);

@@ -106,7 +106,7 @@ Führt eine spezifische SQL-Datei aus und gibt das Ergebnis zurück.
 }
 ```
 
-**Beispiel:** `/api/restApi.php?action=get_sql_result&csrf={token}&file=getCitizensCount.sql`
+**Beispiel:** `/api/restApi.php?action=get_sql_result&csrf={token}&file=bp1/getRessourcesAtRisk.sql`
 
 #### 3. get_active_vehicles_count
 Gibt die Anzahl aktiver Fahrzeuge zurück.

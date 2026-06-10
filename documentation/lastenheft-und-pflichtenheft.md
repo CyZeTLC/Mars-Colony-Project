@@ -122,8 +122,8 @@ Restaufwand = geschätzter Aufwand ab aktuellem Projektstand
 
 | ID | Bezug | Technische Umsetzung | Vorhandener Repo-/DB-Bezug | Restaufwand |
 |---|---|---|---|---:|
-| PH-01 | LH-01, LH-02, LH-03 | Die vorhandenen Ressourcenabfragen und passenden Datenbankfunktionen werden für Ressourcenwarnung, Lagerübersicht und Nachschubbedarf genutzt. | `getRessourcesBelowMin.sql`, `getRessourcesAtRisk.sql`, `getNachschubanforderungen.sql`, `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql` | 1 PT |
-| PH-02 | LH-04, LH-05, LH-06 | Verkaufsentscheidungen werden zunächst aus vorhandenen Ressourcen- und Lagerdaten abgeleitet. Dadurch wird sichtbar, welche Ressourcen wirtschaftlich verwertet werden könnten. | `getRessourcenWithLager.sql`, `getRessourcesBelowMin.sql`, `getStorageResourceSummary.sql` | 1 PT |
+| PH-01 | LH-01, LH-02, LH-03 | Die vorhandenen Ressourcenabfragen und passenden Datenbankfunktionen werden für Ressourcenwarnung, Lagerübersicht und Nachschubbedarf genutzt. | `bp1/getRessourcesBelowMin.sql`, `bp1/getRessourcesAtRisk.sql`, `bp1/getNachschubanforderungen.sql`, `shared/getRessourcenWithLager.sql`, `shared/getStorageResourceSummary.sql` | 1 PT |
+| PH-02 | LH-04, LH-05, LH-06 | Verkaufsentscheidungen werden aus Ressourcenbestand, Sicherheitsreserve, Überschussbewertung und vorbereiteten Verkaufspositionen abgeleitet. Dadurch wird sichtbar, welche Ressourcen wirtschaftlich verwertet werden könnten. | `bp2/getRessourcenUeberschuss.sql`, `bp2/getVerkaufspotenzial.sql`, `bp2/getExterneAbgabeVorbereitung.sql`, Verkaufstabellen | 1 PT |
 | PH-03 | LH-07 | Die vorhandene Web-App wird als zentrale Oberfläche für Dashboard, Tabellenansichten und Prozessdarstellung genutzt. | React, TypeScript, Vite, Tailwind CSS | 1 PT |
 | PH-04 | LH-08 | Die vorhandene PHP-API stellt Datenbankergebnisse für die Web-App bereit. | PHP-API, JSON, CSRF-Token | 1 PT |
 | PH-05 | LH-09, NFA-06 | Die vorhandenen SQL-Dateien und Stored Procedures werden den zwei Hauptprozessen zugeordnet und dokumentiert. | SQL-Dateien / Stored Procedures / Doku / BPMN-Bezug | 1 PT |
@@ -137,8 +137,8 @@ Geschätzter Restaufwand: 6 Personentage
 
 | Businessprozess | Vorhandene SQL-Dateien / Datenbanklogik | Zweck |
 |---|---|---|
-| Kritische Ressourcen überwachen und Nachschub auslösen | `getRessourcesBelowMin.sql`, `getRessourcesAtRisk.sql`, `getNachschubanforderungen.sql`, `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql` | Erkennt Ressourcen unter Mindestbestand, bewertet Ablaufdaten, berechnet Nachschubmengen und zeigt Ressourcen mit Lagerinformationen. |
-| Überschüssige Ressourcen an externe Unternehmen verkaufen | `getRessourcenWithLager.sql`, `getRessourcesBelowMin.sql`, `getStorageResourceSummary.sql` | Nutzt vorhandene Ressourcen- und Lagerdaten als Grundlage für wirtschaftliche Verkaufsentscheidungen. |
+| Kritische Ressourcen überwachen und Nachschub auslösen | `bp1/getRessourcesBelowMin.sql`, `bp1/getRessourcesAtRisk.sql`, `bp1/getNachschubanforderungen.sql`, `shared/getRessourcenWithLager.sql`, `shared/getStorageResourceSummary.sql` | Erkennt Ressourcen unter Mindestbestand, bewertet Ablaufdaten, berechnet Nachschubmengen und zeigt Ressourcen mit Lagerinformationen. |
+| Überschüssige Ressourcen an externe Unternehmen verkaufen | `bp2/getRessourcenUeberschuss.sql`, `bp2/getVerkaufspotenzial.sql`, `bp2/getExterneAbgabeVorbereitung.sql`, `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`, `RESSOURCEN_VERKAUF`, `RESSOURCEN_VERKAUF_POSITION` | Erkennt Überschüsse, bewertet Verkaufspotenzial und zeigt vorbereitete externe Abgaben mit Unternehmen, Mengen und Werten. |
 
 ---
 
@@ -161,11 +161,11 @@ Damit der Projektumfang realistisch bleibt, wird der sichere Kernumfang auf vorh
 | Kritische Ressourcen unter Mindestbestand | vorhanden / SQL-Grundlage vorhanden |
 | Lager- und Ressourcenbezug | vorhanden / SQL-Grundlage vorhanden |
 | Ableitung von Nachschubbedarf | über Stored Procedure vorbereitet |
-| Ableitung möglicher Ressourcenüberschüsse | aus vorhandenen Daten ableitbar |
-| Vorbereitung wirtschaftlicher Verkaufsentscheidungen | fachlich beschrieben / weiter auszubauen |
+| Ableitung möglicher Ressourcenüberschüsse | über Stored Procedure vorbereitet |
+| Vorbereitung wirtschaftlicher Verkaufsentscheidungen | über Stored Procedure und Verkaufstabellen vorbereitet |
 | Web-App-Darstellung | vorhanden |
 | PHP-API-Anbindung | vorhanden |
-| SQL-Dateien / Stored Procedures | BP1-Procedures vorhanden / weiter zu optimieren |
+| SQL-Dateien / Stored Procedures | BP1- und BP2-Procedures vorhanden / weiter zu optimieren |
 | Zuordnung zu den zwei Hauptprozessen | zu dokumentieren |
 | BPMN-Modelle | passend zu erstellen |
 
@@ -226,9 +226,9 @@ Diese Punkte sind sinnvoll, aber nicht zwingend für die aktuelle Version.
 |---|---|
 | AK-01 | Kritische Ressourcen unter Mindestbestand werden angezeigt oder über vorhandene Abfragen nachweisbar. |
 | AK-02 | Ressourcen mit Lagerinformationen werden angezeigt oder über vorhandene Abfragen nachweisbar. |
-| AK-03 | Nachschubbedarf kann aus Ressourcenbestand, Mindestbestand, Ablaufstatus und Lagerdaten über `getNachschubanforderungen` fachlich abgeleitet werden. |
-| AK-04 | Ressourcenübersichten können als Grundlage für Verkaufsentscheidungen genutzt werden. |
-| AK-05 | Mögliche Ressourcenüberschüsse können aus vorhandenen Daten fachlich abgeleitet werden. |
+| AK-03 | Nachschubbedarf kann aus Ressourcenbestand, Mindestbestand, Ablaufstatus und Lagerdaten über `bp1/getNachschubanforderungen` fachlich abgeleitet werden. |
+| AK-04 | Ressourcenübersichten und Verkaufspotenzial können über `bp2/getRessourcenUeberschuss` und `bp2/getVerkaufspotenzial` als Grundlage für Verkaufsentscheidungen genutzt werden. |
+| AK-05 | Mögliche Ressourcenüberschüsse können aus Bestand, Mindestreserve, Lagerdaten und vorhandenen Überschussbewertungen fachlich abgeleitet werden. |
 | AK-06 | Die Web-App ist lauffähig und demonstrierbar. |
 | AK-07 | Die PHP-API liefert Daten im JSON-Format. |
 | AK-08 | Die vorhandenen SQL-Dateien und Stored Procedures sind den zwei Hauptprozessen zugeordnet. |

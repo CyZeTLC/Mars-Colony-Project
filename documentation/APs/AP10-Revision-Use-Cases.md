@@ -38,7 +38,7 @@ Für AP10 bedeutet das: Die Use Cases werden nicht mehr aus allen vorhandenen Pr
 | Use Case | Konkrete Handlung eines Nutzers mit dem System innerhalb eines Businessprozesses. |
 | SQL-Query / Stored Procedure | Technische Unterstützung, um Daten für einen Use Case bereitzustellen. |
 
-Wichtig: SQL-Queries sind keine eigenen Use Cases. Eine SQL-Datei wie `getRessourcesBelowMin.sql` ist also nicht der Use Case selbst, sondern unterstützt den Use Case „Kritische Ressourcen anzeigen“ technisch.
+Wichtig: SQL-Queries sind keine eigenen Use Cases. Eine SQL-Datei wie `bp1/getRessourcesBelowMin.sql` ist also nicht der Use Case selbst, sondern unterstützt den Use Case „Kritische Ressourcen anzeigen“ technisch.
 
 Beispiel:
 

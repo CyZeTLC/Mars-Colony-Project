@@ -33,16 +33,16 @@ Für die Präsentation und weitere Dokumentation sollen deshalb nur die Abfragen
 
 | Businessprozess | Relevante Abfragen / Tabellen | Zweck |
 |---|---|---|
-| Kritische Ressourcen überwachen und Nachschub auslösen | `getRessourcesBelowMin.sql`, `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql`, `getRessourcesAtRisk.sql`, `sql/storedProcedure/getNachschubanforderungen.sql` | Bestände anzeigen, kritische Ressourcen erkennen, ablaufende Bestände bewerten, Lagerbezug prüfen und Nachschubbedarf als fachliche Anforderung ableiten. |
-| Überschüssige Ressourcen an externe Unternehmen verkaufen | `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql`, `EXTERNES_UNTERNEHMEN`, `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`, `RESSOURCEN_VERKAUF`, `RESSOURCEN_VERKAUF_POSITION` | Überschüsse fachlich bewerten und eine externe Abgabe vorbereiten. |
+| Kritische Ressourcen überwachen und Nachschub auslösen | `bp1/getRessourcesBelowMin.sql`, `bp1/getRessourcesAtRisk.sql`, `bp1/getNachschubanforderungen.sql`, `shared/getRessourcenWithLager.sql`, `shared/getStorageResourceSummary.sql` | Bestände anzeigen, kritische Ressourcen erkennen, ablaufende Bestände bewerten, Lagerbezug prüfen und Nachschubbedarf als fachliche Anforderung ableiten. |
+| Überschüssige Ressourcen an externe Unternehmen verkaufen | `bp2/getRessourcenUeberschuss.sql`, `bp2/getVerkaufspotenzial.sql`, `bp2/getExterneAbgabeVorbereitung.sql`, `EXTERNES_UNTERNEHMEN`, `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`, `RESSOURCEN_VERKAUF`, `RESSOURCEN_VERKAUF_POSITION` | Überschüsse erkennen, Sicherheitsreserve berücksichtigen, Verkaufspotenzial bewerten und externe Abgabe fachlich vorbereiten. |
 
 ---
 
 ## 3. Abfragen für Prozess 1
 
-Für Prozess 1 liegen die wichtigsten Abfragen zusätzlich als Stored Procedures im Ordner `sql/storedProcedure/` vor. Die gleichnamigen Dateien im Ordner `sql/` bleiben als API-kompatible SELECT-Spiegel für die bestehende Web-App erhalten. Damit passt die Datenbanklogik zum Feedback aus dem Projektproposal: Die Anwendung soll fachliche Datenbankfunktionen kontrolliert über Procedures nutzen, statt Prozesslogik frei in der Oberfläche zu verteilen.
+Für Prozess 1 liegen die wichtigsten Abfragen zusätzlich als Stored Procedures im Ordner `sql/storedProcedure/bp1/` vor. Die gleichnamigen Dateien im Ordner `sql/bp1/` bleiben als API-kompatible SELECT-Spiegel für die bestehende Web-App erhalten. Prozessübergreifende Ressourcenübersichten liegen in `sql/shared/` und `sql/storedProcedure/shared/`. Damit passt die Datenbanklogik zum Feedback aus dem Projektproposal: Die Anwendung soll fachliche Datenbankfunktionen kontrolliert über Procedures nutzen, statt Prozesslogik frei in der Oberfläche zu verteilen.
 
-### 3.1 `getRessourcesBelowMin.sql`
+### 3.1 `bp1/getRessourcesBelowMin.sql`
 
 **Zweck**  
 Diese Abfrage erkennt Ressourcen, deren aktuelle Menge unter dem definierten Mindestbestand liegt.
@@ -69,7 +69,7 @@ Diese Abfrage ist der zentrale technische Einstieg für Prozess 1. Wenn eine Res
 
 ---
 
-### 3.2 `getRessourcenWithLager.sql`
+### 3.2 `shared/getRessourcenWithLager.sql`
 
 **Zweck**  
 Diese Abfrage zeigt, welche Ressourcen in welchem Lager vorhanden sind.
@@ -97,7 +97,7 @@ Für Prozess 1 hilft die Abfrage bei der Prüfung interner Verfügbarkeit. Für 
 
 ---
 
-### 3.3 `getStorageResourceSummary.sql`
+### 3.3 `shared/getStorageResourceSummary.sql`
 
 **Zweck**  
 Diese Abfrage fasst Lagerbestände zusammen und zeigt pro Lager, wie viele Ressourcen und Mengen vorhanden sind.
@@ -127,7 +127,7 @@ Für Prozess 1 unterstützt die Abfrage die Übersicht über verfügbare Lagerre
 
 ---
 
-### 3.4 `getRessourcesAtRisk.sql`
+### 3.4 `bp1/getRessourcesAtRisk.sql`
 
 **Zweck**  
 Diese Abfrage erkennt Ressourcen, deren Ablaufdatum bald erreicht oder bereits überschritten wurde.
@@ -154,7 +154,7 @@ Die Abfrage unterstützt Prozess 1, weil sie zusätzliche Risiken im Bestand sic
 
 ---
 
-### 3.5 `getNachschubanforderungen.sql`
+### 3.5 `bp1/getNachschubanforderungen.sql`
 
 **Zweck**
 Diese Stored Procedure erstellt eine fachliche Nachschubliste für Prozess 1. Sie berechnet, für welche Ressourcen eine Nachschubanforderung vorbereitet werden soll.
@@ -199,7 +199,103 @@ Diese Tabellen sind keine vollständige Abrechnungslösung. Sie dienen dazu, Üb
 
 ---
 
-## 5. Beispielhafte Daten für Prozess 2
+## 5. Abfragen für Prozess 2
+
+Für Prozess 2 liegen die wichtigsten Abfragen ebenfalls als Stored Procedures im Ordner `sql/storedProcedure/bp2/` vor. Die gleichnamigen Dateien im Ordner `sql/bp2/` bleiben als API-kompatible SELECT-Spiegel für die bestehende Web-App erhalten.
+
+### 5.1 `bp2/getRessourcenUeberschuss.sql`
+
+**Zweck**
+Diese Abfrage erkennt Ressourcen, deren aktuelle Menge oberhalb der fachlichen Mindestreserve liegt.
+
+**Unterstützter Use Case**
+Überschüssige Ressourcen anzeigen
+
+**Fachliche Bedeutung**
+Die Abfrage verhindert, dass Ressourcen nur nach aktueller Menge bewertet werden. Stattdessen wird eine Sicherheitsreserve berücksichtigt, damit die interne Versorgung der Kolonie nicht gefährdet wird.
+
+**Berechnungslogik**
+
+```text
+Mindestreserve = Mindestbestand + Verbrauch pro Sol * 7
+verkaufbare Menge = aktuelle Menge - Mindestreserve
+```
+
+**Benötigte Daten**
+
+| Datenfeld | Bedeutung |
+|---|---|
+| Ressource und Lager | welche Ressource an welchem Ort bewertet wird |
+| aktuelle Menge | vorhandener Bestand |
+| Mindestschwellenwert | interne Reservegrenze |
+| Verbrauch pro Sol | Grundlage für den 7-Sol-Sicherheitspuffer |
+| Mindestreserve | Bestand, der intern erhalten bleiben soll |
+| verkaufbare Menge | Menge, die fachlich als Überschuss gelten kann |
+| Überschuss-Status | Einordnung, ob eine Freigabe nötig ist |
+| empfohlene Maßnahme | nächster fachlicher Schritt |
+
+**Bezug zum Businessprozess**
+Diese Abfrage bildet den Schritt „Überschuss vorhanden?“ aus dem BP2-Prozess ab.
+
+---
+
+### 5.2 `bp2/getVerkaufspotenzial.sql`
+
+**Zweck**
+Diese Abfrage bewertet mögliche Überschüsse im Zusammenhang mit vorhandenen Überschussbewertungen.
+
+**Unterstützter Use Case**
+Verkaufspotenzial bewerten
+
+**Fachliche Bedeutung**
+Die Abfrage verbindet berechnete Überschüsse mit der Tabelle `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`. Dadurch wird sichtbar, ob ein Überschuss nur rechnerisch vorhanden ist oder bereits fachlich freigegeben wurde.
+
+**Benötigte Daten**
+
+| Datenfeld | Bedeutung |
+|---|---|
+| verkaufbare Menge | mögliche externe Abgabemenge |
+| Mindestreserve | intern gesicherter Bestand |
+| Bewertung-ID | vorhandene fachliche Bewertung |
+| Bewertungsstatus | zum Beispiel freigegeben |
+| Begründung | warum eine externe Abgabe möglich ist |
+| Verkaufspotenzial-Status | fachliche Einordnung der Verkaufsfähigkeit |
+| empfohlene Maßnahme | Bewertung anlegen, Freigabe einholen oder Abgabe vorbereiten |
+
+**Bezug zum Businessprozess**
+Diese Abfrage bildet den Schritt „Verkaufspotenzial prüfen“ ab. Sie ersetzt kein vollständiges Verkaufsmodul, sondern liefert eine nachvollziehbare Entscheidungsgrundlage.
+
+---
+
+### 5.3 `bp2/getExterneAbgabeVorbereitung.sql`
+
+**Zweck**
+Diese Abfrage zeigt vorbereitete externe Abgaben mit Unternehmen, Verkaufspositionen, Mengen und Werten.
+
+**Unterstützter Use Case**
+Externe Abgabe vorbereiten
+
+**Fachliche Bedeutung**
+Die Abfrage verbindet `RESSOURCEN_VERKAUF`, `RESSOURCEN_VERKAUF_POSITION`, `EXTERNES_UNTERNEHMEN` und `RESSOURCEN_UEBERSCHUSS_BEWERTUNG`. Dadurch ist nachvollziehbar, welche Ressource an welches Unternehmen abgegeben werden soll und ob die Menge durch eine Überschussbewertung gedeckt ist.
+
+**Benötigte Daten**
+
+| Datenfeld | Bedeutung |
+|---|---|
+| Verkauf-ID | vorbereiteter Verkauf oder externe Abgabe |
+| Unternehmen | möglicher externer Abnehmer |
+| Verkaufsposition | konkrete Ressource, Menge und Lager |
+| freigegebene Menge | Menge aus der Überschussbewertung |
+| Positionswert | wirtschaftlicher Wert der Position |
+| Gesamtwert | Summe des vorbereiteten Vorgangs |
+| Abgabe-Status | fachliche Prüfung, ob die Abgabe vorbereitet ist |
+
+**Bezug zum Businessprozess**
+Diese Abfrage bildet den Schritt „externe Abgabe vorbereiten“ ab. Sie erzeugt keine Rechnung und keine Zahlung, sondern macht den vorbereiteten Verkauf prüfbar und präsentierbar.
+
+---
+
+## 6. Beispielhafte Daten für Prozess 2
 
 | Bereich | Beispieldaten |
 |---|---|
@@ -212,13 +308,14 @@ Diese Beispieldaten sind bewusst einfach gehalten, damit der Verkaufsprozess in 
 
 ---
 
-## 6. Mögliche Auswertung für Ressourcenüberschüsse
+## 7. Mögliche Auswertung für Ressourcenüberschüsse
 
-Eine eigene SQL-Datei für Überschüsse kann aus den vorhandenen Ressourcen- und Lagerdaten abgeleitet werden.
+Die eigene SQL-Datei `bp2/getRessourcenUeberschuss.sql` leitet Überschüsse aus den vorhandenen Ressourcen- und Lagerdaten ab.
 
 Fachliche Logik:
 
 ```text
+Mindestreserve = Mindestbestand + Verbrauch pro Sol * 7
 verkaufbare Menge = aktuelle Menge - Mindestreserve
 ```
 
@@ -236,7 +333,7 @@ Beispielhafte Auswertung:
 
 ---
 
-## 7. Nicht mehr im Hauptfokus
+## 8. Nicht mehr im Hauptfokus
 
 Die folgenden Abfragebereiche sind weiterhin vorhanden, stehen aber nicht mehr im Mittelpunkt der aktuellen Revision:
 
@@ -252,7 +349,7 @@ Die vollständige frühere Liste bleibt im Archiv erhalten.
 
 ---
 
-## 8. Kurzfazit
+## 9. Kurzfazit
 
 Die Datenbankabfragen v2 sind auf den aktuellen Projektfokus reduziert.
 

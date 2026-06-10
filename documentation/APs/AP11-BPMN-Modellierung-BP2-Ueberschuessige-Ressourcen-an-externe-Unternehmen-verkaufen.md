@@ -67,6 +67,14 @@ Relevante Datenbankaufgaben:
 | Sicherheitsreserve berücksichtigen | interne Versorgung nicht gefährden |
 | Verkaufspotenzial vorbereiten | wirtschaftliche Entscheidung fachlich unterstützen |
 
+Konkret umgesetzte Stored Procedures für BP2:
+
+| Stored Procedure | Prozessschritt | Ergebnis |
+|---|---|---|
+| `sql/storedProcedure/bp2/getRessourcenUeberschuss.sql` | Überschuss erkennen und Sicherheitsreserve prüfen | zeigt verkaufbare Mengen mit 7-Sol-Sicherheitspuffer und Überschuss-Status |
+| `sql/storedProcedure/bp2/getVerkaufspotenzial.sql` | Verkaufspotenzial bewerten | verbindet berechnete Überschüsse mit vorhandenen Überschussbewertungen und empfohlener Maßnahme |
+| `sql/storedProcedure/bp2/getExterneAbgabeVorbereitung.sql` | externe Abgabe vorbereiten | zeigt vorbereitete Verkäufe mit Unternehmen, Positionen, Werten und Abgabe-Status |
+
 ---
 
 ## Bezug zur Webanwendung
@@ -99,9 +107,9 @@ Der Prozess ist fachlich sinnvoll, weil er den wirtschaftlichen Nutzen der Marsk
 |---|---|
 | BPMN-Modell erstellen | offen |
 | BPMN-Grafik in Projektdokumentation einfügen | offen |
-| SQL-Abfragen konkret zuordnen | offen |
-| Prüfen, ob spätere Verkaufstabellen benötigt werden | offen |
-| Feedback von Prof. Dr. Becking einarbeiten | offen |
+| SQL-Abfragen konkret zuordnen | erledigt |
+| Prüfen, ob spätere Verkaufstabellen benötigt werden | erledigt |
+| Feedback von Prof. Dr. Becking einarbeiten | erledigt |
 
 ---
 

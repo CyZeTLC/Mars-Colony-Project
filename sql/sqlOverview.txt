@@ -24,7 +24,7 @@ weil man damit sieht, welche Wohnbereiche stark belegt sind.
 
 _______________________________________________________________
 Lagerübersicht mit Ressourcenmenge
-getStorageResourceSummary.sql
+shared/getStorageResourceSummary.sql
 Die Abfrage zeigt pro Lager, wie viele verschiedene Ressourcen dort liegen 
 und wie viel Menge, Gewicht und Volumen zusammenkommen. Sehr passend für Ressourcenverwaltung.
 COUNT = zählt Zeilen
@@ -32,18 +32,33 @@ SUM = addiert Zahlen
 
 _______________________________________________________________
 BP1 SQL und Stored Procedures
-getRessourcesBelowMin.sql
+bp1/getRessourcesBelowMin.sql
 Erkennt kritische Ressourcen unter Mindestbestand und berechnet Fehlmenge,
 Fehlmengen-Prozent und Handlungsprioritaet.
 
-getRessourcesAtRisk.sql
+bp1/getRessourcesAtRisk.sql
 Erkennt abgelaufene oder innerhalb von 30 Tagen ablaufende Ressourcen
 und gibt Risikostatus sowie empfohlene Massnahme aus.
 
-getNachschubanforderungen.sql
+bp1/getNachschubanforderungen.sql
 Bereitet Nachschubanforderungen fachlich vor. Die Procedure berechnet
 Anforderungsmenge, Sicherheitsreserve fuer 7 Sols, interne Verfuegbarkeit,
 Anforderungsgrund und empfohlene Massnahme.
+
+_______________________________________________________________
+BP2 SQL und Stored Procedures
+bp2/getRessourcenUeberschuss.sql
+Erkennt Ressourcen oberhalb der internen Mindestreserve. Die Abfrage
+berechnet einen 7-Sol-Sicherheitspuffer, die Mindestreserve und die
+verkaufbare Menge.
+
+bp2/getVerkaufspotenzial.sql
+Bewertet moegliche Ueberschuesse mit vorhandenen Ueberschussbewertungen
+und liefert Verkaufspotenzial-Status sowie empfohlene Massnahme.
+
+bp2/getExterneAbgabeVorbereitung.sql
+Zeigt vorbereitete externe Abgaben mit Unternehmen, Verkaufspositionen,
+freigegebener Menge, Positionswert, Gesamtwert und Abgabe-Status.
 
 _______________________________________________________________
 getResidentCountByCity.sql

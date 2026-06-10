@@ -12,8 +12,8 @@ Damit ist die Case Study fachlich passend für ein Datenbankanwendungsprojekt, w
 
 | Geschäftsbereich | Bedeutung in der Marskolonie | Bezug zur aktuellen Repo |
 |---|---|---|
-| Ressourcenmanagement | Kontrolle von Sauerstoff, Wasser, Treibstoff, Nahrung, Ersatzteilen und Baumaterialien | `getRessourcenWithLager.sql`, `getRessourcesBelowMin.sql`, `getRessourcesAtRisk.sql`, `getRessourceLog.sql` |
-| Lagerverwaltung | Überwachung von Lagerorten, Kapazitäten und kritischen Beständen | `getAllLager.sql`, `getStorageResourceSummary.sql`, `getLagerVersorgungAtRisk.sql` |
+| Ressourcenmanagement | Kontrolle von Sauerstoff, Wasser, Treibstoff, Nahrung, Ersatzteilen und Baumaterialien | `shared/getRessourcenWithLager.sql`, `bp1/getRessourcesBelowMin.sql`, `bp1/getRessourcesAtRisk.sql`, `getRessourceLog.sql` |
+| Lagerverwaltung | Überwachung von Lagerorten, Kapazitäten und kritischen Beständen | `getAllLager.sql`, `shared/getStorageResourceSummary.sql`, `getLagerVersorgungAtRisk.sql` |
 | Transportlogistik | Planung und Kontrolle von Transportwegen zwischen Städten/Sektoren | `getMissionsBericht.sql`, `getCitiesWithoutTransportConnection.sql` |
 | Flottenmanagement | Kontrolle aktiver/inaktiver Fahrzeuge und Raumfahrzeuge | `getActiveVehicles.sql`, `getFlotte.sql`, `getVehiclesByStatus.sql`, `getLowTreibstoff.sql` |
 | Energieversorgung | Überwachung aktueller Energieerzeugung und Versorgungslücken | `getCurrentEnergieLeistung.sql`, `getEnergySourcesByCity.sql`, `getCitiesWithoutEnergySource.sql` |
@@ -71,7 +71,7 @@ Die folgenden Use Cases leiten sich aus der Case Study und den vorhandenen SQL-A
 |---|---|
 | Primärer Akteur | Logistikoffizier |
 | Ziel | Kritische Ressourcen frühzeitig erkennen |
-| Repo-Bezug | `getRessourcesBelowMin.sql`, `getRessourcenWithLager.sql`, `getStorageResourceSummary.sql` |
+| Repo-Bezug | `bp1/getRessourcesBelowMin.sql`, `shared/getRessourcenWithLager.sql`, `shared/getStorageResourceSummary.sql` |
 | WebApp-Bezug | `Ressources` |
 | Wirtschaftlicher Nutzen | Vermeidung von Notfalllieferungen und Produktionsausfällen |
 

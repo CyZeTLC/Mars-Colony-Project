@@ -70,9 +70,9 @@ Konkret umgesetzte Stored Procedures für BP1:
 
 | Stored Procedure | Prozessschritt | Ergebnis |
 |---|---|---|
-| `getRessourcesBelowMin` | Mindestbestand vergleichen | zeigt kritische Ressourcen inklusive Fehlmenge und Handlungspriorität |
-| `getRessourcesAtRisk` | Ablaufdatum prüfen | zeigt abgelaufene oder bald ablaufende Ressourcen mit empfohlener Maßnahme |
-| `getNachschubanforderungen` | Bedarf berechnen und interne Verfügbarkeit prüfen | erstellt eine fachliche Nachschubliste mit Anforderungsmenge, Grund und Maßnahme |
+| `sql/storedProcedure/bp1/getRessourcesBelowMin.sql` | Mindestbestand vergleichen | zeigt kritische Ressourcen inklusive Fehlmenge und Handlungspriorität |
+| `sql/storedProcedure/bp1/getRessourcesAtRisk.sql` | Ablaufdatum prüfen | zeigt abgelaufene oder bald ablaufende Ressourcen mit empfohlener Maßnahme |
+| `sql/storedProcedure/bp1/getNachschubanforderungen.sql` | Bedarf berechnen und interne Verfügbarkeit prüfen | erstellt eine fachliche Nachschubliste mit Anforderungsmenge, Grund und Maßnahme |
 
 ---
 
