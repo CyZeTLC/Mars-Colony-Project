@@ -2,7 +2,7 @@ SQL-Ordnerstruktur
 ==================
 
 sql/queries/
-Normale SELECT-Abfragen, die von der API ausgefuehrt werden koennen.
+Normale SELECT-Abfragen fuer fachliche Auswertungen.
 
 sql/queries/bp1/
 Abfragen fuer den Businessprozess "Kritische Ressourcen ueberwachen und Nachschub ausloesen".
@@ -73,6 +73,6 @@ Alte bzw. semesterbezogene Zusatznotizen.
 API-Hinweis
 ===========
 
-Die API liest normale Abfragen aus sql/queries/. Fuer get_sql_result koennen
-kurze Pfade wie bp1/getRessourcesAtRisk.sql oder physische Pfade wie
-sql/queries/bp1/getRessourcesAtRisk.sql verwendet werden.
+API-Routing und Prisma-Anbindung werden separat gepflegt. Diese SQL-Struktur
+beschreibt nur Ablage und fachliche Zuordnung der Dateien. Sie aendert keine
+restApi-Pfadlogik.

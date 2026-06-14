@@ -51,7 +51,7 @@ class TableRenderer {
     }
 
     private async apiFetchFileAsTable(endpoint: string): Promise<{ result: TableRow[] }> {
-        return apiFetch<{ result: TableRow[] }>(`get_sql_result&file=${encodeURIComponent(endpoint)}`);
+        return apiFetch<{ result: TableRow[] }>(`get_sql_result&file=${endpoint}`);
     }
 
     private async apiFetchAsTable(endpoint: string): Promise<{ result: TableRow[] }> {

@@ -71,5 +71,5 @@ export async function apiFetch<T>(endpoint: string): Promise<T> {
 }
 
 export async function apiFetchFile(endpoint: string) : Promise<string> {
-  return apiFetch<string>(`get_sql_result&file=${encodeURIComponent(endpoint)}`);
+  return apiFetch<string>(`get_sql_result&file=${endpoint}`);
 }

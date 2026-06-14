@@ -94,10 +94,10 @@ Generiert einen neuen CSRF-Token.
 ```
 
 #### 2. get_sql_result
-Führt eine spezifische SQL-Datei aus `sql/queries/` aus und gibt das Ergebnis zurück.
+Führt eine spezifische SQL-Datei nach bestehender API-Logik aus und gibt das Ergebnis zurück.
 
 **Parameter:**
-- `file`: SQL-Dateipfad, z.B. `general/getCitizensCount.sql`, `bp1/getRessourcesAtRisk.sql` oder `sql/queries/bp1/getRessourcesAtRisk.sql`
+- `file`: Dateiname der SQL-Datei, z.B. `getCitizensCount.sql`
 
 **Antwort:**
 ```json
@@ -106,7 +106,7 @@ Führt eine spezifische SQL-Datei aus `sql/queries/` aus und gibt das Ergebnis z
 }
 ```
 
-**Beispiel:** `/api/restApi.php?action=get_sql_result&csrf={token}&file=bp1/getRessourcesAtRisk.sql`
+**Beispiel:** `/api/restApi.php?action=get_sql_result&csrf={token}&file=getCitizensCount.sql`
 
 #### 3. get_active_vehicles_count
 Gibt die Anzahl aktiver Fahrzeuge zurück.

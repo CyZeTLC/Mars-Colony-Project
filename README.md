@@ -101,7 +101,7 @@ Um Anfragen zu autorisieren, muss jeder Request einen gültigen CSRF-Token entha
 | `get_dashboard_stats` | Liefert aggregierte Daten (Bürger, Städte, Fahrzeuge, Energie). | - |
 | `get_active_vehicles_count` | Gibt die Anzahl der aktuell aktiven Fahrzeuge zurück. | - |
 | `get_citizens_count` | Gibt die Gesamtzahl der Bürger zurück. | - |
-| `get_sql_result` | Führt eine spezifische SQL-Datei aus `sql/queries/` aus. Die Abfragen sind nach `bp1/`, `bp2/`, `shared/` und `general/` gegliedert. | `file` (Dateipfad, z.B. `bp1/getRessourcesAtRisk.sql` oder `sql/queries/bp1/getRessourcesAtRisk.sql`) |
+| `get_sql_result` | Führt eine spezifische SQL-Datei nach bestehender API-Logik aus. | `file` (Dateiname, z.B. `getCitizensCount.sql`) |
 | `get_all_tables` | Gibt alle SQL-Abfrageergebnisse inkl. des SQL-Quellcodes zurück. | - |
 | `get_sql_files` | Listet den Inhalt aller verfügbaren SQL-Dateien auf. | - |
 

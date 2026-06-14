@@ -31,7 +31,7 @@ Für die Präsentation und weitere Dokumentation sollen deshalb nur die Abfragen
 
 ## 2. Relevante Abfragen nach Businessprozess
 
-Die normalen, direkt über die API ausführbaren SELECT-Abfragen liegen unter `sql/queries/`. Dort trennt die Ordnerstruktur zwischen `bp1/`, `bp2/`, `shared/` und `general/`. Die Stored-Procedure-Versionen liegen getrennt davon unter `sql/storedProcedure/` mit derselben fachlichen Gliederung. Dadurch bleibt klar erkennbar, welche Dateien Prozesslogik für BP1, Prozesslogik für BP2, gemeinsame Ressourcenlogik oder allgemeine WebApp-Abfragen enthalten.
+Die normalen SELECT-Abfragen liegen unter `sql/queries/`. Dort trennt die Ordnerstruktur zwischen `bp1/`, `bp2/`, `shared/` und `general/`. Die Stored-Procedure-Versionen liegen getrennt davon unter `sql/storedProcedure/` mit derselben fachlichen Gliederung. Dadurch bleibt klar erkennbar, welche Dateien Prozesslogik für BP1, Prozesslogik für BP2, gemeinsame Ressourcenlogik oder allgemeine WebApp-Abfragen enthalten.
 
 | Businessprozess | Relevante Abfragen / Tabellen | Zweck |
 |---|---|---|
@@ -42,7 +42,7 @@ Die normalen, direkt über die API ausführbaren SELECT-Abfragen liegen unter `s
 
 ## 3. Abfragen für Prozess 1
 
-Für Prozess 1 liegen die wichtigsten Abfragen zusätzlich als Stored Procedures im Ordner `sql/storedProcedure/bp1/` vor. Die gleichnamigen Dateien im Ordner `sql/queries/bp1/` bleiben als API-kompatible SELECT-Spiegel für die bestehende Web-App erhalten. Prozessübergreifende Ressourcenübersichten liegen in `sql/queries/shared/` und `sql/storedProcedure/shared/`. Damit passt die Datenbanklogik zum Feedback aus dem Projektproposal: Die Anwendung soll fachliche Datenbankfunktionen kontrolliert über Procedures nutzen, statt Prozesslogik frei in der Oberfläche zu verteilen.
+Für Prozess 1 liegen die wichtigsten Abfragen zusätzlich als Stored Procedures im Ordner `sql/storedProcedure/bp1/` vor. Die gleichnamigen Dateien im Ordner `sql/queries/bp1/` bleiben als SELECT-Spiegel für die fachliche Dokumentation und spätere Einbindung erhalten. Prozessübergreifende Ressourcenübersichten liegen in `sql/queries/shared/` und `sql/storedProcedure/shared/`. Damit passt die Datenbanklogik zum Feedback aus dem Projektproposal: Die Anwendung soll fachliche Datenbankfunktionen kontrolliert über Procedures nutzen, statt Prozesslogik frei in der Oberfläche zu verteilen.
 
 ### 3.1 `sql/queries/bp1/getRessourcesBelowMin.sql`
 
@@ -203,7 +203,7 @@ Diese Tabellen sind keine vollständige Abrechnungslösung. Sie dienen dazu, Üb
 
 ## 5. Abfragen für Prozess 2
 
-Für Prozess 2 liegen die wichtigsten Abfragen ebenfalls als Stored Procedures im Ordner `sql/storedProcedure/bp2/` vor. Die gleichnamigen Dateien im Ordner `sql/queries/bp2/` bleiben als API-kompatible SELECT-Spiegel für die bestehende Web-App erhalten.
+Für Prozess 2 liegen die wichtigsten Abfragen ebenfalls als Stored Procedures im Ordner `sql/storedProcedure/bp2/` vor. Die gleichnamigen Dateien im Ordner `sql/queries/bp2/` bleiben als SELECT-Spiegel für die fachliche Dokumentation und spätere Einbindung erhalten.
 
 ### 5.1 `sql/queries/bp2/getRessourcenUeberschuss.sql`
 
