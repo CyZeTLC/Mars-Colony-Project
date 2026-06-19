@@ -20,7 +20,7 @@ documentation/
 ├── documentation-structure.md
 ├── businessprozesse-v2.md
 ├── datenbankabfragen-v2.md
-├── lastenheft-und-pflichtenheft.md
+├── lastenheft-und-pflichtenheft-v2.md
 ├── APs/
 │   ├── Gruppenanmeldung.md
 │   ├── AP1-Gruppe-finden.md
@@ -48,6 +48,7 @@ documentation/
     ├── AP5-Revision-Case-Study.md
     ├── businessprozesse-v1.md
     ├── datenbankabfragen-v1.md
+    ├── lastenheft-und-pflichtenheft-v1.md
     ├── Mars_Colony_Riskante_LagerbestaendeEduard.bpmn
     └── diagramEduard.svg
 ```
@@ -63,7 +64,7 @@ documentation/
 | `APs/AP10-Revision-Use-Cases.md` | Use Cases passend zu den zwei ausgewählten Businessprozessen. |
 | `APs/AP11-BPMN-Modellierung-BP1-Kritische RessourcenÜberwachenUndNachschubAuslösen.md` | BPMN-Dokumentation für Prozess 1. |
 | `APs/AP11-BPMN-Modellierung-BP2-Ueberschuessige-Ressourcen-an-externe-Unternehmen-verkaufen.md` | BPMN-Dokumentation für Prozess 2. |
-| `lastenheft-und-pflichtenheft.md` | Ausführliche Spezifikation für den reduzierten Projektumfang. |
+| `lastenheft-und-pflichtenheft-v2.md` | Aktuelle Spezifikation für den reduzierten Projektumfang. |
 | `APs/AP12-Spezifikation.md` | Arbeitspaket-Zusammenfassung zur Spezifikation. |
 | `APs/AP13-Proposal-Ausgearbeitet.md` | Ausgearbeitetes Projektproposal mit Projektplan, Aufwand und Kriterienbezug. |
 | `datenbankabfragen-v2.md` | Aktuelle fokussierte SQL-Dokumentation für die zwei ausgewählten Businessprozesse. |
@@ -121,6 +122,7 @@ Der Ordner `archive/` enthält ältere oder nicht mehr zentrale Dateien. Diese D
 | `AP5-Revision-Case-Study.md` | ältere Case-Study-Revision |
 | `businessprozesse-v1.md` | ältere Businessprozess-Sammlung vor der Reduktion |
 | `datenbankabfragen-v1.md` | ältere vollständige SQL-Übersicht vor der Zwei-Prozess-Revision |
+| `lastenheft-und-pflichtenheft-v1.md` | ältere Spezifikationsfassung vor Version 2 |
 | `Mars_Colony_Riskante_LagerbestaendeEduard.bpmn` | älteres BPMN-Modell |
 | `diagramEduard.svg` | ältere Diagrammdatei |
 

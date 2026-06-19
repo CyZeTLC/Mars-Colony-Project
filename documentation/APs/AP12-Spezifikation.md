@@ -19,7 +19,7 @@ Die Anforderungen, technischen Umsetzungen und Abnahmekriterien beziehen sich ni
 
 Die ausführliche Spezifikation liegt in:
 
-`documentation/lastenheft-und-pflichtenheft.md`
+`documentation/lastenheft-und-pflichtenheft-v2.md`
 
 ## Dauer
 
