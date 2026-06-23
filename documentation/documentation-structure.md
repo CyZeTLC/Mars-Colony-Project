@@ -69,7 +69,7 @@ documentation/
 | `lastenheft-und-pflichtenheft-v2.md` | Aktuelle Spezifikation für den reduzierten Projektumfang. |
 | `APs/AP12-Spezifikation.md` | Arbeitspaket-Zusammenfassung zur Spezifikation. |
 | `APs/AP13-Proposal-Ausgearbeitet.md` | Ausgearbeitetes Projektproposal mit Projektplan, Aufwand und Kriterienbezug. |
-| `datenbankabfragen-v4.md` | Kurze BP2-Erklärung der drei Verkaufsqueries mit erwarteten Ergebnissen, SQL-Dateien und Stored Procedures. |
+| `datenbankabfragen-v4.md` | Aktuelle Übersicht der SQL-Abfragen mit BP1-, BP2-, Shared- und General-Zuordnung sowie passenden Stored Procedures. |
 
 ---
 
