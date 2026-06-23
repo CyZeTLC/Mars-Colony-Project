@@ -17,6 +17,7 @@ const Layout = () => {
         if (path.startsWith("/ressources")) return "Ressources";
         if (path.startsWith("/citizens")) return "Citizens";
         if (path.startsWith("/cities")) return "Cities";
+        if (path.startsWith("/sales")) return "Verkaufspotential & Abgabe";
 
         if (path.startsWith("/city/")) {
             const cityName = path.split("/city/")[1];

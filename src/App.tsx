@@ -12,6 +12,7 @@ import Citizens from './pages/Citizens.tsx';
 import Cities from './pages/Cities.tsx';
 import Layout from './components/Layout.tsx';
 import City from "./pages/city/[cityname]/page.tsx";
+import Sales from "./pages/Sales.tsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.isLoggedIn());
@@ -25,6 +26,7 @@ function App() {
           <Route path="employees" element={<Employees />} />
           <Route path="sql" element={<SqlOverview />} />
           <Route path="ressources" element={<Ressources />} />
+          <Route path="sales" element={<Sales />} />
           <Route path="citizens" element={<Citizens />} />
           <Route path="cities" element={<Cities />} />
           <Route path="city/:name" element={<City />} />
