@@ -1,53 +1,108 @@
+import {
+    ResourceConsumptionChart,
+    ResourceStockLevelChart,
+    type ConsumptionRecord,
+    type StockLevel,
+} from '@/components/dashboard/ResourceGraphs';
 import StatusCard from '@/components/dashboard/StatusCard';
-import { useEffect, useState } from 'react';
-import { apiFetch } from '@/utils/restApi';
-import { RessourcesChart, type RessourcesData } from '@/components/dashboard/RessourcesChart';
 import Weather from '@/components/dashboard/Weather';
+import { apiFetch } from '@/utils/restApi';
+import { useEffect, useState } from 'react';
 
 interface DashboardStats {
-    citizens_count: Array<{ citizens_count: number; minors_count: number }>;
+    citizens_count: Array<{
+        citizens_count: number;
+        minors_count: number;
+    }>;
     cities_count: Array<{ cities_count: number }>;
     energy_power: Array<{ current_energy_power: number }>;
-    vehicles: Array<{ active_vehicles_count: number; inactive_vehicles_count: number; total_vehicles_count: number }>;
+    vehicles: Array<{
+        active_vehicles_count: number;
+        inactive_vehicles_count: number;
+        total_vehicles_count: number;
+    }>;
+}
+
+interface SqlResponse<T> {
+    result: T[];
+}
+
+interface ConsumptionApiRow {
+    datum: string;
+    ressource: string;
+    einheit: string | null;
+    verbrauch: number | string;
+}
+
+interface StockLevelApiRow {
+    ressource: string;
+    bestand: number | string;
+    mindestbestand: number | string;
+    einheit: string | null;
+    prozent: number | string;
 }
 
 const Overview = () => {
-    const [data, setData] = useState<RessourcesData[]>([]);
     const [stats, setStats] = useState<DashboardStats | null>(null);
+    const [consumptionData, setConsumptionData] = useState<ConsumptionRecord[]>(
+        [],
+    );
+    const [stockData, setStockData] = useState<StockLevel[]>([]);
     const [loading, setLoading] = useState(true);
-    const [loadingGraph, setLoadingGraph] = useState(true);
+    const [loadingGraphs, setLoadingGraphs] = useState(true);
 
     useEffect(() => {
-        async function loadData() {
+        async function loadDashboard() {
             try {
-                const data = await apiFetch<DashboardStats>('get_dashboard_stats');
-                console.log("Dashboard Stats:", data);
-                setStats(data);
+                const response = await apiFetch<DashboardStats>(
+                    'get_dashboard_stats',
+                );
+                setStats(response);
             } catch (error) {
-                console.error("Fehler beim Laden der Städte:", error);
+                console.error('Dashboard-Statistiken konnten nicht geladen werden:', error);
             } finally {
                 setLoading(false);
             }
         }
 
-        setTimeout(() => {
-            setData([
-                { name: 'Jan', amount: 400 },
-                { name: 'Feb', amount: 100 },
-                { name: 'Mär', amount: 350 },
-                { name: 'Apr', amount: 420 },
-                { name: 'Mai', amount: 480 },
-                { name: 'Jun', amount: 550 },
-                { name: 'Jul', amount: 430 },
-                { name: 'Aug', amount: 580 },
-                { name: 'Sep', amount: 490 },
-                { name: 'Okt', amount: 410 },
-                { name: 'Nov', amount: 370 },
-                { name: 'Dez', amount: 450 }
-            ]); setLoadingGraph(false);
-        }, 2000);
+        async function loadResourceGraphs() {
+            try {
+                const [consumptionResponse, stockResponse] = await Promise.all([
+                    apiFetch<SqlResponse<ConsumptionApiRow>>(
+                        'get_sql_result&file=getResourceConsumptionHistory.sql',
+                    ),
+                    apiFetch<SqlResponse<StockLevelApiRow>>(
+                        'get_sql_result&file=getResourceStockLevels.sql',
+                    ),
+                ]);
 
-        loadData();
+                setConsumptionData(
+                    consumptionResponse.result.map((row) => ({
+                        date: row.datum,
+                        resource: row.ressource,
+                        amount: Number(row.verbrauch),
+                        unit: row.einheit ?? '',
+                    })),
+                );
+
+                setStockData(
+                    stockResponse.result.map((row) => ({
+                        resource: row.ressource,
+                        currentAmount: Number(row.bestand),
+                        minimumAmount: Number(row.mindestbestand),
+                        unit: row.einheit ?? '',
+                        percentage: Number(row.prozent),
+                    })),
+                );
+            } catch (error) {
+                console.error('Ressourcen-Graphen konnten nicht geladen werden:', error);
+            } finally {
+                setLoadingGraphs(false);
+            }
+        }
+
+        void loadDashboard();
+        void loadResourceGraphs();
     }, []);
 
     const totalCities = stats?.cities_count[0]?.cities_count ?? 0;
@@ -59,28 +114,70 @@ const Overview = () => {
 
     return (
         <section>
-            <h3 className="text-2xl font-semibold text-mars-accent mb-4">Missions-Status</h3>
-            <div className="flex gap-4 w-full">
-                <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 w-full">
-                    <StatusCard title="Städte" value={loading ? "..." : totalCities} color="text-green-400" borderColor="border-green-500/50" />
-                    <StatusCard title="Aktive Fahrzeuge" value={loading ? "..." : activeVehicles + "/" + totalVehicles} color="text-mars-accent" borderColor="border-mars-accent/50" />
-                    <StatusCard title="Energie-Leistung" value={loading ? "..." : energyPower + " MW"} color="text-mars-red-deep" borderColor="border-mars-red-deep/50" />
-                    <StatusCard title="Bevölkerung" value={loading ? "..." : totalCitizens + " (" + minorCitizens + ")"} color="text-white" borderColor="border-gray-600" />
+            <h3 className="mb-4 text-2xl font-semibold text-mars-accent">
+                Missions-Status
+            </h3>
+
+            <div className="flex w-full flex-col gap-4 xl:flex-row">
+                <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
+                    <StatusCard
+                        title="Städte"
+                        value={loading ? '...' : totalCities}
+                        color="text-green-400"
+                        borderColor="border-green-500/50"
+                    />
+                    <StatusCard
+                        title="Aktive Fahrzeuge"
+                        value={
+                            loading ? '...' : `${activeVehicles}/${totalVehicles}`
+                        }
+                        color="text-mars-accent"
+                        borderColor="border-mars-accent/50"
+                    />
+                    <StatusCard
+                        title="Energie-Leistung"
+                        value={loading ? '...' : `${energyPower} MW`}
+                        color="text-mars-red-deep"
+                        borderColor="border-mars-red-deep/50"
+                    />
+                    <StatusCard
+                        title="Bevölkerung"
+                        value={
+                            loading
+                                ? '...'
+                                : `${totalCitizens} (${minorCitizens})`
+                        }
+                        color="text-white"
+                        borderColor="border-gray-600"
+                    />
                 </div>
+
                 <Weather />
             </div>
-            <div className="mt-8 grid grid-cols-2 gap-6">
-                <div className='bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg'>
-                    <h4 className="text-xl font-bold text-mars-accent mb-4">Ressourcenverbrauch (letzte 12 Monate)</h4>
-                    <RessourcesChart data={data} isLoading={loadingGraph} />
+
+            <div className="mt-8 grid grid-cols-1 gap-6 xl:grid-cols-2">
+                <div className="rounded-lg border border-gray-700 bg-secondary p-6 shadow-lg">
+                    <h4 className="mb-4 text-xl font-bold text-mars-accent">
+                        Ressourcenverbrauch
+                    </h4>
+                    <ResourceConsumptionChart
+                        data={consumptionData}
+                        isLoading={loadingGraphs}
+                    />
                 </div>
-                <div className='bg-secondary p-6 rounded-lg border border-gray-700 shadow-lg'>
-                    <h4 className="text-xl font-bold text-mars-accent mb-4">Weitere Statistiken</h4>
-                    <RessourcesChart data={[...data].reverse()} isLoading={loadingGraph} />
+
+                <div className="rounded-lg border border-gray-700 bg-secondary p-6 shadow-lg">
+                    <h4 className="mb-4 text-xl font-bold text-mars-accent">
+                        Bestand vs. Mindestbestand
+                    </h4>
+                    <ResourceStockLevelChart
+                        data={stockData}
+                        isLoading={loadingGraphs}
+                    />
                 </div>
             </div>
         </section>
     );
-}
+};
 
 export default Overview;
