@@ -1,16 +1,19 @@
 # Datenbankabfragen v4
 
-Stand: 23.06.2026
+Stand: 03.07.2026
 
-Diese Datei ist eine Arbeitsübersicht für die SQL-Abfragen der Ares Logistik Verwaltung. Sie erklärt kurz, welche Abfragen es gibt, was sie fachlich machen und wie sie zu den Businessprozessen passen.
+Diese Datei ist eine Arbeitsübersicht für die SQL-Abfragen der Mars Logistik Verwaltung [ALS]. Sie erklärt kurz, welche Abfragen es gibt, was sie fachlich machen und wie sie zu den Businessprozessen passen.
 
-Wichtig: Zu allen SQL-Abfragen unter `sql/queries/` gibt es eine passende Stored Procedure unter `sql/storedProcedure/`. Die Anwendung soll die Datenbanklogik möglichst über diese Stored Procedures ausführen. Die normalen Query-Dateien bleiben als lesbare SELECT-Versionen für Dokumentation, Tests und Verständnis erhalten.
+Zu allen SQL-Abfragen unter `sql/queries/` gibt es eine passende Stored Procedure unter `sql/storedProcedure/`. Die normalen Query-Dateien bleiben als lesbare SELECT-Versionen für Dokumentation, Tests und Verständnis erhalten.
+
+Gemäß dem dritten Gesprächsprotokoll sollen produktive Datenbankzugriffe über Stored Procedures erfolgen. Im aktuellen Code führt `api/restApi.php` über `runSqlFile()` jedoch noch SQL-Dateien aus. Die Stored Procedures sind damit fachlich und technisch vorbereitet, aber noch nicht in die PHP-API eingebunden.
 
 Geprüfter Stand:
 
 - 38 Dateien unter `sql/queries/`
 - 38 passende Dateien unter `sql/storedProcedure/`
 - keine fehlende Stored-Procedure-Datei
+- 2 zusätzliche, aktuell von den BP1-Dashboarddiagrammen verwendete Abfragen direkt unter `sql/`
 
 ---
 
@@ -24,11 +27,14 @@ C:\Users\leona\Documents\GitHub\Mars-Colony-Project\sql
 
 | Bereich | Zweck |
 |---|---|
-| `sql/build/` | Enthält Build- und Importskripte für Datenbanktabellen und Beispieldaten. Für BP2 sind vor allem die Verkaufstabellen und Beispieldaten in `sql/build/mysql.sql` wichtig. |
+| `sql/build/` | Enthält Build-, Import- und Migrationsskripte. `mysql.sql` enthält den vollständigen Demo-Import; `marskolonie_mysql.sql` das erzeugte Schema; `resourceGraphsMigration.sql` ergänzt Diagrammdaten in einer bestehenden Datenbank. |
+| `sql/getResourceConsumptionHistory.sql`, `sql/getResourceStockLevels.sql` | Aktuell von der Dashboard-API geladene BP1-Abfragen für Ressourcenverbrauch und Bestand gegen Mindestbestand. |
 | `sql/queries/` | Enthält lesbare SQL-Abfragen. Diese Dateien zeigen, welche Daten fachlich abgefragt werden. |
 | `sql/storedProcedure/` | Enthält die Stored-Procedure-Versionen der Abfragen. Diese Variante ist für die Ausführung über die Datenbank gedacht. |
 | `sql/sem2/` | Enthält ältere bzw. semesterbezogene Zusatznotizen. Für die aktuellen BP1- und BP2-Abfragen ist der Ordner nicht zentral. |
 | `sql/sqlOverview.txt` | Kurze technische Übersicht über die SQL-Ordnerstruktur. |
+
+Die beiden Diagrammabfragen liegen ausnahmsweise direkt unter `sql/`, weil `get_sql_result` im aktuellen PHP-Code nur direkte Dateien dieses Ordners freigibt. Die übrigen fachlichen Abfragen liegen strukturiert in Unterordnern; deren produktive API-Auflösung bzw. Stored-Procedure-Anbindung ist noch zu vereinheitlichen.
 
 Stored-Procedure-Pfad:
 
@@ -58,6 +64,15 @@ BP1 beantwortet die Frage: **Welche Ressourcen werden kritisch und was muss nach
 | `getNachschubanforderungen.sql` | `getNachschubanforderungen()` | Berechnet vorbereitete Nachschubanforderungen inklusive Anforderungsmenge, interner Verfügbarkeit und empfohlener Maßnahme. | Macht aus der Bestandsprüfung eine konkrete Entscheidungsgrundlage: intern umlagern oder externen Nachschub vorbereiten. |
 
 Kurz gesagt: BP1 nutzt die Queries, um kritische Ressourcen zu erkennen und daraus eine sinnvolle Nachschubentscheidung vorzubereiten.
+
+### BP1-Dashboarddiagramme
+
+| Query | Datenbasis | Darstellung |
+|---|---|---|
+| `sql/getResourceConsumptionHistory.sql` | `BESTANDSBEWEGUNG` und `RESSOURCE` | Tages- bzw. Monatsverbrauch für Wasser, Sauerstoff und Nahrung |
+| `sql/getResourceStockLevels.sql` | `RESSOURCE` | Aktueller Bestand relativ zum Mindestbestand |
+
+`sql/build/mysql.sql` enthält Tabelle und Beispieldaten. Für eine bereits bestehende Datenbank kann einmalig `sql/build/resourceGraphsMigration.sql` ausgeführt werden.
 
 ---
 
@@ -272,11 +287,12 @@ Die `general`-Queries gehören zur allgemeinen WebApp. Sie sind technisch vorhan
 
 Die wichtigen Prozessabfragen liegen in `bp1`, `bp2` und `shared`. Die `general`-Abfragen bleiben als technische Unterstützung der WebApp erhalten.
 
-Für die Umsetzung gilt:
+Für die Zielarchitektur gilt:
 
 ```text
-Lesbare Abfrage:      sql/queries/...
-Ausführung über DB:   sql/storedProcedure/...
+Lesbare Abfrage:           sql/queries/...
+Vorgesehene DB-Ausführung: sql/storedProcedure/...
+Aktueller PHP-Ist-Stand:   SQL-Dateien über runSqlFile()
 ```
 
-Damit ist nachvollziehbar, was eine Abfrage fachlich macht, und gleichzeitig klar, welche Stored Procedure für die technische Ausführung vorgesehen ist.
+Damit ist nachvollziehbar, was eine Abfrage fachlich macht, welche Stored Procedure vorgesehen ist und welche Integrationsarbeit in der API noch offen ist.

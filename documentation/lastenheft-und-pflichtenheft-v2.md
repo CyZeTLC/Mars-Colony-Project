@@ -2,8 +2,8 @@
 # Lastenheft und Pflichtenheft
 
 Projekt: Mars Logistik Verwaltung [ALS]
-Version: 2.0
-Stand: 19.06.2026
+Version: 2.1
+Stand: 03.07.2026
 Praktikumsgruppe: 1
 
 ---
@@ -35,11 +35,11 @@ Das Projekt basiert auf folgenden vorhandenen Bestandteilen:
 | Web-App | React/TypeScript mit Vite vorhanden |
 | PHP-REST-API | vorhanden |
 | SQL-Dateien | vorhanden |
-| Stored Procedures | für BP1, BP2, gemeinsame und allgemeine Abfragen vorbereitet |
+| Stored Procedures | 38 passende Procedures für BP1, BP2, gemeinsame und allgemeine Abfragen vorhanden; API-Anbindung offen |
 | MariaDB-Datenbank | vorhanden |
 | Login / Sicherheit | Session, Login-Ablaufzeit und CSRF-Token vorhanden |
 | Businessprozesse | auf zwei Hauptprozesse reduziert |
-| BPMN-Modelle | passend zu den zwei Hauptprozessen vorbereitet |
+| BPMN-Modelle | BP1 als finales Modell v11 vorhanden; BP2 fachlich beschrieben |
 | Dokumentation | vorhanden und nach Feedback überarbeitet |
 
 ---
@@ -75,18 +75,18 @@ Prioritätsskala:
 
 | ID | Businessprozess | Anforderung | Priorität | Status |
 |---|---|---|---:|---|
-| LH-01 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Ressourcen anzeigen, die unter dem Mindestbestand liegen. | 1 | vorhandene SQL-/DB-Grundlage |
-| LH-02 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Ressourcen mit Menge, Einheit und Lagerinformationen anzeigen. | 1 | vorhandene SQL-/DB-Grundlage |
-| LH-03 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Nachschubbedarf fachlich erkennbar machen. | 1 | aus vorhandenen Ressourcen- und Lagerdaten ableitbar |
-| LH-04 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll Ressourcenüberschüsse aus Bestand, Mindestbestand und Lagerdaten ableitbar machen. | 2 | aus vorhandenen Ressourcenabfragen ableitbar |
-| LH-05 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll vorhandene Ressourcenübersichten als Grundlage für Verkaufsentscheidungen bereitstellen. | 2 | vorhandene SQL-/DB-Grundlage |
-| LH-06 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll eine mögliche externe Abgabe fachlich vorbereiten können. | 3 | Erweiterung / wirtschaftlicher Ausbau |
+| LH-01 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Ressourcen anzeigen, die unter dem Mindestbestand liegen. | 1 | Query und Stored Procedure vorhanden |
+| LH-02 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Ressourcen mit Menge, Einheit und Lagerinformationen anzeigen. | 1 | Query und Stored Procedure vorhanden |
+| LH-03 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Nachschubbedarf fachlich erkennbar machen. | 1 | Query und Stored Procedure vorhanden; UI-Ablauf offen |
+| LH-04 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll Ressourcenüberschüsse aus Bestand, Mindestbestand und Lagerdaten ableitbar machen. | 2 | Query und Stored Procedure vorhanden |
+| LH-05 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll vorhandene Ressourcenübersichten als Grundlage für Verkaufsentscheidungen bereitstellen. | 2 | Query, Stored Procedure und Tabellen vorhanden |
+| LH-06 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll eine mögliche externe Abgabe fachlich vorbereiten können. | 3 | Datenbankseitig vorhanden; UI offen |
 | LH-07 | Übergreifend | Das System soll eine Weboberfläche mit Dashboard und Tabellenansichten bereitstellen. | 1 | vorhanden |
 | LH-08 | Übergreifend | Das System soll Daten über eine PHP-API im JSON-Format bereitstellen. | 1 | vorhanden |
-| LH-09 | Übergreifend | Die vorhandenen Datenbankabfragen und Stored Procedures sollen den zwei Hauptprozessen eindeutig zugeordnet sein. | 1 | zu dokumentieren und zu optimieren |
+| LH-09 | Übergreifend | Die vorhandenen Datenbankabfragen und Stored Procedures sollen den zwei Hauptprozessen eindeutig zugeordnet sein. | 1 | dokumentiert |
 | LH-10 | Übergreifend | Das System soll Login, Session und CSRF-Token für geschützte API-Anfragen verwenden. | 1 | vorhanden |
-| LH-11 | Übergreifend | Das Backend soll SQL-Abfragen und Stored Procedures serverseitig ausführen und Ergebnisse als JSON zurückgeben. | 1 | vorhanden / vorbereitet |
-| LH-12 | Übergreifend | Die technische Architektur soll so dokumentiert sein, dass Frontend, REST-API, Backend, Stored Procedures und Datenbank nachvollziehbar zusammenhängen. | 1 | zu dokumentieren |
+| LH-11 | Übergreifend | Das Backend soll Datenbankfunktionen serverseitig ausführen und Ergebnisse als JSON zurückgeben. | 1 | SQL-Dateien angebunden; Stored-Procedure-Anbindung offen |
+| LH-12 | Übergreifend | Die technische Architektur soll so dokumentiert sein, dass Frontend, REST-API, Backend, Stored Procedures und Datenbank nachvollziehbar zusammenhängen. | 1 | dokumentiert |
 
 ---
 
@@ -101,12 +101,11 @@ Die nicht-funktionalen Anforderungen beschreiben die Qualitätsmerkmale des Syst
 | NFA-03 | Fehlerfälle sollen verständlich angezeigt werden, zum Beispiel bei fehlgeschlagenen Datenbankabfragen, ungültigen Eingaben oder nicht verfügbaren API-Daten. | 2 | teilweise vorhanden |
 | NFA-04 | Der Datenaustausch zwischen Web-App und API soll in einem einheitlichen JSON-Format erfolgen. | 1 | vorhanden |
 | NFA-05 | Der Zugriff auf Daten soll ausschließlich über die PHP-API erfolgen, damit die Weboberfläche nicht direkt auf die Datenbank zugreift. | 1 | vorhanden |
-| NFA-06 | Die vorhandene Datenbanklogik soll so eingebunden und dokumentiert sein, dass SQL-Dateien, Stored Procedures, Web-App und die zwei Hauptprozesse fachlich zusammenpassen. | 1 | zu dokumentieren |
+| NFA-06 | Die vorhandene Datenbanklogik soll so eingebunden und dokumentiert sein, dass SQL-Dateien, Stored Procedures, Web-App und die zwei Hauptprozesse fachlich zusammenpassen. | 1 | dokumentiert; API-Integration offen |
 | NFA-07 | Die Anwendung soll ohne besondere lokale Einrichtung über die bestehende Serverumgebung demonstrierbar sein. | 2 | vorhanden |
 | NFA-08 | Die Darstellung der Systemfunktionen soll den wirtschaftlichen Nutzen der zwei Hauptprozesse sichtbar machen, insbesondere durch Warnungen, Übersichten und Entscheidungsgrundlagen. | 2 | zu optimieren |
 | NFA-09 | Die Struktur der Anwendung soll wartbar bleiben, indem Weboberfläche, PHP-API und Datenbanklogik klar voneinander getrennt sind. | 2 | teilweise vorhanden |
 | NFA-10 | Login- und API-Zugriffe sollen über Sessiondaten und CSRF-Token abgesichert werden. | 1 | vorhanden |
-| NFA-11 | Die Architektur soll eine spätere Migration des Backends auf eine Next.js-basierte API-Struktur ermöglichen. | 3 | geplant |
 
 #### Technische Rahmenbedingungen
 
@@ -118,8 +117,7 @@ Die nicht-funktionalen Anforderungen beschreiben die Qualitätsmerkmale des Syst
 | Datenzugriff | Die Web-App greift nicht direkt auf die Datenbank zu, sondern nutzt die vorhandene PHP-REST-API. |
 | Backend | Das Backend ist aktuell in PHP umgesetzt und liefert JSON-Antworten. |
 | Session / Sicherheit | Beim Login wird eine Session mit Login-Information und CSRF-Token verwendet. Der Login läuft nach 60 Minuten Inaktivität ab, das CSRF-Token nach 24 Stunden. |
-| Datenbanklogik | Vorhandene SQL-Dateien und Stored Procedures werden weiterverwendet und den zwei Hauptprozessen zugeordnet. |
-| Weiterentwicklung | Das Backend soll perspektivisch vollständig in eine Next.js-basierte API-Struktur überführt werden. |
+| Datenbanklogik | SQL-Dateien und passende Stored Procedures sind vorhanden; die PHP-API verwendet aktuell `runSqlFile()`. |
 
 ---
 
@@ -139,7 +137,7 @@ Restaufwand = geschätzter Aufwand ab aktuellem Projektstand
 | PH-05 | LH-09, NFA-06 | Die vorhandenen SQL-Dateien und Stored Procedures werden den zwei Hauptprozessen zugeordnet und dokumentiert. | SQL-Dateien / Stored Procedures / Doku / BPMN-Bezug | 1 PT |
 | PH-06 | NFA-02, NFA-06, NFA-08 | Die vorhandene Datenbanklogik wird fachlich optimiert und in Web-App, BPMN-Modellen und Präsentation als wirtschaftlich nutzbare Prozessunterstützung sichtbar gemacht. | MariaDB / SQL-Dateien / Stored Procedures / PHP-API | 1 PT |
 | PH-07 | LH-10, NFA-10 | Login, Sessiondaten und CSRF-Token werden für geschützte API-Aufrufe genutzt. | `api/login.php`, `api/restApi.php`, `src/utils/AuthService.ts`, `src/utils/restApi.ts` | 1 PT |
-| PH-08 | LH-11, LH-12, NFA-11 | Die Architektur wird als Schichtenmodell aus Frontend, REST-API, Backend, Stored Procedures und Datenbank dokumentiert. Die spätere Migration auf Next.js bleibt als Erweiterung vorgesehen. | React/TypeScript, PHP-API, SQL, Stored Procedures, Architektur-Doku | 1 PT |
+| PH-08 | LH-11, LH-12 | Die Architektur wird als Schichtenmodell aus Frontend, REST-API, Backend, Datenbanklogik und Datenbank dokumentiert. | React/TypeScript, PHP-API, SQL, Stored Procedures, Architektur-Doku | 1 PT |
 
 Geschätzter Restaufwand: 8 Personentage
 
@@ -154,13 +152,14 @@ Webanwendung
 REST-API / PHP-Backend
     |
     v
-Stored Procedures und SQL-Abfragen
+aktuell: SQL-Dateien über runSqlFile()
+Ziel: Stored Procedures
     |
     v
 MariaDB-Datenbank
 ```
 
-Das Frontend sendet Anfragen an die REST-API und übergibt dabei Parameter wie Endpunkt, Query-Name und Session-Informationen. Das PHP-Backend prüft die Anfrage, validiert Session und CSRF-Token, führt die passende SQL-Abfrage oder Stored Procedure aus und gibt das Ergebnis als JSON zurück.
+Das Frontend sendet Anfragen an die REST-API. Das PHP-Backend prüft den CSRF-Token aus dem Header `X-CSRF-Token`, führt aktuell eine freigegebene SQL-Datei über PDO aus und gibt das Ergebnis als JSON zurück. Die im dritten Gesprächsprotokoll geforderte Ausführung über Stored Procedures ist vorbereitet, aber noch nicht in der API umgesetzt.
 
 ---
 
@@ -189,18 +188,19 @@ Damit der Projektumfang realistisch bleibt, wird der sichere Kernumfang auf vorh
 | Kernfunktion | Status |
 |---|---|
 | Ressourcenübersicht | vorhanden / SQL-Grundlage vorhanden |
-| Kritische Ressourcen unter Mindestbestand | vorhanden / SQL-Grundlage vorhanden |
+| Kritische Ressourcen unter Mindestbestand | Query und Stored Procedure vorhanden |
 | Lager- und Ressourcenbezug | vorhanden / SQL-Grundlage vorhanden |
-| Ableitung von Nachschubbedarf | über Stored Procedure vorbereitet |
-| Ableitung möglicher Ressourcenüberschüsse | über Stored Procedure vorbereitet |
-| Vorbereitung wirtschaftlicher Verkaufsentscheidungen | über Stored Procedure und Verkaufstabellen vorbereitet |
+| Ressourcenverbrauch und Mindestbestandsdiagramm | im Dashboard vorhanden |
+| Ableitung von Nachschubbedarf | Query und Stored Procedure vorhanden; UI offen |
+| Ableitung möglicher Ressourcenüberschüsse | Query und Stored Procedure vorhanden |
+| Vorbereitung wirtschaftlicher Verkaufsentscheidungen | Stored Procedure und Verkaufstabellen vorhanden; UI offen |
 | Web-App-Darstellung | vorhanden |
 | PHP-API-Anbindung | vorhanden |
 | Session- und CSRF-Schutz | vorhanden |
-| SQL-Dateien / Stored Procedures | BP1- und BP2-Procedures vorhanden / weiter zu optimieren |
-| Architekturbeschreibung | vorbereitet |
-| Zuordnung zu den zwei Hauptprozessen | zu dokumentieren |
-| BPMN-Modelle | passend zu erstellen |
+| SQL-Dateien / Stored Procedures | 38 Query-/Procedure-Paare vorhanden |
+| Architekturbeschreibung | vorhanden |
+| Zuordnung zu den zwei Hauptprozessen | dokumentiert |
+| BPMN-Modelle | BP1 v11 final; BP2 fachlich beschrieben |
 
 ---
 
@@ -215,7 +215,6 @@ Diese Punkte sind sinnvoll, aber nicht zwingend für die aktuelle Version.
 | Automatische Nachschubbestellung | kann Nachschubmaßnahmen stärker automatisieren |
 | Erweiterte Dashboard-Kennzahlen | macht wirtschaftlichen Nutzen besser sichtbar |
 | Optimierte Stored-Procedures-Struktur | verbessert Wartbarkeit und Präsentierbarkeit |
-| Umbau des Backends auf Next.js | vereinheitlicht Frontend- und API-Technologie langfristig |
 | Transport- und Missionsplanung | kann später wieder als eigener Businessprozess ergänzt werden |
 | Energie- und Personalplanung | bleibt fachlich sinnvoll, ist aber nicht Teil des aktuellen Kernumfangs |
 | Echtzeit-Sensorik | langfristiger Ausbau, keine reale Hardware vorhanden |
@@ -231,7 +230,6 @@ Diese Punkte sind sinnvoll, aber nicht zwingend für die aktuelle Version.
 | Build Tool / Entwicklungsserver | Vite |
 | Styling | Tailwind CSS |
 | Backend / API | PHP-REST-API |
-| Geplante Backend-Weiterentwicklung | Next.js-basierte API-Struktur |
 | Datenbank | MariaDB |
 | Datenbanklogik | SQL-Dateien und Stored Procedures |
 | Datenaustausch | JSON |
@@ -250,8 +248,7 @@ Diese Punkte sind sinnvoll, aber nicht zwingend für die aktuelle Version.
 | Transportmissionen planen und auswerten | Fachlich interessant, aber nach Feedback nicht Teil der zwei Hauptprozesse. |
 | Energieengpässe erkennen und Lastverteilung einleiten | Mögliche spätere Erweiterung, aber nicht aktueller Fokus. |
 | Personal- und Arbeitseinsätze planen | Gehört nicht direkt zur Ressourcenüberwachung oder zum Ressourcenverkauf. |
-| Vollständige Next.js-Migration | Als Weiterentwicklung vorgesehen, aber nicht Kernumfang von Version 2.0. |
-| Vollständiges Rollen- und Rechtesystem | Für Version 2.0 nicht zwingend erforderlich. |
+| Vollständiges Rollen- und Rechtesystem | Für Version 2.1 nicht zwingend erforderlich. |
 | Echtzeit-Sensorik | Keine reale Sensorhardware vorhanden. |
 
 ---

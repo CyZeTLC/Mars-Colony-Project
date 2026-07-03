@@ -1,6 +1,15 @@
 SQL-Ordnerstruktur
 ==================
 
+Aktueller Fokus:
+- BP1 ist das durchgehende Beispiel der Abschlusspräsentation.
+- BP2 bleibt Bestandteil des Projekts.
+
+sql/getResourceConsumptionHistory.sql
+sql/getResourceStockLevels.sql
+Direkt von den BP1-Dashboarddiagrammen verwendete Abfragen für
+Ressourcenverbrauch und Bestand gegen Mindestbestand.
+
 sql/queries/
 Normale SELECT-Abfragen fuer fachliche Auswertungen.
 
@@ -67,12 +76,23 @@ Stored-Procedure-Versionen der SQL-Logik.
 sql/build/
 Build- und Importskripte fuer Datenbankstrukturen und Beispieldaten.
 
+- mysql.sql
+  Vollstaendiger MariaDB-/MySQL-Demoimport mit Bestandsbewegungen.
+
+- marskolonie_mysql.sql
+  Aus dem Datenmodell erzeugtes MySQL-Schema.
+
+- resourceGraphsMigration.sql
+  Ergaenzt BESTANDSBEWEGUNG und Demo-Verbrauchsdaten in einer
+  bestehenden Datenbank.
+
 sql/sem2/
 Alte bzw. semesterbezogene Zusatznotizen.
 
 API-Hinweis
 ===========
 
-API-Routing und Prisma-Anbindung werden separat gepflegt. Diese SQL-Struktur
-beschreibt nur Ablage und fachliche Zuordnung der Dateien. Sie aendert keine
-restApi-Pfadlogik.
+Die aktuelle PHP-API fuehrt SQL-Dateien ueber PDO und runSqlFile() aus.
+Die 38 passenden Stored Procedures sind vorbereitet, aber noch nicht in
+restApi.php angebunden. Diese Anbindung ist gemaess Gespraechsprotokoll 03
+die Zielarchitektur fuer produktive Datenbankzugriffe.

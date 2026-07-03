@@ -1,94 +1,46 @@
-# Tom Coombs / CyZeTLC – Doku-Zuarbeit
+# AP8 – Auswahl DBMS, Infrastruktur und Prototyp
 
-# AP8 – Auswahl DBMS-Infrastruktur – Prototyp
+Status: abgeschlossen, Stand 03.07.2026
 
-Aufgabe laut Projektplan:
-AP8: Auswahl DBMS-Infrastruktur
-„Es wurde ein angemessenes DBMS ausgewählt und ggf. ein entsprechender Server aufgesetzt.“
+## Entscheidung
 
-## 1. Ziel des Arbeitspakets
+Für den aktuellen Projektstand wird **MariaDB/MySQL** verwendet. Die Datenbank läuft in der vorhandenen Serverumgebung; ein neues Oracle-Schema ist nicht erforderlich. Oracle-Skripte bleiben als Alt-/Alternativstand im Repository.
 
-In AP8 wird dokumentiert, welches DBMS für das Projekt verwendet wird, warum dieses DBMS geeignet ist und welche Server- bzw. Infrastrukturentscheidung getroffen wurde.
+## Infrastruktur
 
-Diese Datei ist eine vorläufige Zuarbeit für Tom Coombs / CyZeTLC. Sie fasst zusammen, was aus dem Repository zur DBMS-Infrastruktur erkennbar ist. Unklare Punkte werden bewusst nicht erfunden, sondern als offene Ergänzungsfelder markiert.
+| Bereich | Umsetzung |
+|---|---|
+| Frontend | React 19, TypeScript 6 und Vite 8 |
+| Backend | PHP-REST-API |
+| Datenbankzugriff | PDO |
+| Datenbank | MariaDB/MySQL |
+| Datenbankschema | `sql/build/mysql.sql` und `sql/build/marskolonie_mysql.sql` |
+| Migration für Diagramme | `sql/build/resourceGraphsMigration.sql` |
+| Sicherheit | Login, PHP-Session und CSRF-Token |
+| Betrieb | vorhandene externe Serverumgebung; lokale Entwicklung über Vite |
 
-## 2. Aktueller Stand aus dem Repository
+Zugangsdaten, Tokens und private Serverdetails werden nicht dokumentiert.
 
-| Bereich | Erkennbarer Stand im Repository | Bemerkung | Noch offen |
-|---|---|---|---|
-| Datenbankmanagementsystem | In der Spezifikation wird MariaDB als Datenbank genannt. Zusätzlich existieren SQL-Build-Dateien für MySQL und Oracle. | Der PHP-Servercode enthält eine PDO-Anbindung, die je nach Konfiguration MySQL oder Oracle verwenden kann. | Finale DBMS-Auswahl und Version durch Tom Coombs / CyZeTLC bestätigen. |
-| Server / Hosting | In der Spezifikation wird ein VPS als Serverbetrieb genannt. In der WebApp sind produktionsnahe API-URLs zu einer externen Domain sichtbar. | Der genaue Servertyp und Anbieter sind im Repository nicht vollständig dokumentiert. | Hosting-Anbieter, VPS-Konfiguration und Betriebsumgebung ergänzen. |
-| API-Anbindung | Eine PHP-API im Ordner `api/` ist vorhanden. Sie liefert JSON-Antworten und nutzt CSRF-Schutz. | Die API lädt SQL-Dateien und führt sie über eine serverseitige Datenbankverbindung aus. | Finale Beschreibung der API-Struktur und produktiven Pfade bestätigen. |
-| WebApp-Anbindung | Die WebApp ist als React/TypeScript/Vite-Anwendung aufgebaut. Sie ruft Daten über serverseitige API-Funktionen ab. | Seiten wie Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht sind im Routing erkennbar. Im aktuellen Fokus sind vor allem Ressourcen- und Lagerdaten relevant. | Bestätigen, welche Seiten für AP8 als Infrastrukturbezug genannt werden sollen. |
-| SQL-Dateien | Im Ordner `sql/queries/` sind die normalen SQL-Abfragen nach `bp1/`, `bp2/`, `shared/` und `general/` gegliedert. Zusätzlich existieren Build-Skripte. | Die SQL-Dateien unterstützen viele fachliche Auswertungen. Für die aktuelle Revision stehen Ressourcen-, Lager- und Bestandsabfragen im Vordergrund. | Prüfen, welche Abfragen in der finalen Abgabe tatsächlich verwendet werden. |
-| Stored Procedures | Der Ordner `sql/storedProcedure/` ist vorhanden und für den aktuellen Fokus in `bp1/`, `bp2/`, `shared/` und `general/` gegliedert. | Die prozessbezogenen Stored Procedures sind dadurch eindeutig den zwei Hauptprozessen zugeordnet. | Produktive Einbindung über API weiter prüfen. |
-| Zugangsdaten / Konfiguration | Eine Konfigurationsdatei für die Datenbankanbindung ist vorhanden. | Aus Sicherheitsgründen werden keine Zugangsdaten, Passwörter, Tokens oder privaten Konfigurationswerte dokumentiert. | Tom ergänzt nur allgemeine, freigabefähige Angaben. |
-| Deployment / Betrieb | Die Dokumentation beschreibt lokale Entwicklung mit Vite und PHP sowie eine vorhandene Serverumgebung. | Der konkrete Deployment-Prozess ist nicht vollständig aus den gelesenen Dateien ableitbar. | Deployment-, Backup- und Betriebskonzept ergänzen. |
-| Dokumentation | README, Dokumentations-README und Spezifikation beschreiben WebApp, PHP-API, SQL-Dateien und Datenbankbezug. | Die Dokumentation enthält teils unterschiedliche Hinweise zu Oracle, MySQL und MariaDB. | Finale technische Linie vereinheitlichen. |
+## Datenbanklogik
 
-## 3. Vorläufige Infrastrukturentscheidung
+Die fachlichen SQL-Dateien und Stored Procedures sind identisch nach `bp1`, `bp2`, `shared` und `general` strukturiert. Es bestehen 38 Query-/Procedure-Paare.
 
-Nach aktuellem Repository-Stand deutet vieles darauf hin, dass für die finale Projektdokumentation eine MariaDB-Datenbank verwendet werden soll. Diese Aussage ergibt sich besonders aus der vorhandenen Spezifikation, in der MariaDB und ein Betrieb auf einem VPS ausdrücklich genannt werden.
+Die aktuelle PHP-API führt SQL-Dateien über PDO aus. Die im dritten Gesprächsprotokoll geforderte produktive Ausführung über Stored Procedures ist noch nicht angebunden und bleibt der zentrale Integrationspunkt.
 
-Gleichzeitig zeigen andere Repository-Bestandteile, dass auch Oracle- und MySQL-Skripte vorhanden sind und die PHP-Anbindung technisch zwischen MySQL und Oracle unterscheiden kann. Deshalb sollte dieser Punkt von Tom Coombs / CyZeTLC bestätigt werden.
+## Prototyp
 
-Vorläufig lässt sich festhalten: Die WebApp greift nicht direkt auf die Datenbank zu, sondern nutzt eine PHP-API. Die API führt SQL-Dateien serverseitig aus und gibt Ergebnisse im JSON-Format an die WebApp zurück. Diese Architektur ist für das Projekt sinnvoll, weil Frontend, API und Datenbanklogik getrennt bleiben.
+Die Webanwendung enthält Seiten für Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht. Für BP1 sind besonders relevant:
 
-Noch offen: genaue Serverkonfiguration, DBMS-Version, Hosting-Anbieter, produktiver Datenbankname und finaler Stand der Stored Procedures.
+- Ressourcen- und Lageransichten,
+- Diagramm zum Ressourcenverbrauch,
+- Diagramm zum Verhältnis von Bestand und Mindestbestand,
+- BP1-Abfragen und passende Stored Procedures.
 
-## 4. Begründung der DBMS-Auswahl
+BP2 wird durch Verkaufstabellen, Beispieldaten und drei fachliche Stored Procedures unterstützt; eine vollständige Verkaufsoberfläche gehört nicht zum aktuellen Kern.
 
-| Kriterium | Bewertung für das Projekt | Begründung | Noch zu prüfen |
-|---|---|---|---|
-| relationale Datenhaltung | Geeignet | Die Marskolonie nutzt viele klar strukturierte Entitäten wie Ressourcen, Lager, Städte, Fahrzeuge, Mitarbeitende und Transportwege. | Finale Modellversion und DBMS bestätigen. |
-| Unterstützung strukturierter SQL-Abfragen | Geeignet | Im Repository sind zahlreiche SQL-Dateien für Auswertungen und Übersichten vorhanden. | Prüfen, welche SQL-Dateien final produktiv genutzt werden. |
-| Eignung für WebApp-Anbindung | Geeignet | Die PHP-API kann Datenbankergebnisse als JSON an die WebApp liefern. | Produktive API-Konfiguration bestätigen. |
-| Betrieb auf VPS möglich | Wahrscheinlich geeignet | Die Spezifikation nennt den Betrieb der Datenbank auf einem VPS. | Anbieter, Betriebssystem, Ressourcen und Absicherung ergänzen. |
-| vorhandene Projektgrundlage | Geeignet | WebApp, PHP-API, SQL-Dateien, Build-Skripte und Dokumentation sind vorhanden. | Unterschiede zwischen Oracle-, MySQL- und MariaDB-Hinweisen klären. |
-| Teamkenntnisse | Vermutlich geeignet | Die vorhandene Struktur nutzt klassische SQL-Dateien und PHP/PDO, was für ein Datenbankprojekt nachvollziehbar ist. | Kenntnisse und Verantwortlichkeiten im Team ergänzen. |
-| Projektumfang | Geeignet | Ein relationales DBMS reicht für die zwei aktuell ausgewählten Geschäftsprozesse aus. | Prüfen, ob spätere Verkaufsfunktionen neue Tabellen benötigen. |
-| Wartbarkeit | Geeignet, wenn sauber dokumentiert | Die Trennung zwischen WebApp, API und SQL-Dateien unterstützt Wartbarkeit. | Stored-Procedures-Stand und Dokumentation vereinheitlichen. |
-| Erweiterbarkeit | Geeignet | Weitere Prozesse wie Verkauf, Routenoptimierung oder Prognosen können später ergänzt werden. | Notwendige Schema-Erweiterungen für spätere Phasen prüfen. |
+## Ergebnis
 
-## 5. Bezug zur WebApp
-
-Die DBMS-Infrastruktur unterstützt die WebApp, indem sie fachliche Daten für die Geschäftsprozesse bereitstellt. Die WebApp ist damit nicht nur ein isoliertes Frontend, sondern die Oberfläche für datenbankgestützte Auswertungen und Entscheidungen.
-
-Im Repository ist eine serverseitige PHP-API sichtbar. Die WebApp kommuniziert über diese Schnittstelle mit der Datenbanklogik. Die Daten werden im JSON-Format an die WebApp zurückgegeben und dort in Dashboard-Kacheln, Tabellen oder Übersichten dargestellt.
-
-Erkennbar sind unter anderem WebApp-Bereiche für Dashboard, Ressourcen, Fahrzeuge, Mitarbeitende, Städte, Bewohner und SQL-Übersicht. Für die aktuelle Revision stehen davon vor allem Ressourcenübersicht, Lagerbezug und technische Nachvollziehbarkeit der verwendeten SQL-Abfragen im Vordergrund. Die übrigen Bereiche bleiben als vorhandene Projektbestandteile erhalten, werden aber nicht als Hauptprozesse betrachtet.
-
-## 6. Bezug zu Businessprozessen
-
-| Businessprozess | Benötigte Datenbankunterstützung | Bedeutung der DBMS-Infrastruktur |
-|---|---|---|
-| Kritische Ressourcen überwachen und Nachschub auslösen | Ressourcenbestände, Mindestwerte, Lagerzuordnung und Bestandsübersichten | Das DBMS stellt die Grundlage bereit, um kritische Ressourcen zu erkennen und Nachschubbedarf abzuleiten. |
-| Überschüssige Ressourcen an externe Unternehmen verkaufen | Ressourcenbestände, Mindestwerte, Lagerdaten und mögliche Überschussberechnung | Die Infrastruktur kann als Grundlage für Verkaufsentscheidungen dienen; ein vollständiges Verkaufsmodul ist eine spätere Erweiterung. |
-
-Weitere vorhandene Daten zu Missionen, Fahrzeugen, Energie, Personal, Städten und Bewohnern bleiben technisch relevant, werden in der aktuellen Revision aber nicht als Hauptprozesse ausgearbeitet.
-
-## 7. Offene Punkte für Tom Coombs / CyZeTLC
-
-- [ ] Exaktes verwendetes DBMS bestätigen: ______________________________
-- [ ] Version des DBMS ergänzen: ______________________________
-- [ ] Servertyp bestätigen: ______________________________
-- [ ] Hosting / VPS-Anbieter ergänzen: ______________________________
-- [ ] Datenbankname ergänzen, falls dokumentierbar: ______________________________
-- [ ] Verbindung zwischen WebApp, API und Datenbank kurz bestätigen: ______________________________
-- [ ] Stored-Procedures-Stand ergänzen: ______________________________
-- [ ] Sicherheitsaspekte ergänzen: ______________________________
-- [ ] Backup-/Betriebskonzept ergänzen, falls vorhanden: ______________________________
-- [ ] Verantwortliche Person für Infrastruktur ergänzen: ______________________________
-
-## 8. Vorläufiges Ergebnis
-
-Für AP8 liegt eine vorläufige Dokumentation der DBMS-Infrastruktur vor. Die vorhandene Projektstruktur wurde nur lesend geprüft. Erkennbare technische Bestandteile wurden dokumentiert.
-
-Unklare Punkte wurden bewusst offengelassen und als Ergänzungsfelder für Tom Coombs / CyZeTLC markiert. Es wurden keine geheimen Zugangsdaten, Passwörter, Tokens oder privaten Konfigurationswerte dokumentiert.
-
-## 9. Kurzfazit
-
-AP8 dokumentiert die technische Grundlage, auf der WebApp, SQL-Abfragen und Businessprozesse aufbauen. Die finale Fassung sollte nach Bestätigung der offenen Infrastrukturdetails durch Tom Coombs / CyZeTLC ergänzt werden.
+DBMS, Infrastruktur und Prototyp sind für den Projektumfang festgelegt. Die technische Linie ist React/TypeScript → PHP-API → MariaDB/MySQL. Stored Procedures bilden den vorgesehenen nächsten Datenzugriffsschritt.
 
 ## Dauer
 

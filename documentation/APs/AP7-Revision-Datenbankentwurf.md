@@ -26,6 +26,7 @@ Nach dem zweiten Gespräch mit Prof. Dr. Becking wurde entschieden, den Projektu
 | Ressourcen und Lager | `RESSOURCE`, `LAGER` und `IST_GELAGERT_IN` bilden Ressourcenbestände und Lagerbezug ab. |
 | Mindestbestand | In `RESSOURCE` ist mit `MIN_SCHWELLENWERT` eine Grundlage für kritische Bestände vorhanden. |
 | Testdaten | In `sql/build/mysql.sql` sind Beispieldaten für Ressourcen, Lager und weitere Projektbereiche enthalten. |
+| Bestandsverlauf | `BESTANDSBEWEGUNG` speichert Verbrauch, Nachschub und Korrekturen für die BP1-Diagramme. |
 | DBMS-Linie | Für die aktuelle Dokumentation steht MariaDB/MySQL im Vordergrund. Oracle bleibt als vorhandene Alt- bzw. Alternativdatei im Repository erhalten. |
 
 ## 4. Bewertung nach Feedback
@@ -64,6 +65,8 @@ Die Erweiterung wurde bewusst additiv umgesetzt. Bestehende Tabellen wurden nich
 ## 7. Testdaten
 
 In `sql/build/mysql.sql` wurden Beispieldaten ergänzt, damit der Verkaufsprozess demonstrierbar ist.
+
+Zusätzlich enthält `sql/build/mysql.sql` reproduzierbare Verbrauchsdaten für Wasser, Sauerstoff und Nahrung. Für bestehende Datenbanken liegt dieselbe Ergänzung als `sql/build/resourceGraphsMigration.sql` vor.
 
 | Bereich | Beispieldaten |
 |---|---|
