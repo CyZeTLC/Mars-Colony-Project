@@ -1,119 +1,84 @@
-# AP11: BPMN-Modellierung
+# AP11 – BPMN-Modellierung BP1
 
-## Prozess 1: Kritische Ressourcen überwachen und Nachschub auslösen
-![BPMN Notation](../docu-assets/1-mars-logistik-verwaltung-als-kritische-ressourcen-ueberwachen.png)
+## Kritische Ressourcen überwachen und Nachschub auslösen
+
+Status: finales Modell v11
+
 ## Ziel
 
-Dieses Arbeitspaket beschreibt den Businessprozess „Kritische Ressourcen überwachen und Nachschub auslösen“ und bildet ihn als BPMN-Modell ab.
+BP1 ist einer der zwei Hauptprozesse und gemäß dem Gesprächsprotokoll vom 24.06.2026 das durchgehende Beispiel der Abschlusspräsentation:
 
-Der Prozess gehört zu den Hauptprozessen der Mars Logistik Verwaltung [ALS], weil Sauerstoff, Wasser, Nahrung und Ersatzteile für den Betrieb der Marskolonie kritisch sind.
+```text
+Use Case → Businessprozess → BPMN-Modell → Stored Procedures → Applikationsbezug
+```
 
-Die Ausarbeitung orientiert sich am Feedback von Prof. Dr. Becking und konzentriert sich auf den reduzierten Projektfokus.
+Das aktuelle ausführbare Modell liegt unter:
 
----
+[`../../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn`](../../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn)
 
-## Prozessbeschreibung
+Die älteren Dateien `v01` bis `v10` dokumentieren die Entwicklung des Modells.
 
-Der Prozess startet, wenn Bestände und Sensorwerte aktualisiert wurden.
+## Beteiligte
 
-Das System überwacht die Ressourcen und prüft, ob ein Mindestbestand unterschritten wurde.
-
-Wenn kein Mindestbestand unterschritten wurde, läuft der Normalbetrieb weiter.
-
-Wenn ein Mindestbestand unterschritten wurde, wird eine kritische Ressource gemeldet und der konkrete Bedarf berechnet.
-
-Danach wird geprüft, ob die benötigte Ressource intern verfügbar ist.
-
-Wenn die Ressource intern verfügbar ist, wird eine interne Umlagerung oder Produktion geplant und anschließend die Versorgung abgesichert.
-
-Wenn die Ressource nicht intern verfügbar ist, wird externer Nachschub angefordert. Danach wird der Nachschub empfangen und der Bestand aktualisiert.
-
-Der Prozess endet, sobald die Versorgung gesichert ist.
-
----
-
-## Beteiligte Bereiche
-
-| Bereich | Aufgabe |
+| Pool / Lane | Aufgabe |
 |---|---|
-| System / Sensorik | Bestände überwachen und Sensorwerte auswerten |
-| Leitstand / Kolonieleitung | Kritische Ressourcen bewerten und Bedarf berechnen |
-| Lager / Produktion | Interne Umlagerung oder Produktion planen |
-| Logistik / Ausführung | Interne Umlagerung oder externe Lieferung organisatorisch abwickeln |
+| System / Sensorik | Bestands- und Sensordaten aktualisieren, Ressourcenstatus überwachen und Warnung versenden |
+| Leitstand / Kolonieleitung | Warnung bewerten, Kritikalität einstufen, Nachschubbedarf berechnen und Notfallentscheidung treffen |
+| Lager / Produktion | Interne Produktion durchführen und einlagern |
+| Logistik / Transport | Externen Nachschub anfordern, Transport koordinieren und Lieferung einlagern |
+| Externer Support | Rückmeldung zur externen Verfügbarkeit |
 
----
+## Ablauf des finalen Modells
 
-## Zentrale Entscheidungen
+1. Neue Bestands- und Sensordaten gehen ein und werden aktualisiert.
+2. Das System überwacht den Ressourcenstatus und vergleicht Ist- und Mindestbestand.
+3. Ohne Unterschreitung wird der Ist-Bestand aktualisiert; der Normalbetrieb bleibt gesichert.
+4. Bei Unterschreitung meldet das System die kritische Ressource und versendet eine Warnung.
+5. Die Kolonieleitung stuft parallel die Kritikalität ein und berechnet den Nachschubbedarf. Anschließend wird ein Bedarfsbericht erstellt.
+6. Bei einer internen Lösung wird produziert und eingelagert.
+7. Andernfalls wird externer Nachschub angefordert und die Rückmeldung abgewartet.
+8. Ist eine externe Reserve oder Produktion verfügbar, werden Transport, Empfang und Einlagerung durchgeführt.
+9. Ist sie nicht verfügbar, wird der Notfallmodus mit Eskalation eingeleitet.
+10. Nach erfolgreicher interner oder externer Versorgung wird der Bestand aktualisiert und der Normalbetrieb gesichert.
 
-| Entscheidung | Ergebnis |
+## Datenobjekte und Entscheidungen
+
+| Element | Bedeutung |
 |---|---|
-| Unter Mindestbestand? | Ja: Bedarf wird bearbeitet. Nein: Normalbetrieb |
-| Intern verfügbar? | Ja: interne Lösung. Nein: externer Nachschub |
+| Sensordaten / Bestandsdaten | Ausgangsdaten der Überwachung |
+| Mindestbestand | Vergleichswert für die Kritikalität |
+| Bedarfsbericht | Ergebnis aus Einstufung und Bedarfsberechnung |
+| Nachschubauftrag | Übergabe an den externen Ablauf |
+| Produktionsplan | Grundlage der internen Lösung |
+| Ist-Bestand unter Mindestbestand? | entscheidet zwischen Normalbetrieb und Warnpfad |
+| Interne Lösung verfügbar? | entscheidet zwischen Produktion und externem Nachschub |
+| Externe Reserve / Produktion verfügbar? | entscheidet zwischen Transport und Eskalation |
 
----
+## Bezug zu Stored Procedures
 
-## Bezug zur Datenbank
-
-Der Prozess kann durch SQL-Abfragen und Stored Procedures unterstützt werden.
-
-Relevante Datenbankaufgaben:
-
-| Aufgabe | Zweck |
+| Stored Procedure | BPMN-Bezug |
 |---|---|
-| Ressourcenbestand prüfen | aktuelle Bestände auslesen |
-| Mindestbestand vergleichen | kritische Ressourcen erkennen |
-| Bedarf berechnen | fehlende Menge bestimmen |
-| interne Verfügbarkeit prüfen | Lager oder Produktion auswerten |
-| Bestand aktualisieren | neue Werte speichern |
+| `getRessourcesBelowMin()` | Ist- und Mindestbestand vergleichen |
+| `getRessourcesAtRisk()` | Ablauf- und Bestandsrisiken ergänzen |
+| `getNachschubanforderungen()` | Bedarf, interne Verfügbarkeit und empfohlene Maßnahme ableiten |
+| `getRessourcenWithLager()` | Ressourcen einem Lager zuordnen |
 
-Konkret umgesetzte Stored Procedures für BP1:
+Die Dateien liegen unter `sql/storedProcedure/bp1/` und `sql/storedProcedure/shared/`. Entsprechend dem dritten Gesprächsprotokoll sollen sie den Datenbankzugriff bilden. Die aktuelle PHP-API verwendet dafür noch SQL-Dateien; die Stored-Procedure-Anbindung ist offen.
 
-| Stored Procedure | Prozessschritt | Ergebnis |
-|---|---|---|
-| `sql/storedProcedure/bp1/getRessourcesBelowMin.sql` | Mindestbestand vergleichen | zeigt kritische Ressourcen inklusive Fehlmenge und Handlungspriorität |
-| `sql/storedProcedure/bp1/getRessourcesAtRisk.sql` | Ablaufdatum prüfen | zeigt abgelaufene oder bald ablaufende Ressourcen mit empfohlener Maßnahme |
-| `sql/storedProcedure/bp1/getNachschubanforderungen.sql` | Bedarf berechnen und interne Verfügbarkeit prüfen | erstellt eine fachliche Nachschubliste mit Anforderungsmenge, Grund und Maßnahme |
+## Applikationsbezug
 
----
+Das Dashboard zeigt bereits:
 
-## Bezug zur Webanwendung
+- Ressourcenverbrauch für Wasser, Sauerstoff und Nahrung,
+- Bestand relativ zum Mindestbestand,
+- allgemeine Koloniekennzahlen.
 
-Die Webanwendung kann den Prozess über ein Ressourcen-Dashboard sichtbar machen.
-
-Mögliche Anzeigen:
-
-| Anzeige | Nutzen |
-|---|---|
-| aktuelle Bestände | Überblick |
-| kritische Ressourcen | Warnung |
-| Nachschubbedarf | Entscheidungsgrundlage |
-| Nachschubstatus | Kontrolle |
-| aktualisierte Bestände | Prüfung der Versorgung |
-
----
+Die Ressourcenseite enthält Ansichten für kritische Ressourcen, Lager und Bestände. Ein vollständiger UI-Ablauf für Nachschubauftrag, externe Rückmeldung und Eskalation ist nicht implementiert; diese Schritte werden im BPMN fachlich modelliert.
 
 ## Ergebnis
 
-Das BPMN-Modell zeigt, wie kritische Ressourcen erkannt, bewertet und durch interne oder externe Maßnahmen abgesichert werden.
-
-Der Prozess ist fachlich sinnvoll, wirtschaftlich relevant und gut für eine datenbankgestützte Umsetzung geeignet.
-
----
-
-## Offene Punkte
-
-| Punkt | Status |
-|---|---|
-| Feedback von Prof. Dr. Becking einarbeiten | erledigt |
-| SQL-Abfragen konkret zuordnen | erledigt |
-| Stored Procedures planen | erledigt |
-| BPMN-Modell final prüfen | offen |
-| BPMN-Grafik in Projektdokumentation einfügen | vorbereitet |
-
----
+Das finale BPMN-v11-Modell bildet Normalbetrieb, interne Versorgung, externen Nachschub und Notfalleskalation ab. Damit ist BP1 fachlich detailliert und als roter Faden für die Abschlusspräsentation vorbereitet.
 
 ## Dauer
 
 Dauer: 1,5 Tage
-
-Hinweis: AP11 ist in zwei BPMN-Dateien aufgeteilt. Zusammen ergeben Prozess 1 und Prozess 2 einen Gesamtaufwand von 3 Tagen.

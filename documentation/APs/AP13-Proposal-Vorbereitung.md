@@ -1,5 +1,7 @@
 # AP13 – Proposal Vorbereitung
 
+> Einordnung: Dieses Dokument hält die Vorbereitung der Proposal-Phase fest. Für die Abschlusspräsentation gilt inzwischen der BP1-Fokus aus Gesprächsprotokoll 04.
+
 ## Ziel
 
 In AP13 wird das Projektproposal für die Mars Logistik Verwaltung [ALS] vorbereitet.

@@ -1,5 +1,7 @@
 # AP13 – Proposal Ausgearbeitet
 
+> Einordnung: Dieses Dokument hält den Stand der Proposal-Phase fest. Für die Abschlusspräsentation wurde später gemäß Gesprächsprotokoll 04 BP1 als durchgehendes Beispiel priorisiert; der aktuelle technische Stand ist in `documentation/README.md` zusammengefasst.
+
 Status: ausgearbeitet / vortragsfähig
 
 Projekt: Mars Logistik Verwaltung [ALS]  

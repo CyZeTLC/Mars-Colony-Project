@@ -1,257 +1,77 @@
-# Mars Colony Webapp Documentation
+# Projektdokumentation
 
-## Übersicht
+Stand: 03.07.2026
 
-Die Mars Colony Webapp ist eine Webanwendung zur Verwaltung einer simulierten Marskolonie. Sie ermöglicht die Überwachung und Verwaltung von Städten, Bürgern, Mitarbeitern, Ressourcen, Fahrzeugen und Transportwegen auf dem Mars.
+Diese Dokumentation beschreibt den aktuellen Stand der **Mars Logistik Verwaltung [ALS]**. Verbindliche Referenz für fachliche Entscheidungen und Prioritäten sind die Gesprächsprotokolle.
 
-## Technologie-Stack
+## Aktueller Fokus
 
-- **Frontend**: React mit TypeScript, Vite als Build-Tool
-- **Styling**: Tailwind CSS
-- **Backend**: PHP-API
-- **Datenbank**: Oracle und MySQL (SQL-Skripte bereitgestellt)
-- **Authentifizierung**: Login-System
+Das Projekt umfasst zwei Businessprozesse:
 
-## Installation
+1. **Kritische Ressourcen überwachen und Nachschub auslösen**
+2. **Überschüssige Ressourcen an externe Unternehmen verkaufen**
 
-### Voraussetzungen
+Für die Abschlusspräsentation wird BP1 als durchgehendes Beispiel verwendet:
 
-- Node.js (Version 16 oder höher)
-- PHP (für die API)
-- Datenbankserver (Oracle oder MySQL)
-
-### Schritte
-
-1. **Repository klonen**:
-   ```bash
-   git clone https://github.com/CyZeTLC/Mars-Colony-Project.git
-   cd mars-colony
-   ```
-
-2. **Abhängigkeiten installieren**:
-   ```bash
-   npm install
-   ```
-
-3. **Datenbank einrichten**:
-   - Verwenden Sie die SQL-Skripte in `sql/build/` (oracle.sql oder mysql.sql)
-   - Konfigurieren Sie die Datenbankverbindung in `api/config.inc.php`
-
-4. **API starten**:
-   - Stellen Sie sicher, dass PHP läuft
-   - Die API ist unter `api/` verfügbar
-
-5. **Entwicklungsserver starten**:
-   ```bash
-   npm run dev
-   ```
-
-## Verwendung
-
-### Navigation
-
-Die App besteht aus folgenden Hauptseiten:
-
-- **Overview**: Dashboard mit Übersicht über die Kolonie
-- **Cities**: Verwaltung der Städte und deren Koordinaten
-- **Citizens**: Liste und Details der Bürger
-- **Employees**: Mitarbeiterverwaltung und Berufe
-- **Ressources**: Ressourceninventar und Lager
-- **Vehicles**: Fahrzeuge und Raumfahrzeuge
-- **SqlOverview**: Direkte SQL-Abfragen & Results der Queries
-
-### Login
-
-Melden Sie sich mit einem Mitarbeiter-Account an, um Zugriff auf die Funktionen zu erhalten.
-
-## REST-API (restApi.php)
-
-Die REST-API in `api/restApi.php` stellt die Backend-Funktionalität für die Webapp bereit. Sie verwendet GET-Parameter für Anfragen und gibt JSON-Antworten zurück. Alle Anfragen erfordern einen gültigen CSRF-Token.
-
-### Basis-URL
-```
-GET /api/restApi.php?action={action}&csrf={csrf}&{additional_params}
+```text
+Use Case → Businessprozess → BPMN-Modell → Stored Procedures → Applikationsbezug
 ```
 
-### CSRF-Schutz
-- Jede Anfrage muss einen `csrf`-Parameter enthalten.
-- Verwenden Sie `generate_csrf`, um einen neuen Token zu erhalten.
-- Tokens sind 24 Stunden gültig.
+BP2 bleibt Teil des Projekts und der Dokumentation, steht in der Abschlusspräsentation aber nicht im Mittelpunkt.
 
-### Verfügbare Aktionen
+## Zentrale Dokumente
 
-#### 1. generate_csrf
-Generiert einen neuen CSRF-Token.
+| Dokument | Inhalt |
+|---|---|
+| [`Gesprächsprotokoll/`](Gesprächsprotokoll/) | Referenz für Feedback und Projektentscheidungen |
+| [`businessprozesse-v2.md`](businessprozesse-v2.md) | Auswahl und Priorisierung der Businessprozesse |
+| [`APs/AP10-Revision-Use-Cases.md`](APs/AP10-Revision-Use-Cases.md) | Use Cases für BP1 und BP2 |
+| [`APs/AP11-BPMN-Modellierung-BP1-Kritische RessourcenÜberwachenUndNachschubAuslösen.md`](APs/AP11-BPMN-Modellierung-BP1-Kritische%20RessourcenÜberwachenUndNachschubAuslösen.md) | BP1 und finales BPMN-Modell |
+| [`APs/AP11-BPMN-Modellierung-BP2-Ueberschuessige-Ressourcen-an-externe-Unternehmen-verkaufen.md`](APs/AP11-BPMN-Modellierung-BP2-Ueberschuessige-Ressourcen-an-externe-Unternehmen-verkaufen.md) | Fachliche BP2-Modellierung |
+| [`lastenheft-und-pflichtenheft-v2.md`](lastenheft-und-pflichtenheft-v2.md) | Anforderungen und technischer Umsetzungsstand |
+| [`datenbankabfragen-v4.md`](datenbankabfragen-v4.md) | SQL-Abfragen, Stored Procedures und BP1-Diagrammdaten |
+| [`documentation-structure.md`](documentation-structure.md) | Vollständige Struktur und Status der Unterlagen |
 
-**Parameter:**
-- Keine zusätzlichen Parameter
+## Technischer Ist-Stand
 
-**Antwort:**
-```json
-{
-  "csrf": "token_string"
-}
+| Ebene | Umsetzung |
+|---|---|
+| Frontend | React 19, TypeScript 6 und Vite 8 |
+| UI | Tailwind CSS 3, Material UI und Recharts |
+| Backend | PHP-REST-API mit PDO |
+| Datenbank | MariaDB/MySQL |
+| Sicherheit | Login, PHP-Session und CSRF-Token im Header `X-CSRF-Token` |
+| Datenbanklogik | 38 Query-Dateien und 38 passende Stored Procedures |
+
+Die Webanwendung enthält Dashboard, Ressourcen-, Fahrzeug-, Mitarbeiter-, Bürger-, Städte- und SQL-Ansichten. Neu im BP1-Bezug sind Diagramme für Ressourcenverbrauch sowie Bestand gegen Mindestbestand.
+
+Die Stored Procedures bilden gemäß Gesprächsprotokoll 03 die Zielarchitektur für Datenbankzugriffe. Die aktuelle PHP-API führt im Repository noch SQL-Dateien aus; eine produktive Stored-Procedure-Anbindung ist deshalb weiterhin offen.
+
+## Datenbank einrichten
+
+Für einen vollständigen MariaDB-/MySQL-Import:
+
+```text
+sql/build/mysql.sql
 ```
 
-#### 2. get_sql_result
-Führt eine spezifische SQL-Datei nach bestehender API-Logik aus und gibt das Ergebnis zurück.
+Für eine bestehende Datenbank mit noch fehlenden BP1-Diagrammdaten:
 
-**Parameter:**
-- `file`: Dateiname der SQL-Datei, z.B. `getCitizensCount.sql`
-
-**Antwort:**
-```json
-{
-  "result": [/* SQL-Ergebnis */]
-}
+```text
+sql/build/resourceGraphsMigration.sql
 ```
 
-**Beispiel:** `/api/restApi.php?action=get_sql_result&csrf={token}&file=getCitizensCount.sql`
+Das aus dem Datenmodell erzeugte Schema liegt zusätzlich unter `sql/build/marskolonie_mysql.sql`. Oracle-Dateien sind nur Alt-/Alternativstände und nicht die aktuelle Projektlinie.
 
-#### 3. get_active_vehicles_count
-Gibt die Anzahl aktiver Fahrzeuge zurück.
+## API-Grundform
 
-**Parameter:**
-- Keine zusätzlichen Parameter
-
-**Antwort:**
-```json
-{
-  "active_vehicles": [/* Fahrzeugdaten */]
-}
+```text
+GET /api/restApi.php?action={action}
+X-CSRF-Token: {token}
 ```
 
-#### 4. get_citizens_count
-Gibt die Anzahl der Bürger zurück.
+Der CSRF-Token wird über `generate_csrf` erzeugt und ist 24 Stunden gültig. Er wird als HTTP-Header übertragen, nicht als Queryparameter.
 
-**Parameter:**
-- Keine zusätzlichen Parameter
+## Historische Dokumente
 
-**Antwort:**
-```json
-{
-  "citizens_count": [/* Bürgeranzahl */]
-}
-```
-
-#### 5. get_dashboard_stats
-Gibt Dashboard-Statistiken zurück (Bürger, Städte, Fahrzeuge, Energie).
-
-**Parameter:**
-- Keine zusätzlichen Parameter
-
-**Antwort:**
-```json
-{
-  "citizens_count": [...],
-  "cities_count": [...],
-  "vehicles": [...],
-  "energy_power": [...]
-}
-```
-
-#### 6. get_all_tables
-Gibt alle verfügbaren Tabellen aus den SQL-Dateien zurück.
-
-**Parameter:**
-- Keine zusätzlichen Parameter
-
-**Antwort:**
-```json
-{
-  "tables": {
-    "tableName": {
-      "result": [/* Daten */],
-      "sql": "/* SQL-Inhalt */"
-    }
-  }
-}
-```
-
-#### 7. get_sql_files
-Gibt den Inhalt aller SQL-Dateien zurück.
-
-**Parameter:**
-- Keine zusätzlichen Parameter
-
-**Antwort:**
-```json
-{
-  "sql_content": "/* Vollständiger SQL-Inhalt aller Dateien */"
-}
-```
-
-### Fehlerbehandlung
-Die API gibt strukturierte Fehlerantworten zurück:
-
-```json
-{
-  "error": 400,
-  "message": "Invalid request!"
-}
-```
-
-Häufige Fehlercodes:
-- `400`: Ungültige Anfrage (fehlende Parameter)
-- `403`: Ungültiger oder abgelaufener CSRF-Token
-- `501`: Aktion nicht implementiert
-
-### Verwendung im Frontend
-Das Frontend verwendet die API über die `restApi.ts`-Datei in `src/utils/`. Beispiel:
-
-```typescript
-import { apiCall } from '../utils/restApi';
-
-const stats = await apiCall('get_dashboard_stats');
-```
-
-## Datenbankstruktur
-
-## Datenbankstruktur
-
-Die Datenbank enthält Tabellen für:
-
-- Städte (STADT)
-- Bürger (BEWOHNER)
-- Mitarbeiter (MITARBEITER)
-- Ressourcen (RESSOURCE)
-- Fahrzeuge (FAHRZEUGE, RAUMFAHRZEUG)
-- Transportwege (TRANSPORTWEGE)
-- Und mehr...
-
-Vollständiges Schema in `sql/build/oracle.sql` oder `sql/build/mysql.sql`.
-
-## Entwicklung
-
-### Skripte
-
-- `npm run dev` - Entwicklungsserver starten
-- `npm run build` - Produktionsbuild erstellen
-- `npm run preview` - Build-Vorschau
-
-### Projektstruktur
-
-```
-src/
-├── components/     # Wiederverwendbare Komponenten
-├── pages/          # Hauptseiten der App
-├── utils/          # Hilfsfunktionen
-└── assets/         # Statische Assets
-
-api/                # PHP-API
-sql/                # Datenbankskripte
-public/             # Öffentliche Assets
-```
-
-## Beitrag
-
-Für Beiträge zum Projekt:
-
-1. Fork das Repository
-2. Erstellen Sie einen Feature-Branch
-3. Committen Sie Ihre Änderungen
-4. Erstellen Sie einen Pull-Request
-
-## Lizenz
-
-Dieses Projekt ist unter der MIT-Lizenz lizenziert. Siehe `LICENSE.txt` für Details.
+Der Ordner [`archive/`](archive/) enthält ersetzte Versionen. Sie bleiben zur Nachvollziehbarkeit unverändert und sind nicht als aktueller Projektstand zu lesen.

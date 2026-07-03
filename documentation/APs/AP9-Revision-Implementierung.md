@@ -21,7 +21,7 @@ Die Implementierung soll diese Prozesse nachvollziehbar unterstützen, ohne den 
 | API | Eine PHP-API ist vorhanden und stellt Daten im JSON-Format bereit. |
 | Datenbank | MariaDB/MySQL wird als aktuelle Datenbanklinie verwendet. |
 | SQL-Dateien | SQL-Build-Dateien und fachliche Abfragen sind im Repository vorhanden. |
-| Stored Procedures | Ein Ordner für Stored-Procedure-Dateien ist vorhanden und kann weiter ausgebaut werden. |
+| Stored Procedures | 38 passende Stored Procedures sind vorhanden; die API-Anbindung ist offen. |
 | Testdaten | In `sql/build/mysql.sql` sind Beispieldaten für die Demonstration enthalten. |
 
 ## 3. Bewertung nach Feedback
@@ -39,6 +39,8 @@ Die Implementierung soll diese Prozesse nachvollziehbar unterstützen, ohne den 
 |---|---|---|
 | SQL-Build-Skripte | Verkaufstabellen in `marskolonie_mysql.sql` und `mysql.sql` ergänzt. | Prozess 6 kann datenbankseitig abgebildet werden. |
 | Beispieldaten | Seed-Daten für externe Unternehmen, Überschussbewertungen und Verkaufspositionen ergänzt. | Der Verkaufsprozess ist in einer Präsentation leichter erklärbar. |
+| BP1-Dashboard | Ressourcenverbrauch und Bestand gegen Mindestbestand ergänzt. | Der Applikationsbezug von BP1 ist direkt sichtbar. |
+| Bestandsbewegungen | `BESTANDSBEWEGUNG` in `mysql.sql` sowie `resourceGraphsMigration.sql` ergänzt. | Verbrauchsdaten können über zwölf Monate demonstriert werden. |
 | Ressourcenbezug | Verkaufspositionen beziehen sich auf konkrete Ressourcen und Lager. | Die Verbindung zwischen Lagerbestand und Verkauf bleibt nachvollziehbar. |
 | Dokumentation | AP5, AP10, AP11, AP12 und AP13 wurden auf den Zwei-Prozess-Fokus ausgerichtet. | Implementierung und Dokumentation erzählen dieselbe fachliche Linie. |
 
@@ -64,6 +66,8 @@ Nicht weiter ausgebaut werden außerdem Transportplanung, Energieverteilung, Per
 Die Implementierung passt zum reduzierten Projektumfang.
 
 Prozess 1 wird durch vorhandene Ressourcen-, Lager- und Mindestbestandsdaten unterstützt. Prozess 6 wurde durch neue Verkaufstabellen und Seed-Daten ergänzt.
+
+Die aktuelle PHP-API führt weiterhin SQL-Dateien aus. Die Stored Procedures sind vollständig vorbereitet, müssen gemäß Gesprächsprotokoll 03 aber noch produktiv angebunden werden.
 
 Damit kann die Anwendung in der Präsentation als datenbankgestützte Unterstützung der zwei ausgewählten Businessprozesse erklärt werden.
 

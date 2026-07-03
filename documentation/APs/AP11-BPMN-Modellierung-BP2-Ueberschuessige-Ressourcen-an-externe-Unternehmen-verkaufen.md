@@ -2,13 +2,15 @@
 
 ## Prozess 2: Überschüssige Ressourcen an externe Unternehmen verkaufen
 
+Status: fachlich beschrieben; kein finales BPMN-Modell im Repository
+
 ## Ziel
 
 Dieses Arbeitspaket beschreibt den Businessprozess „Überschüssige Ressourcen an externe Unternehmen verkaufen“ und bereitet ihn für die BPMN-Modellierung vor.
 
 Der Prozess gehört zu den zwei Hauptprozessen der Mars Logistik Verwaltung [ALS], weil überschüssige oder lokal produzierte Ressourcen nicht unkontrolliert gelagert werden sollen. Stattdessen sollen sie wirtschaftlich bewertet und bei Eignung für eine externe Abgabe vorbereitet werden.
 
-Die finale BPMN-Grafik wird ergänzt, sobald das Modell erstellt und geprüft wurde.
+BP2 bleibt Bestandteil des Projekts. Nach dem Gespräch vom 24.06.2026 wird für die Abschlusspräsentation jedoch BP1 priorisiert; ein finales BP2-BPMN-Modell ist deshalb kein Bestandteil des aktuellen Repository-Stands.
 
 ---
 
@@ -95,7 +97,7 @@ Mögliche Anzeigen:
 
 ## Ergebnis
 
-Das BPMN-Modell soll zeigen, wie überschüssige Ressourcen erkannt, bewertet und für eine mögliche externe Abgabe vorbereitet werden.
+Die fachliche Modellierung zeigt, wie überschüssige Ressourcen erkannt, bewertet und für eine mögliche externe Abgabe vorbereitet werden.
 
 Der Prozess ist fachlich sinnvoll, weil er den wirtschaftlichen Nutzen der Marskolonie sichtbar macht. Gleichzeitig bleibt der Umfang realistisch, weil kein vollständiges Verkaufs- und Zahlungssystem umgesetzt werden muss.
 
@@ -105,8 +107,8 @@ Der Prozess ist fachlich sinnvoll, weil er den wirtschaftlichen Nutzen der Marsk
 
 | Punkt | Status |
 |---|---|
-| BPMN-Modell erstellen | offen |
-| BPMN-Grafik in Projektdokumentation einfügen | offen |
+| Finales BPMN-Modell erstellen | offen / nach BP1 priorisiert |
+| BPMN-Grafik in Projektdokumentation einfügen | offen / nach BP1 priorisiert |
 | SQL-Abfragen konkret zuordnen | erledigt |
 | Prüfen, ob spätere Verkaufstabellen benötigt werden | erledigt |
 | Feedback von Prof. Dr. Becking einarbeiten | erledigt |
@@ -117,4 +119,4 @@ Der Prozess ist fachlich sinnvoll, weil er den wirtschaftlichen Nutzen der Marsk
 
 Dauer: 1,5 Tage
 
-Hinweis: AP11 ist in zwei BPMN-Dateien aufgeteilt. Zusammen ergeben Prozess 1 und Prozess 2 einen Gesamtaufwand von 3 Tagen.
+Hinweis: AP11 dokumentiert beide Prozesse getrennt. Der geschätzte Gesamtaufwand für die fachliche Ausarbeitung von Prozess 1 und Prozess 2 beträgt 3 Tage.

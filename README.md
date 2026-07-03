@@ -1,136 +1,82 @@
 <div align="center">
-  <img src="https://hsbi.cyzetlc.de/HSBI_Signet-scaled.png" alt="Logo" width="600" height="120">
+  <img src="https://hsbi.cyzetlc.de/HSBI_Signet-scaled.png" alt="HSBI-Logo" width="600" height="120">
 
-  <h3 align="center">Mars Logisitik Verwaltung (ALS) - Projekt</h3>
-
-  <p align="center">
-    ERD & PDM, SQL Queries, TypeScript WepApp, php backend, ..
-    <br />
-    <a href="https://github.com/CyZeTLC/Mars-Colony-Project/issues">Fehler melden</a>
-    ·
-    <a href="https://github.com/CyZeTLC/Mars-Colony-Project/pulls">Feature Request</a>
-  </p>
+  <h3>Mars Logistik Verwaltung (ALS)</h3>
+  <p>Datenbankgestützte Verwaltung einer simulierten Marskolonie</p>
 </div>
 
-<div align="center">
+## Projektfokus
 
-![GitHub License](https://img.shields.io/github/license/CyZeTLC/Mars-Colony-Project?style=for-the-badge)
-![GitHub stars](https://img.shields.io/github/stars/CyZeTLC/Mars-Colony-Project?style=for-the-badge)
-![Letze Aenderung](https://img.shields.io/github/last-commit/CyZeTLC/Mars-Colony-Project?style=for-the-badge)
+Das Semesterprojekt verbindet eine React-Webanwendung mit einer PHP-REST-API und einer MariaDB-/MySQL-Datenbank. Fachlich umfasst das Projekt zwei Businessprozesse:
 
-</div>
+1. **Kritische Ressourcen überwachen und Nachschub auslösen**
+2. **Überschüssige Ressourcen an externe Unternehmen verkaufen**
 
----
+Für die Abschlusspräsentation steht gemäß dem Gesprächsprotokoll vom 24.06.2026 der erste Prozess im Mittelpunkt:
 
-## Über das Projekt
-
-Dieses Repository enthält alle technischen Komponenten für das Semesterprojekt **Mars Logisitk Verwaltung** für das Modul Datenbanken-1 im WS 25/26. Es dient als zentraler Speicherort für die serverseitige Logik sowie die Web-Integrationen & SQL Queries.
-
-### Kern-Features:
-* **WebApp:** Echtzeit-Datenabfrage über das Web in Form einer modernen TypeScript App (mit php backend). 
-* **ERD/PDM:** Die Darstellung der Datenbankstruktur durch ein den SAP PowerDesigner.
-* **SQL Queries:** Datenbankabfragen für die WebApp.
-
----
-
-## Technologie-Stack
-
-| Rolle | Technologie | Beschreibung |
-| :--- | :--- | :--- |
-| **Frontend Framework** | **React** (mit Hooks) | Komponentenbasiertes UI-Design. |
-| **Sprache** | **TypeScript** | Stellt Typensicherheit und bessere Wartbarkeit sicher. |
-| **Build Tool** | **Vite** | Schneller Development-Server und effizientes Bundling. |
-| **Styling** | **Tailwind CSS v4** | Utility-First CSS-Framework für das futuristische Mars-Design. |
-| **Backend/Daten** | **Oracle Database** | Der geplante Datenbank-Layer für die persistente Speicherung der Kolonie-Daten. |
-
----
-
-## Einrichtung und Installation (Schritt-für-Schritt)
-
-### 1. Klonen und Abhängigkeiten installieren
-
-Stelle sicher, dass du **Node.js (LTS)** und **npm** installiert hast.
-
-```bash
-# Repository klonen
-git clone https://github.com/CyZeTLC/Mars-Colony-Project
-
-# Alle notwendigen Pakete installieren (React, Vite, Tailwind v3, etc.)
-npm install
+```text
+Use Case → Businessprozess → BPMN-Modell → Stored Procedures → Applikationsbezug
 ```
 
-### 2. Applikation starten
+## Technologie
 
-Starte den Vite-Entwicklungsserver:
+| Bereich | Aktueller Stand |
+|---|---|
+| Frontend | React 19, TypeScript 6, Vite 8 |
+| Oberfläche | Tailwind CSS 3, Material UI, Recharts |
+| Backend | PHP mit PDO und JSON-REST-API |
+| Datenbank | MariaDB/MySQL; Oracle-Skripte bleiben als Alt-/Alternativstand erhalten |
+| Datenbanklogik | SQL-Abfragen und 38 zugeordnete Stored Procedures |
+| Sicherheit | Login, Session und CSRF-Token |
+
+## Lokaler Start
+
+Voraussetzung für Vite 8 ist Node.js `^20.19.0` oder `>=22.12.0`.
 
 ```bash
+git clone https://github.com/CyZeTLC/Mars-Colony-Project.git
+cd Mars-Colony-Project
+npm install
 npm run dev
 ```
 
-Die Anwendung ist nun über die angezeigte lokale URL (z.B. http://localhost:5173/) erreichbar.
+Für die vollständige Anwendung werden zusätzlich PHP, eine konfigurierte Datenbankverbindung in `api/config.inc.php` und ein MariaDB-/MySQL-Schema benötigt.
 
----
+## Datenbank
 
-## REST API Dokumentation
+- `sql/build/mysql.sql`: vollständiger Import mit Beispieldaten und `BESTANDSBEWEGUNG`
+- `sql/build/marskolonie_mysql.sql`: aus dem Datenmodell erzeugtes MySQL-Schema
+- `sql/build/resourceGraphsMigration.sql`: Migration und Demo-Verbrauchsdaten für eine bestehende Datenbank
+- `sql/queries/`: lesbare Abfragen nach `bp1`, `bp2`, `shared` und `general`
+- `sql/storedProcedure/`: passende Stored-Procedure-Varianten
 
-Die Anwendung verfügt über eine interne Schnittstelle zur Abfrage von Datenbank-Statistiken und zur Verwaltung von CSRF-Sicherheitstoken. Alle Antworten werden im **JSON-Format** zurückgegeben.
+Die zwei Abfragen für die BP1-Diagramme liegen direkt unter `sql/`, da die aktuelle API nur dort einzelne Dateien auflöst.
 
-### Basis-Konfiguration
+## API
 
-* **Endpunkt:** `restApi.php`
-* **Methode:** `GET`
-* **Pflichtparameter:** `action` und `csrf`
+Basis-URL:
 
----
-
-### Sicherheit (CSRF-Schutz)
-
-Um Anfragen zu autorisieren, muss jeder Request einen gültigen CSRF-Token enthalten.
-
-* Ein Token ist **24 Stunden** gültig.
-* Falls kein Token vorhanden ist oder dieser abgelaufen ist, gibt die API einen `403 Forbidden` Fehler zurück.
-* **Initialer Abruf:** Nutze die Action `generate_csrf`, um einen Token zu generieren.
-
----
-
-### Endpunkte (Actions)
-
-| Action | Beschreibung | Parameter |
-| --- | --- | --- |
-| `generate_csrf` | Generiert einen neuen CSRF-Token für die Session. | - |
-| `get_dashboard_stats` | Liefert aggregierte Daten (Bürger, Städte, Fahrzeuge, Energie). | - |
-| `get_active_vehicles_count` | Gibt die Anzahl der aktuell aktiven Fahrzeuge zurück. | - |
-| `get_citizens_count` | Gibt die Gesamtzahl der Bürger zurück. | - |
-| `get_sql_result` | Führt eine spezifische SQL-Datei nach bestehender API-Logik aus. | `file` (Dateiname, z.B. `getCitizensCount.sql`) |
-| `get_all_tables` | Gibt alle SQL-Abfrageergebnisse inkl. des SQL-Quellcodes zurück. | - |
-| `get_sql_files` | Listet den Inhalt aller verfügbaren SQL-Dateien auf. | - |
-
----
-
-### Fehlerbehandlung
-
-Die API nutzt Standard-HTTP-Statuscodes:
-
-* **200 OK:** Anfrage erfolgreich.
-* **400 Bad Request:** Fehlende Parameter (action/csrf) oder ungültige Datei.
-* **403 Forbidden:** CSRF-Token fehlt, ist ungültig oder abgelaufen.
-* **501 Not Implemented:** Die angeforderte Action existiert nicht.
-
-**Beispiel für eine Fehlermeldung:**
-
-```json
-{
-  "error": 403,
-  "message": "CSRF-Token expired!"
-}
+```text
+GET /api/restApi.php?action={action}
+X-CSRF-Token: {token}
 ```
 
----
+`generate_csrf` benötigt keinen Token. Alle anderen Aktionen erwarten ihn im HTTP-Header `X-CSRF-Token`; ein Token ist 24 Stunden gültig.
 
-### Beispiel-Abfrage (JavaScript/Fetch)
+Wichtiger Implementierungsstand: Die Stored Procedures sind vollständig vorbereitet, die PHP-API führt im aktuellen Repository jedoch noch SQL-Dateien über PDO aus. Die Umstellung des produktiven Datenzugriffs auf Stored-Procedure-Aufrufe bleibt offen und folgt aus dem Feedback im dritten Gesprächsprotokoll.
 
-```javascript
-fetch('api.php?action=get_dashboard_stats&csrf=DEIN_TOKEN_HIER')
-  .then(response => response.json())
-  .then(data => console.log(data));
+## Dokumentation
+
+Der Einstiegspunkt ist [`documentation/README.md`](documentation/README.md). Meeting Minutes unter `documentation/Gesprächsprotokoll/` sind die Referenz für Projektumfang, technische Leitlinie und Präsentationsfokus.
+
+## Qualitätssicherung
+
+```bash
+npm run type-check
+npm run lint
+npm run build
 ```
+
+## Lizenz
+
+Siehe [`LICENSE.txt`](LICENSE.txt) und [`NOTICE.txt`](NOTICE.txt).

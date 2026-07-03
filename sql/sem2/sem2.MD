@@ -1,5 +1,7 @@
 # Projektplanung - 2. Semester
 
+> Historische Planungsnotiz. Der aktuelle Projektstand ist in `documentation/README.md` dokumentiert.
+
 ## Team-Update
 In diesem Semester gibt es eine personelle Veränderung in unserer Gruppe:
 * **Neu dabei:** Leonardo unterstützt uns ab sofort.
@@ -15,8 +17,8 @@ Unser Hauptaugenmerk liegt in dieser Phase auf der Professionalisierung und Erwe
 * **Wartbarkeit:** Verbesserung der Software-Architektur für eine saubere Trennung der Belange.
 
 ### 2. Backend-Neuentwicklung
-* **Migration:** Das aktuelle Backend wird durch eine neue, leistungsfähigere Lösung ersetzt.
-* **Skalierbarkeit:** Fokus auf eine robustere Datenverarbeitung und effizientere Schnittstellen.
+* **Aktueller Stand:** Das PHP-Backend bleibt bestehen.
+* **Datenzugriff:** Die vorhandenen Stored Procedures sollen gemäß Gesprächsprotokoll 03 in die PHP-API eingebunden werden.
 
 ### 3. Neue Funktionalitäten
 * **Erweiterung:** Implementierung zusätzlicher Features, um den Funktionsumfang des Projekts sinnvoll zu ergänzen.

@@ -1,67 +1,65 @@
-# AP16 – Architektur Entwurf
+# AP16 – Architekturentwurf
 
-Status: abgeschlossen
+Status: abgeschlossen, Stand 03.07.2026
 
 ## Ziel
 
-Die geplante Architektur des Softwaresystems wurde entworfen und dokumentiert.
+Die Architektur der Mars Logistik Verwaltung wird nachvollziehbar in Frontend, API, Datenbanklogik und Datenbank getrennt.
 
-## Architekturüberblick
-
-Die Anwendung ist als mehrschichtige Webanwendung aufgebaut.
+## Ist-Architektur
 
 ```text
-Webanwendung
-    |
-    v
-Businessprozesse BP1 und BP2
-    |
-    v
-Stored Procedures
-    |
-    v
-MariaDB-Datenbank
+React-/TypeScript-Webanwendung
+            |
+            | HTTPS / JSON, X-CSRF-Token
+            v
+       PHP-REST-API
+            |
+            | PDO + runSqlFile()
+            v
+        SQL-Dateien
+            |
+            v
+    MariaDB-/MySQL-Datenbank
 ```
 
-Im Mittelpunkt stehen die zwei ausgewählten Businessprozesse:
-
-1. **Kritische Ressourcen überwachen und Nachschub auslösen**
-2. **Überschüssige Ressourcen an externe Unternehmen verkaufen**
-
-Die Webanwendung stellt die fachlichen Funktionen für diese Prozesse bereit. Die Daten werden über eine REST-API aus dem Backend geladen und als JSON an das Frontend zurückgegeben.
-
-## Technische Architektur
-
-| Ebene | Umsetzung |
+| Ebene | Aktueller Stand |
 |---|---|
-| Frontend | React mit TypeScript und Vite |
-| API / Backend | PHP-REST-API |
-| Datenzugriff | SQL-Abfragen und Stored Procedures |
-| Datenbank | MariaDB-Datenbank mit Ressourcen-, Lager- und Bestandsdaten |
-| Sicherheit | Login, Session, CSRF-Token und Ablaufzeiten |
+| Frontend | React 19, TypeScript 6, Vite 8 |
+| Oberfläche | Tailwind CSS 3, Material UI und Recharts |
+| API / Backend | `api/restApi.php`, `api/login.php` und `api/server.php` |
+| Datenzugriff | PDO; derzeit Ausführung freigegebener SQL-Dateien |
+| Datenbank | MariaDB/MySQL |
+| Sicherheit | Login, PHP-Session, einstündige Frontend-Anmeldung und CSRF-Token mit 24 Stunden Laufzeit |
 
-Das Frontend sendet Anfragen an die REST-API und übergibt dabei Parameter wie den gewünschten Endpunkt, Query-Namen oder Session-Informationen.
+Das Frontend lädt Daten über die REST-API. Bis auf `generate_csrf` erwarten API-Anfragen den CSRF-Token im Header `X-CSRF-Token`. Die API gibt JSON zurück.
 
-Das PHP-Backend prüft die Anfrage, validiert CSRF-Token und Session-Daten, führt die passenden SQL-Abfragen oder Stored Procedures aus und sendet die Ergebnisse als JSON zurück.
+## Soll-Architektur für Datenbankzugriffe
 
-## Stored Procedures
+Das dritte Gesprächsprotokoll legt Stored Procedures als technischen Datenbankzugriff fest:
 
-Die SQL-Abfragen aus dem vorherigen Projektstand wurden strukturiert und teilweise als Stored Procedures vorbereitet.
+```text
+Webanwendung → PHP-REST-API → Stored Procedures → MariaDB/MySQL
+```
 
-Für die zwei Hauptprozesse sind besonders relevant:
+Im Repository bestehen 38 Query-/Stored-Procedure-Paare. Besonders relevant für BP1 sind:
 
+- `getRessourcesBelowMin()`
+- `getRessourcesAtRisk()`
 - `getNachschubanforderungen()`
-- `getExterneAbgabeVorbereitung()`
+- `getRessourcenWithLager()`
 
-Dadurch bleibt die fachliche Logik näher an der Datenbank. Das Backend muss nicht die vollständige Query-Logik kennen, sondern kann definierte Datenbankfunktionen aufrufen.
+Die Procedures sind noch nicht in `api/restApi.php` angebunden. Die derzeitige API-Ausführung über `runSqlFile()` ist daher als Übergangsstand dokumentiert.
 
-## Weiterentwicklung
+## Businessprozessbezug
 
-Aktuell wird das Backend über PHP umgesetzt. Perspektivisch kann die Backend-Logik vollständig in eine modernere Webarchitektur überführt werden, zum Beispiel in eine Next.js-basierte API-Struktur.
+BP1 wird in der Abschlusspräsentation als Kette aus Use Case, Businessprozess, finalem BPMN-v11-Modell, Stored Procedures und Applikationsbezug gezeigt. Das Dashboard unterstützt diesen Bezug bereits mit Ressourcenverbrauch und Bestand-gegen-Mindestbestand.
+
+BP2 bleibt datenbankseitig durch Überschuss-, Bewertungs- und Verkaufsstrukturen abgedeckt, steht in der Abschlusspräsentation aber nicht im Mittelpunkt.
 
 ## Ergebnis
 
-Die Architektur ist für den aktuellen Projektumfang ausreichend beschrieben. Frontend, REST-API, Backend, Stored Procedures und Datenbank sind als zusammenhängende Systembestandteile dokumentiert.
+Die Ist- und Soll-Architektur sind getrennt dokumentiert. Der zentrale offene technische Schritt ist die Umstellung der PHP-API von SQL-Dateien auf Stored-Procedure-Aufrufe.
 
 ## Dauer
 

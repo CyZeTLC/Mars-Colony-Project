@@ -1,5 +1,7 @@
 # AP10 – Revision Use Cases v2
 
+Stand: 03.07.2026
+
 ## 1. Ziel der zweiten Revision
 
 Die Use Cases wurden nach dem zweiten Gespräch mit Prof. Dr. Becking erneut überarbeitet. Das wichtigste Ergebnis des Feedbacks war, dass das Projekt nicht zu viele Geschäftsprozesse und damit auch nicht zu viele Use Cases gleichzeitig behandeln soll.
@@ -61,6 +63,8 @@ Beispiel:
 
 Diese ausgewählten Use Cases bilden den aktuellen Fokus. Sie wurden ausgewählt, weil sie direkt aus den beiden Businessprozessen entstehen und zur überarbeiteten Case Study passen.
 
+Für die Abschlusspräsentation werden die Use Cases 1 bis 3 aus BP1 priorisiert. Die Use Cases 4 bis 6 bleiben dokumentierter Projektumfang.
+
 ## 6. Fachlicher Fokus nach Feedback
 
 | Bereich | Gehört zum aktuellen Fokus? | Begründung |
@@ -81,12 +85,12 @@ Diese ausgewählten Use Cases bilden den aktuellen Fokus. Sie wurden ausgewählt
 
 | Finaler Use Case | Benötigte Daten | Mögliche technische Unterstützung | Bemerkung |
 |---|---|---|---|
-| Ressourcenbestand anzeigen | Ressourcentyp, Menge, Einheit, Lagerbezug | Vorhandene Ressourcen- und Lagerabfragen können diesen Use Case unterstützen. | Direkter Bezug zur Ressourcenübersicht. |
-| Kritische Ressourcen anzeigen | Menge, Mindestbestand, Lagerinformationen | Vorhandene oder ableitbare Abfragen zu Ressourcen unter Mindestbestand können unterstützen. | Zentral für Prozess 1. |
-| Nachschubbedarf erkennen | Kritische Bestände, Mindestwerte, Lagerort | Lässt sich aus kritischen Ressourcen und Lagerdaten ableiten. | Keine vollständige automatische Bestellung notwendig. |
-| Überschüssige Ressourcen anzeigen | Aktuelle Menge, Mindestbedarf, Lagerdaten | Lässt sich aus Ressourcenbestand, Mindestwerten und Lagerübersicht ableiten. | Zentral für Prozess 6. |
-| Verkaufspotenzial bewerten | Überschussmenge, Ressourcentyp, Lagerort | Kann durch vorhandene Ressourcen- und Lagerdaten vorbereitet werden. | Vollständige Verkaufslogik ist nicht Kernumfang. |
-| Externe Abgabe vorbereiten | Verkaufbare Ressource, Menge, Begründung der Abgabe | Kann später durch ein Verkaufsmodul ergänzt werden. | Aktuell vor allem fachliche Vorbereitung. |
+| Ressourcenbestand anzeigen | Ressourcentyp, Menge, Einheit, Lagerbezug | `getRessourcenWithLager()` und `getResourceStockLevels.sql` | Bestandsdiagramm im Dashboard; Ressourcenansicht vorbereitet. |
+| Kritische Ressourcen anzeigen | Menge, Mindestbestand, Ablauf- und Lagerinformationen | `getRessourcesBelowMin()` und `getRessourcesAtRisk()` | Zentral für BP1. |
+| Nachschubbedarf erkennen | Kritische Bestände, Mindestwerte, Verbrauch und Lagerort | `getNachschubanforderungen()` | Datenbanklogik vorhanden; kein vollständiger Bestellablauf in der UI. |
+| Überschüssige Ressourcen anzeigen | Aktuelle Menge, Mindestreserve und Lagerdaten | `getRessourcenUeberschuss()` | Datenbanklogik vorhanden. |
+| Verkaufspotenzial bewerten | Überschussmenge, Ressourcentyp, Lagerort und Freigabe | `getVerkaufspotenzial()` | Datenbanklogik vorhanden. |
+| Externe Abgabe vorbereiten | Unternehmen, Ressource, Menge und Wert | `getExterneAbgabeVorbereitung()` | Verkaufstabellen und Beispieldaten vorhanden; keine vollständige UI. |
 
 ## 8. Abgrenzung
 
