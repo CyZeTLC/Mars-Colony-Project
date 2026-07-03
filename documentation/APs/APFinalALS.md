@@ -75,6 +75,15 @@ Zur angemeldeten Projektgruppe gehören:
 
 Tom Coombs übernahm die zentrale technische Verantwortung und war Ansprechperson der Gruppe. Leonardo Parrino / Ph4ntomic arbeitete schwerpunktmäßig an Dokumentation, Meeting Minutes, Businessprozessen, SQL-/Stored-Procedure-Einordnung, BPMN 1, Präsentationen und organisatorischer Abstimmung.
 
+### Dokumentierte Hauptverantwortungen
+
+| Person | Nachvollziehbar dokumentierter Schwerpunkt |
+|---|---|
+| Tom Coombs / CyZeTLC | technische Gesamtverantwortung, REST-API, PHP-Backend, Datenbankanbindung, Architektur, Code-Review und technische Prüfung |
+| Leonardo Parrino / Ph4ntomic | Projektdokumentation, Meeting Minutes, Businessprozesse, BPMN 1, SQL-/Stored-Procedure-Einordnung, Präsentationen, ILIAS und organisatorische Abstimmung |
+
+Für Baisangur Aslambekov, Nikita Töws, Sergiu Curmei und Eduard Flaming sind im Repository keine eindeutigen individuellen Aufgabenbereiche dokumentiert. Damit keine unzutreffenden Beiträge zugeordnet werden, werden weitere personengenaue Tätigkeiten erst nach gemeinsamer Bestätigung in der Endabgabe ergänzt. Diese Zuordnung dient dort ausschließlich der Einordnung des Projektverlaufs.
+
 Die Zusammenarbeit wurde leichtgewichtig und Kanban-orientiert organisiert:
 
 | Werkzeug | Verwendung |
