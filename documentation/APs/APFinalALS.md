@@ -73,7 +73,7 @@ Zur angemeldeten Projektgruppe gehören:
 - Sergiu Curmei
 - Eduard Flaming
 
-Tom Coombs übernahm die zentrale technische Verantwortung und war Ansprechperson der Gruppe. Leonardo Parrino / Ph4ntomic arbeitete schwerpunktmäßig an Dokumentation, Meeting Minutes, Businessprozessen, SQL-/Stored-Procedure-Einordnung, BPMN 1, Präsentationen und organisatorischer Abstimmung.
+Tom Coombs übernahm die zentrale technische Verantwortung und war technischer Ansprechpartner der Gruppe. Leonardo Parrino / Ph4ntomic war federführend für Projektdokumentation, Meeting Minutes, Businessprozess-Ausarbeitung, BPMN-Modellierung für BP1, SQL-/Stored-Procedure-Einordnung, Präsentationsaufbereitung und organisatorische Abstimmung verantwortlich. In diesen Bereichen fungierte er zudem als zentraler Ansprechpartner und unterstützte die fachliche Einordnung der Webanwendung sowie die nachvollziehbare Darstellung zentraler Projektentscheidungen in GitHub und den begleitenden Dokumenten.
 
 Die Zusammenarbeit wurde leichtgewichtig und Kanban-orientiert organisiert:
 
