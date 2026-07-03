@@ -22,6 +22,10 @@ Die wesentlichen Implementierungen des Anforderungskatalogs wurden gemäß Laste
 
 Die Anwendung bildet die wesentlichen Anforderungen des Projekts ab. BP1 ist als vollständiger Zusammenhang aus Use Case, Businessprozess, BPMN-Modell, Datenbanklogik und Applikationsbezug vorbereitet. BP2 bleibt als zweiter Businessprozess datenbankseitig und fachlich dokumentiert.
 
+## Technische Abgrenzung
+
+Die PHP-API führt im finalen Projektstand SQL-Dateien über PDO aus. Die vorhandenen Stored Procedures sind fachlich zugeordnet und dokumentiert, wurden im vereinbarten Projektumfang aber nicht mehr produktiv in die API eingebunden.
+
 ## Ergebnis
 
 Die Applikation ist für den vereinbarten Projektumfang fertiggestellt und kann für Tests, Abschlusspräsentation und Projektdokumentation verwendet werden.

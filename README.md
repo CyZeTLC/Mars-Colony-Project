@@ -63,7 +63,7 @@ X-CSRF-Token: {token}
 
 `generate_csrf` benötigt keinen Token. Alle anderen Aktionen erwarten ihn im HTTP-Header `X-CSRF-Token`; ein Token ist 24 Stunden gültig.
 
-Wichtiger Implementierungsstand: Die Stored Procedures sind vollständig vorbereitet, die PHP-API führt im aktuellen Repository jedoch noch SQL-Dateien über PDO aus. Die Umstellung des produktiven Datenzugriffs auf Stored-Procedure-Aufrufe bleibt offen und folgt aus dem Feedback im dritten Gesprächsprotokoll.
+Wichtiger Implementierungsstand: Die Stored Procedures sind vollständig vorbereitet, die PHP-API führt im finalen Repository-Stand jedoch SQL-Dateien über PDO aus. Die nicht umgesetzte Procedure-Anbindung ist als bekannte technische Abgrenzung dokumentiert.
 
 ## Dokumentation
 

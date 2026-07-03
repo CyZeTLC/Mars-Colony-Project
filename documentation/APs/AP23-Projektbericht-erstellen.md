@@ -37,6 +37,8 @@ Historische Fassungen aus `documentation/archive/` bleiben zur Nachvollziehbarke
 
 Die Projektdokumentation wurde vollständig zusammengeführt, auf den aktuellen Stand gebracht und von veralteten oder widersprüchlichen Angaben bereinigt. Damit liegt eine einheitliche Grundlage für Abschlusspräsentation und Projektabgabe vor.
 
+`APFinalALS.md` dient als klickbarer Einstieg in alle Arbeitspakete. Die daraus erzeugte finale PDF und die ILIAS-Abgabe werden extern verwaltet und nicht im Repository abgelegt.
+
 ## Dauer
 
 Dauer: projektbegleitend

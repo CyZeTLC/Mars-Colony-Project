@@ -25,7 +25,7 @@ Zugangsdaten, Tokens und private Serverdetails werden nicht dokumentiert.
 
 Die fachlichen SQL-Dateien und Stored Procedures sind identisch nach `bp1`, `bp2`, `shared` und `general` strukturiert. Es bestehen 38 Query-/Procedure-Paare.
 
-Die aktuelle PHP-API führt SQL-Dateien über PDO aus. Die im dritten Gesprächsprotokoll geforderte produktive Ausführung über Stored Procedures ist noch nicht angebunden und bleibt der zentrale Integrationspunkt.
+Die finale PHP-API führt SQL-Dateien über PDO aus. Die im dritten Gesprächsprotokoll vorgesehene Stored-Procedure-Ausführung ist vorbereitet, wurde innerhalb des vereinbarten Projektumfangs aber nicht mehr produktiv angebunden.
 
 ## Prototyp
 

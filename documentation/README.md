@@ -23,6 +23,7 @@ BP2 bleibt Teil des Projekts und der Dokumentation, steht in der Abschlusspräse
 
 | Dokument | Inhalt |
 |---|---|
+| [`APs/APFinalALS.md`](APs/APFinalALS.md) | Klickbarer Gesamteinstieg in AP1 bis AP23 |
 | [`Gesprächsprotokoll/`](Gesprächsprotokoll/) | Referenz für Feedback und Projektentscheidungen |
 | [`businessprozesse-v2.md`](businessprozesse-v2.md) | Auswahl und Priorisierung der Businessprozesse |
 | [`APs/AP10-Revision-Use-Cases.md`](APs/AP10-Revision-Use-Cases.md) | Use Cases für BP1 und BP2 |
@@ -45,7 +46,7 @@ BP2 bleibt Teil des Projekts und der Dokumentation, steht in der Abschlusspräse
 
 Die Webanwendung enthält Dashboard, Ressourcen-, Fahrzeug-, Mitarbeiter-, Bürger-, Städte- und SQL-Ansichten. Neu im BP1-Bezug sind Diagramme für Ressourcenverbrauch sowie Bestand gegen Mindestbestand.
 
-Die Stored Procedures bilden gemäß Gesprächsprotokoll 03 die Zielarchitektur für Datenbankzugriffe. Die aktuelle PHP-API führt im Repository noch SQL-Dateien aus; eine produktive Stored-Procedure-Anbindung ist deshalb weiterhin offen.
+Die Stored Procedures bilden gemäß Gesprächsprotokoll 03 die Zielarchitektur für Datenbankzugriffe. Die finale PHP-API führt im vorliegenden Projektstand weiterhin SQL-Dateien aus. Diese Abweichung ist als bekannte technische Abgrenzung des abgeschlossenen Projektumfangs dokumentiert.
 
 ## Datenbank einrichten
 

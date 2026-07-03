@@ -18,6 +18,7 @@ Die Vorstellung diente gleichzeitig als praktischer Funktionstest und als Grundl
 |---|---|
 | TypeScript-Typprüfung | erfolgreich |
 | Produktionsbuild | erfolgreich |
+| ESLint | sieben bekannte Hinweise/Fehler dokumentiert; keine Blockade für Build oder Präsentation |
 | Start und Darstellung der Webanwendung | erfolgreich |
 | Dashboard und Ressourcendiagramme | erfolgreich vorgestellt |
 | Datenbank-, Query- und Stored-Procedure-Struktur | geprüft und dokumentiert |

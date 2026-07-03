@@ -15,6 +15,7 @@ documentation/
 ├── lastenheft-und-pflichtenheft-v2.md
 ├── APs/
 │   ├── Gruppenanmeldung.md
+│   ├── APFinalALS.md
 │   └── AP1 ... AP23
 ├── Gesprächsprotokoll/
 │   ├── 01-Gesprächsprotokoll.md
@@ -36,6 +37,7 @@ Die ausführbaren BPMN-Dateien liegen zentral im Repository-Ordner `bpmn/`. Der 
 
 | Datei | Zweck |
 |---|---|
+| `APs/APFinalALS.md` | Klickbare Gesamtübersicht aller Arbeitspakete |
 | `businessprozesse-v2.md` | Zwei-Prozess-Umfang und BP1-Priorität |
 | `APs/AP10-Revision-Use-Cases.md` | Use Cases für BP1 und BP2 |
 | `APs/AP11-BPMN-Modellierung-BP1-...md` | Fachliche Beschreibung des finalen BP1-BPMN |

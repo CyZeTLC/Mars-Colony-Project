@@ -35,7 +35,7 @@ Das Projekt basiert auf folgenden vorhandenen Bestandteilen:
 | Web-App | React/TypeScript mit Vite vorhanden |
 | PHP-REST-API | vorhanden |
 | SQL-Dateien | vorhanden |
-| Stored Procedures | 38 passende Procedures für BP1, BP2, gemeinsame und allgemeine Abfragen vorhanden; API-Anbindung offen |
+| Stored Procedures | 38 passende Procedures vorhanden; fehlende produktive API-Anbindung als finale technische Abgrenzung dokumentiert |
 | MariaDB-Datenbank | vorhanden |
 | Login / Sicherheit | Session, Login-Ablaufzeit und CSRF-Token vorhanden |
 | Businessprozesse | auf zwei Hauptprozesse reduziert |
@@ -77,15 +77,15 @@ Prioritätsskala:
 |---|---|---|---:|---|
 | LH-01 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Ressourcen anzeigen, die unter dem Mindestbestand liegen. | 1 | Query und Stored Procedure vorhanden |
 | LH-02 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Ressourcen mit Menge, Einheit und Lagerinformationen anzeigen. | 1 | Query und Stored Procedure vorhanden |
-| LH-03 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Nachschubbedarf fachlich erkennbar machen. | 1 | Query und Stored Procedure vorhanden; UI-Ablauf offen |
+| LH-03 | Kritische Ressourcen überwachen und Nachschub auslösen | Das System soll Nachschubbedarf fachlich erkennbar machen. | 1 | Query und Stored Procedure vorhanden; vollständiger UI-Ablauf nicht Teil des finalen Umfangs |
 | LH-04 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll Ressourcenüberschüsse aus Bestand, Mindestbestand und Lagerdaten ableitbar machen. | 2 | Query und Stored Procedure vorhanden |
 | LH-05 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll vorhandene Ressourcenübersichten als Grundlage für Verkaufsentscheidungen bereitstellen. | 2 | Query, Stored Procedure und Tabellen vorhanden |
-| LH-06 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll eine mögliche externe Abgabe fachlich vorbereiten können. | 3 | Datenbankseitig vorhanden; UI offen |
+| LH-06 | Überschüssige Ressourcen an externe Unternehmen verkaufen | Das System soll eine mögliche externe Abgabe fachlich vorbereiten können. | 3 | Datenbankseitig vorhanden; vollständige Verkaufs-UI nicht Teil des finalen Umfangs |
 | LH-07 | Übergreifend | Das System soll eine Weboberfläche mit Dashboard und Tabellenansichten bereitstellen. | 1 | vorhanden |
 | LH-08 | Übergreifend | Das System soll Daten über eine PHP-API im JSON-Format bereitstellen. | 1 | vorhanden |
 | LH-09 | Übergreifend | Die vorhandenen Datenbankabfragen und Stored Procedures sollen den zwei Hauptprozessen eindeutig zugeordnet sein. | 1 | dokumentiert |
 | LH-10 | Übergreifend | Das System soll Login, Session und CSRF-Token für geschützte API-Anfragen verwenden. | 1 | vorhanden |
-| LH-11 | Übergreifend | Das Backend soll Datenbankfunktionen serverseitig ausführen und Ergebnisse als JSON zurückgeben. | 1 | SQL-Dateien angebunden; Stored-Procedure-Anbindung offen |
+| LH-11 | Übergreifend | Das Backend soll Datenbankfunktionen serverseitig ausführen und Ergebnisse als JSON zurückgeben. | 1 | SQL-Dateien angebunden; fehlende Stored-Procedure-Anbindung dokumentierte Abgrenzung |
 | LH-12 | Übergreifend | Die technische Architektur soll so dokumentiert sein, dass Frontend, REST-API, Backend, Stored Procedures und Datenbank nachvollziehbar zusammenhängen. | 1 | dokumentiert |
 
 ---
@@ -101,7 +101,7 @@ Die nicht-funktionalen Anforderungen beschreiben die Qualitätsmerkmale des Syst
 | NFA-03 | Fehlerfälle sollen verständlich angezeigt werden, zum Beispiel bei fehlgeschlagenen Datenbankabfragen, ungültigen Eingaben oder nicht verfügbaren API-Daten. | 2 | teilweise vorhanden |
 | NFA-04 | Der Datenaustausch zwischen Web-App und API soll in einem einheitlichen JSON-Format erfolgen. | 1 | vorhanden |
 | NFA-05 | Der Zugriff auf Daten soll ausschließlich über die PHP-API erfolgen, damit die Weboberfläche nicht direkt auf die Datenbank zugreift. | 1 | vorhanden |
-| NFA-06 | Die vorhandene Datenbanklogik soll so eingebunden und dokumentiert sein, dass SQL-Dateien, Stored Procedures, Web-App und die zwei Hauptprozesse fachlich zusammenpassen. | 1 | dokumentiert; API-Integration offen |
+| NFA-06 | Die vorhandene Datenbanklogik soll so eingebunden und dokumentiert sein, dass SQL-Dateien, Stored Procedures, Web-App und die zwei Hauptprozesse fachlich zusammenpassen. | 1 | fachlich dokumentiert; produktive Procedure-Integration abgegrenzt |
 | NFA-07 | Die Anwendung soll ohne besondere lokale Einrichtung über die bestehende Serverumgebung demonstrierbar sein. | 2 | vorhanden |
 | NFA-08 | Die Darstellung der Systemfunktionen soll den wirtschaftlichen Nutzen der zwei Hauptprozesse sichtbar machen, insbesondere durch Warnungen, Übersichten und Entscheidungsgrundlagen. | 2 | zu optimieren |
 | NFA-09 | Die Struktur der Anwendung soll wartbar bleiben, indem Weboberfläche, PHP-API und Datenbanklogik klar voneinander getrennt sind. | 2 | teilweise vorhanden |
@@ -159,7 +159,7 @@ Ziel: Stored Procedures
 MariaDB-Datenbank
 ```
 
-Das Frontend sendet Anfragen an die REST-API. Das PHP-Backend prüft den CSRF-Token aus dem Header `X-CSRF-Token`, führt aktuell eine freigegebene SQL-Datei über PDO aus und gibt das Ergebnis als JSON zurück. Die im dritten Gesprächsprotokoll geforderte Ausführung über Stored Procedures ist vorbereitet, aber noch nicht in der API umgesetzt.
+Das Frontend sendet Anfragen an die REST-API. Das PHP-Backend prüft den CSRF-Token aus dem Header `X-CSRF-Token`, führt eine freigegebene SQL-Datei über PDO aus und gibt das Ergebnis als JSON zurück. Die im dritten Gesprächsprotokoll vorgesehene Ausführung über Stored Procedures ist vorbereitet, wurde im finalen Projektumfang aber nicht mehr in die API integriert.
 
 ---
 
@@ -191,9 +191,9 @@ Damit der Projektumfang realistisch bleibt, wird der sichere Kernumfang auf vorh
 | Kritische Ressourcen unter Mindestbestand | Query und Stored Procedure vorhanden |
 | Lager- und Ressourcenbezug | vorhanden / SQL-Grundlage vorhanden |
 | Ressourcenverbrauch und Mindestbestandsdiagramm | im Dashboard vorhanden |
-| Ableitung von Nachschubbedarf | Query und Stored Procedure vorhanden; UI offen |
+| Ableitung von Nachschubbedarf | Query und Stored Procedure vorhanden; vollständiger UI-Ablauf abgegrenzt |
 | Ableitung möglicher Ressourcenüberschüsse | Query und Stored Procedure vorhanden |
-| Vorbereitung wirtschaftlicher Verkaufsentscheidungen | Stored Procedure und Verkaufstabellen vorhanden; UI offen |
+| Vorbereitung wirtschaftlicher Verkaufsentscheidungen | Stored Procedure und Verkaufstabellen vorhanden; vollständige Verkaufs-UI abgegrenzt |
 | Web-App-Darstellung | vorhanden |
 | PHP-API-Anbindung | vorhanden |
 | Session- und CSRF-Schutz | vorhanden |

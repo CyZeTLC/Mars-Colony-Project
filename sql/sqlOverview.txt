@@ -93,6 +93,6 @@ API-Hinweis
 ===========
 
 Die aktuelle PHP-API fuehrt SQL-Dateien ueber PDO und runSqlFile() aus.
-Die 38 passenden Stored Procedures sind vorbereitet, aber noch nicht in
-restApi.php angebunden. Diese Anbindung ist gemaess Gespraechsprotokoll 03
-die Zielarchitektur fuer produktive Datenbankzugriffe.
+Die 38 passenden Stored Procedures sind vorbereitet. Ihre fehlende produktive
+Anbindung in restApi.php ist als technische Abgrenzung des finalen
+Projektumfangs dokumentiert.

@@ -28,7 +28,7 @@ Das Repository enthält die grundlegende Projektstruktur für die Implementierun
 - `sql/` für Datenbankskripte, SQL-Abfragen und Stored Procedures
 - `documentation/` für Arbeitspakete, Spezifikation, Businessprozesse und Projektdokumentation
 
-Die Webanwendung kann Daten über die REST-API abrufen. Das Backend führt im aktuellen Code freigegebene SQL-Dateien über PDO aus und gibt die Ergebnisse als JSON an das Frontend zurück. Die passenden Stored Procedures sind vorhanden, aber noch nicht in die API eingebunden.
+Die Webanwendung kann Daten über die REST-API abrufen. Das Backend führt im finalen Code freigegebene SQL-Dateien über PDO aus und gibt die Ergebnisse als JSON an das Frontend zurück. Die fehlende produktive Stored-Procedure-Anbindung ist als technische Abgrenzung dokumentiert.
 
 ## Bezug zu den Businessprozessen
 

@@ -6,7 +6,7 @@ Diese Datei ist eine Arbeitsübersicht für die SQL-Abfragen der Mars Logistik V
 
 Zu allen SQL-Abfragen unter `sql/queries/` gibt es eine passende Stored Procedure unter `sql/storedProcedure/`. Die normalen Query-Dateien bleiben als lesbare SELECT-Versionen für Dokumentation, Tests und Verständnis erhalten.
 
-Gemäß dem dritten Gesprächsprotokoll sollen produktive Datenbankzugriffe über Stored Procedures erfolgen. Im aktuellen Code führt `api/restApi.php` über `runSqlFile()` jedoch noch SQL-Dateien aus. Die Stored Procedures sind damit fachlich und technisch vorbereitet, aber noch nicht in die PHP-API eingebunden.
+Gemäß dem dritten Gesprächsprotokoll sollen produktive Datenbankzugriffe über Stored Procedures erfolgen. Im finalen Code führt `api/restApi.php` über `runSqlFile()` jedoch SQL-Dateien aus. Die fehlende Procedure-Anbindung ist fachlich vorbereitet und als bekannte technische Abgrenzung dokumentiert.
 
 Geprüfter Stand:
 

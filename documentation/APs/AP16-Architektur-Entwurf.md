@@ -49,7 +49,7 @@ Im Repository bestehen 38 Query-/Stored-Procedure-Paare. Besonders relevant für
 - `getNachschubanforderungen()`
 - `getRessourcenWithLager()`
 
-Die Procedures sind noch nicht in `api/restApi.php` angebunden. Die derzeitige API-Ausführung über `runSqlFile()` ist daher als Übergangsstand dokumentiert.
+Die Procedures sind im finalen Projektstand nicht in `api/restApi.php` angebunden. Die API-Ausführung über `runSqlFile()` bleibt als bekannte technische Abgrenzung dokumentiert.
 
 ## Businessprozessbezug
 
@@ -59,7 +59,7 @@ BP2 bleibt datenbankseitig durch Überschuss-, Bewertungs- und Verkaufsstrukture
 
 ## Ergebnis
 
-Die Ist- und Soll-Architektur sind getrennt dokumentiert. Der zentrale offene technische Schritt ist die Umstellung der PHP-API von SQL-Dateien auf Stored-Procedure-Aufrufe.
+Die Ist- und Soll-Architektur sind getrennt dokumentiert. Die nicht umgesetzte Umstellung der PHP-API auf Stored-Procedure-Aufrufe ist transparent als Abgrenzung des finalen Projektumfangs festgehalten.
 
 ## Dauer
 

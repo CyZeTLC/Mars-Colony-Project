@@ -45,6 +45,8 @@ BP2 bleibt Bestandteil des Projekts und wird zur Einordnung kurz erwähnt.
 
 Die Abschlusspräsentation ist als gemeinsam bearbeitbare Canva-Präsentation angelegt, im Team geteilt und inhaltlich vorbereitet. Vortragsteile, Folientexte und Dokumentationsgrundlagen wurden aufeinander abgestimmt.
 
+Die Canva-Datei und die finale ILIAS-Abgabe werden extern verwaltet; ein öffentlicher Freigabelink wird nicht im Repository gespeichert.
+
 ## Dauer
 
 Dauer: projektbegleitend
