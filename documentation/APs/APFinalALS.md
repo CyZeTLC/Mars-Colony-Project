@@ -77,7 +77,9 @@ Tom Coombs übernahm die zentrale technische Verantwortung und war technischer A
 
 Leonardo Parrino / Ph4ntomic war federführend für Projektdokumentation, Meeting Minutes, Businessprozess-Ausarbeitung, BPMN-Modellierung für BP1, SQL-/Stored-Procedure-Einordnung, Präsentationsaufbereitung und organisatorische Abstimmung verantwortlich. In diesen Bereichen fungierte er zudem als zentraler Ansprechpartner und unterstützte die fachliche Einordnung der Webanwendung sowie die nachvollziehbare Darstellung zentraler Projektentscheidungen in GitHub und den begleitenden Dokumenten.
 
-Diese Beschreibung dient lediglich der groben Einordnung. Jedes Gruppenmitglied reicht den eigenen Projektanteil wie gefordert separat ein. Die Übersicht wird zusätzlich der Vollständigkeit halber dokumentiert, da das Projekt später in die persönlichen Portfolios aufgenommen werden soll.
+Die Aufgabenbereiche von Tom Coombs und Leonardo Parrino werden an dieser Stelle ausdrücklich aufgeführt, da beide das Projekt später in ihre persönlichen Projektportfolios aufnehmen möchten und die Zuordnung ihrer jeweiligen Beiträge sonst fehlen würde.
+
+Diese Beschreibung dient lediglich der groben Einordnung. Jedes Gruppenmitglied reicht den eigenen Projektanteil wie gefordert separat ein.
 
 ### Dokumentierte Hauptverantwortungen
 
