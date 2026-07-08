@@ -182,11 +182,10 @@ export function ResourceConsumptionChart({
                             key={range}
                             type="button"
                             onClick={() => setSelectedRange(range)}
-                            className={`rounded px-3 py-1.5 text-xs font-semibold transition-colors ${
-                                selectedRange === range
+                            className={`rounded px-3 py-1.5 text-xs font-semibold transition-colors ${selectedRange === range
                                     ? 'bg-mars-accent text-white'
                                     : 'text-gray-400 hover:text-white'
-                            }`}
+                                }`}
                         >
                             {range} M
                         </button>
@@ -199,8 +198,8 @@ export function ResourceConsumptionChart({
                     Keine Verbrauchsdaten für {selectedResource} vorhanden.
                 </div>
             ) : (
-                <div className="h-[300px] w-full">
-                    <ResponsiveContainer width="100%" height="100%">
+                <div className="h-[300px] w-full" style={{ pointerEvents: 'none' }}>
+                    <ResponsiveContainer width="100%" height="100%" >
                         <LineChart
                             data={chartData}
                             margin={{ top: 10, right: 20, left: 0, bottom: 0 }}
@@ -273,7 +272,7 @@ export function ResourceStockLevelChart({
 
     return (
         <div>
-            <div className="h-[320px] w-full">
+            <div className="h-[320px] w-full" style={{ pointerEvents: 'none' }}>
                 <ResponsiveContainer width="100%" height="100%">
                     <BarChart
                         data={data}
