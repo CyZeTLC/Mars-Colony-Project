@@ -13,6 +13,7 @@ import Cities from './pages/Cities.tsx';
 import Layout from './components/Layout.tsx';
 import City from "./pages/city/[cityname]/page.tsx";
 import Sales from "./pages/Sales.tsx";
+import Restock from "./pages/Restock.tsx";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(AuthService.isLoggedIn());
@@ -30,6 +31,7 @@ function App() {
           <Route path="citizens" element={<Citizens />} />
           <Route path="cities" element={<Cities />} />
           <Route path="city/:name" element={<City />} />
+          <Route path="restock" element={<Restock />} />
         </Route>
       </Routes>
     </BrowserRouter>

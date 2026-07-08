@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { AuthService } from '../../utils/AuthService';
 import { NavLink } from 'react-router-dom';
 
-export type Section = 'overview' | 'cities' | 'inhabitants' | 'employees' | 'vehicles' | 'sql' | 'ressources' | 'sales';
+export type Section = 'overview' | 'cities' | 'inhabitants' | 'employees' | 'vehicles' | 'sql' | 'ressources' | 'sales' | 'restock';
 
 const handleLogout = () => {
     AuthService.logout();
@@ -27,15 +27,23 @@ const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }
         case 'inhabitants':
             return (
                 <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M16 11a4 4 0 1 1-8 0 4 4 0 0 1 8 0z" strokeWidth="1.2" />
-                    <path d="M2 21c1.5-4 6-6 10-6s8.5 2 10 6" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <g strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </g>
                 </svg>
             );
         case 'employees':
             return (
                 <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="12" cy="7" r="4" strokeWidth="1.2" />
+                    <g strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <rect x="5" y="4" width="14" height="17" rx="2" />
+                        <path d="M9 4V3h6v1" />
+                        <circle cx="12" cy="11" r="2.5" />
+                        <path d="M7.5 17c0-2 2-2.5 4.5-2.5s4.5.5 4.5 2.5" />
+                    </g>
                 </svg>
             );
         case 'vehicles':
@@ -50,10 +58,11 @@ const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }
         case 'ressources':
             return (
                 <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <rect x="1" y="7" width="15" height="10" rx="2" strokeWidth="1.2" />
-                    <path d="M16 12h4l2 3" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    <circle cx="5.5" cy="17.5" r="1.5" strokeWidth="1.2" />
-                    <circle cx="18.5" cy="17.5" r="1.5" strokeWidth="1.2" />
+                    <g strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
+                        <polyline points="2 12 12 17 22 12" />
+                        <polyline points="2 17 12 22 22 17" />
+                    </g>
                 </svg>
             );
         case 'sales':
@@ -66,8 +75,14 @@ const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }
         case 'sql':
             return (
                 <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor">
-                    <path d="M3 7c0 4 4 8 9 8s9-4 9-8" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-                    <path d="M3 7l9 4 9-4" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+                    <g strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <ellipse cx="11" cy="6" rx="8" ry="3" />
+                        <path d="M3 6v11c0 1.66 3.58 3 8 3 1.25 0 2.43-.17 3.5-.47" />
+                        <path d="M3 12c0 1.66 3.58 3 8 3 1.5 0 2.89-.2 4-.55" />
+                        <path d="M19 6v5" />
+                        <circle cx="17" cy="17" r="4" />
+                        <line x1="19.8" y1="19.8" x2="22" y2="22" />
+                    </g>
                 </svg>
             );
         case 'logout':
@@ -82,6 +97,23 @@ const Icon: React.FC<{ name: Section | 'logout' | 'toggle'; className?: string }
             return (
                 <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor">
                     <path d="M4 6h16M4 12h16M4 18h16" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+            );
+        case 'restock':
+            return (
+                <svg {...common} viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                    <path
+                        d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
+                    <path
+                        d="M3.27 6.96L12 12.01l8.73-5.05M12 22.08V12"
+                        strokeWidth="1.6"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                    />
                 </svg>
             );
         default:
@@ -100,6 +132,7 @@ const Sidebar = () => {
         { id: 'vehicles', label: 'Fahrzeugflotte', path: '/vehicles' },
         { id: 'ressources', label: 'Ressourcen & Lager', path: '/ressources' },
         { id: 'sales', label: 'Verkauf', path: '/sales' },
+        { id: 'restock', label: 'Nachbestellung', path: '/restock' },
         { id: 'sql', label: 'SQL-Queries', path: '/sql' },
     ];
 
