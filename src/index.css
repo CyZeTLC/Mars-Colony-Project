@@ -34,3 +34,10 @@ body {
   margin: 0;
   transition: background-color 0.5s ease;
 }
+
+.resource-chart .recharts-wrapper:focus,
+.resource-chart .recharts-wrapper:focus-visible,
+.resource-chart .recharts-surface:focus,
+.resource-chart .recharts-surface:focus-visible {
+  outline: none;
+}
