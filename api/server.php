@@ -120,6 +120,81 @@ function runSqlFile(string $sqlFilePath, array $params = []): array
     }
 }
 
+/**
+ * Führt ausschließlich die Stored Procedures aus, die wir für die API
+ * ausdrücklich freigegeben haben.
+ *
+ * @param string $procedureName Name der freigegebenen Stored Procedure.
+ * @param array $params Optionale Parameter für den Procedure-Aufruf.
+ * @return array Das erste Resultset als assoziatives Array.
+ * @throws InvalidArgumentException Wenn die Procedure nicht freigegeben ist.
+ * @throws RuntimeException Wenn die Procedure nicht ausgeführt werden kann.
+ */
+function runStoredProcedure(string $procedureName, array $params = []): array
+{
+    global $pdo;
+
+    $allowedProcedures = [
+        'getRessourcesBelowMin',
+        'getRessourcesAtRisk',
+        'getNachschubanforderungen',
+        'getRessourcenWithLager'
+    ];
+
+    if (!in_array($procedureName, $allowedProcedures, true)) {
+        throw new InvalidArgumentException(
+            'Stored Procedure ist nicht freigegeben.'
+        );
+    }
+
+    $placeholders = implode(
+        ', ',
+        array_fill(0, count($params), '?')
+    );
+
+    $statement = null;
+
+    try {
+        $sql = sprintf(
+            'CALL `%s`(%s)',
+            $procedureName,
+            $placeholders
+        );
+
+        $statement = $pdo->prepare($sql);
+        $statement->execute($params);
+
+        $result = $statement->fetchAll(PDO::FETCH_ASSOC);
+
+        // MariaDB liefert bei CALL zusätzliche, häufig leere Resultsets.
+        // Wir leeren sie, damit die PDO-Verbindung direkt wieder nutzbar ist.
+        while ($statement->nextRowset()) {
+            // Alle weiteren Resultsets werden bewusst verworfen.
+        }
+
+        return $result;
+    } catch (PDOException $exception) {
+        // Technische Details bleiben im Server-Log und gelangen nicht zum Client.
+        error_log(
+            sprintf(
+                'Stored Procedure %s fehlgeschlagen: %s',
+                $procedureName,
+                $exception->getMessage()
+            )
+        );
+
+        throw new RuntimeException(
+            'Die Datenbankfunktion konnte nicht ausgeführt werden.',
+            0,
+            $exception
+        );
+    } finally {
+        if ($statement instanceof PDOStatement) {
+            $statement->closeCursor();
+        }
+    }
+}
+
 
 /**
  * Führt eine SQL-Abfrage aus und gibt die Ergebnisse als JSON-String aus.

@@ -23,6 +23,31 @@ function sendResponse(array $data, int $httpCode = 200)
     exit;
 }
 
+function runStoredProcedureAction(string $procedureName): array
+{
+    try {
+        return runStoredProcedure($procedureName);
+    } catch (InvalidArgumentException $exception) {
+        sendResponse(
+            [
+                "error" => 400,
+                "code" => "PROCEDURE_NOT_ALLOWED",
+                "message" => "Die angeforderte Datenbankfunktion ist nicht erlaubt."
+            ],
+            400
+        );
+    } catch (RuntimeException $exception) {
+        sendResponse(
+            [
+                "error" => 500,
+                "code" => "STORED_PROCEDURE_FAILED",
+                "message" => "Die Datenbankfunktion konnte nicht ausgeführt werden."
+            ],
+            500
+        );
+    }
+}
+
 if (!isset($_GET['action'])) {
     sendResponse(["error" => 400, "message" => "Invalid request!"], 400);
 }
@@ -56,6 +81,30 @@ switch ($action) {
         session_regenerate_id(true);
         generate_csrf();
         $response['csrf'] = $_SESSION['csrf']['token'];
+        break;
+
+    case "get_bp1_resources_below_min":
+        $response['result'] = runStoredProcedureAction(
+            'getRessourcesBelowMin'
+        );
+        break;
+
+    case "get_bp1_resources_at_risk":
+        $response['result'] = runStoredProcedureAction(
+            'getRessourcesAtRisk'
+        );
+        break;
+
+    case "get_bp1_replenishment_requirements":
+        $response['result'] = runStoredProcedureAction(
+            'getNachschubanforderungen'
+        );
+        break;
+
+    case "get_bp1_resources_with_storage":
+        $response['result'] = runStoredProcedureAction(
+            'getRessourcenWithLager'
+        );
         break;
 
     case "get_sql_result":
