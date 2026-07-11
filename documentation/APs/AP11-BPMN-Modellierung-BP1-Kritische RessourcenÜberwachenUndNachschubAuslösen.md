@@ -14,7 +14,7 @@ Use Case → Businessprozess → BPMN-Modell → Stored Procedures → Applikati
 
 Das aktuelle ausführbare Modell liegt unter:
 
-[`../../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn`](../../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn)
+[`../../bpmn/BP1V2Update_Kritische_Ressourcen_v11.bpmn`](../../bpmn/BP1V2Update_Kritische_Ressourcen_v11.bpmn)
 
 Die zugehörige finale Exportgrafik liegt unter:
 

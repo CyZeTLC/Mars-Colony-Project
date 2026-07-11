@@ -30,7 +30,7 @@ documentation/
 └── archive/
 ```
 
-Die ausführbaren BPMN-Dateien liegen zentral im Repository-Ordner `bpmn/`. Der aktuelle BP1-Stand ist `BP1V2Update_Kritische_Ressourcen_v11_final.bpmn`; ältere Versionen bleiben für die Entwicklungshistorie erhalten.
+Die ausführbaren BPMN-Dateien liegen zentral im Repository-Ordner `bpmn/`. Der aktuelle BP1-V2-Stand ist `BP1V2Update_Kritische_Ressourcen_v11.bpmn`; die finale Exportgrafik liegt unter `documentation/docu-assets/bpmnBP1V2Update_Kritische_Ressourcen_v11_final.png`.
 
 ## Aktuelle Hauptdokumente
 
@@ -39,6 +39,7 @@ Die ausführbaren BPMN-Dateien liegen zentral im Repository-Ordner `bpmn/`. Der 
 | `businessprozesse-v2.md` | Zwei-Prozess-Umfang und BP1-Priorität |
 | `APs/AP10-Revision-Use-Cases.md` | Use Cases für BP1 und BP2 |
 | `APs/AP11-BPMN-Modellierung-BP1-...md` | Fachliche Beschreibung des finalen BP1-BPMN |
+| `APs/AP11-BPMN-Modellierung-BP1-V2-...md` | V2-Dokumentation mit finaler BPMN-Grafik |
 | `APs/AP11-BPMN-Modellierung-BP2-...md` | Fachliche Vorbereitung für BP2 |
 | `lastenheft-und-pflichtenheft-v2.md` | Aktuelle Spezifikation |
 | `datenbankabfragen-v4.md` | Query-/Stored-Procedure-Zuordnung und Diagrammabfragen |

@@ -849,7 +849,7 @@ sql/getResourceStockLevels.sql
 
 ## BPMN vor dem Export korrigieren
 
-In `bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn` stehen aktuell noch drei sichtbare Schreibfehler:
+In der BP1-V2-Datei `bpmn/BP1V2Update_Kritische_Ressourcen_v11.bpmn` wurden die sichtbaren Schreibfehler korrigiert:
 
 | Aktuell | Korrektur |
 |---|---|
@@ -857,7 +857,7 @@ In `bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn` stehen aktuell noch dr
 | `Naschubauftrag` | `Nachschubauftrag` |
 | `Externen Transport empfengen` | `Externen Transport empfangen` |
 
-Die finale PNG-Grafik liegt unter `documentation/docu-assets/bpmnBP1V2Update_Kritische_Ressourcen_v11_final.png`.
+Die finale PNG-Grafik zur BPMN V2 liegt unter `documentation/docu-assets/bpmnBP1V2Update_Kritische_Ressourcen_v11_final.png`.
 
 ---
 
@@ -901,7 +901,7 @@ Für den Abgleich wurde der gesamte Dokumentationsordner einschließlich Arbeits
 - [`datenbankabfragen-v4.md`](datenbankabfragen-v4.md)
 - [`projektentscheidungen/02 - 2026-06-24-bp1-fokus-abschlusspräsentation.md`](projektentscheidungen/02%20-%202026-06-24-bp1-fokus-abschlusspräsentation.md)
 - [`projektentscheidungen/03 - 2026-07-03-prisma-verworfen-bp1-fokus.md`](projektentscheidungen/03%20-%202026-07-03-prisma-verworfen-bp1-fokus.md)
-- [`../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn`](../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn)
+- [`../bpmn/BP1V2Update_Kritische_Ressourcen_v11.bpmn`](../bpmn/BP1V2Update_Kritische_Ressourcen_v11.bpmn)
 - [`../sql/storedProcedure/bp1/getRessourcesBelowMin.sql`](../sql/storedProcedure/bp1/getRessourcesBelowMin.sql)
 - [`../sql/storedProcedure/bp1/getRessourcesAtRisk.sql`](../sql/storedProcedure/bp1/getRessourcesAtRisk.sql)
 - [`../sql/storedProcedure/bp1/getNachschubanforderungen.sql`](../sql/storedProcedure/bp1/getNachschubanforderungen.sql)
