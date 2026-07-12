@@ -16,6 +16,10 @@ Das aktuelle ausführbare Modell liegt unter:
 
 [`../../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn`](../../bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn)
 
+Die zugehörige finale Exportgrafik liegt unter:
+
+![BPMN BP1 kritische Ressourcen v11 final](../docu-assets/bpmnBP1V2Update_Kritische_Ressourcen_v11_final.png)
+
 Die älteren Dateien `v01` bis `v10` dokumentieren die Entwicklung des Modells.
 
 ## Beteiligte

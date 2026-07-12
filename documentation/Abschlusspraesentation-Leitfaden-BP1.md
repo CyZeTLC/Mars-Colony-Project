@@ -856,7 +856,7 @@ In `bpmn/BP1V2Update_Kritische_Ressourcen_v11_final.bpmn` stehen aktuell noch dr
 | `Naschubauftrag` | `Nachschubauftrag` |
 | `Externen Transport empfengen` | `Externen Transport empfangen` |
 
-Nach der Korrektur das BPMN erneut exportieren. Die vorhandene PNG-Datei unter `documentation/docu-assets/` nicht ungeprüft verwenden, weil sie nicht sicher den vollständigen finalen v11-Stand zeigt.
+Die finale PNG-Grafik liegt unter `documentation/docu-assets/bpmnBP1V2Update_Kritische_Ressourcen_v11_final.png`.
 
 ---
 

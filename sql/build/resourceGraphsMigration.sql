@@ -1,6 +1,3 @@
--- Migration für die Dashboard-Graphen (MySQL/MariaDB).
--- Bei einer bestehenden Datenbank einmalig ausführen.
-
 CREATE TABLE IF NOT EXISTS BESTANDSBEWEGUNG (
     BEWEGUNG_ID BIGINT NOT NULL AUTO_INCREMENT,
     RESSOURCE_ID DECIMAL(8,0) NOT NULL,

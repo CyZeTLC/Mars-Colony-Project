@@ -24,6 +24,10 @@ Die Anwendung bildet die wesentlichen Anforderungen des Projekts ab. BP1 ist als
 
 Nicht Bestandteil des finalen Kernumfangs sind eine dauerhafte Speicherung ausgelöster Nachschubaktionen, ein vollständiges Bestellwesen sowie Rechnungs-, Vertrags- oder Zahlungsfunktionen für BP2.
 
+## Technische Abgrenzung
+
+Die PHP-API führt im finalen Projektstand SQL-Dateien über PDO aus. Die vorhandenen Stored Procedures sind fachlich zugeordnet und dokumentiert, wurden im vereinbarten Projektumfang aber nicht mehr produktiv in die API eingebunden.
+
 ## Ergebnis
 
 Die Applikation ist für den vereinbarten Projektumfang fertiggestellt und kann für Tests, Abschlusspräsentation und Projektdokumentation verwendet werden.
